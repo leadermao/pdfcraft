@@ -14,14 +14,15 @@ export const dynamic = 'force-static';
 export default function manifest(): MetadataRoute.Manifest {
   return {
     name: siteConfig.name,
-    short_name: 'PDFCraft',
+    short_name: '雨来 PDF',
     description: siteConfig.description,
     start_url: '/',
     display: 'standalone',
-    background_color: '#ffffff',
-    theme_color: '#3b82f6',
+    background_color: '#f4efec',
+    theme_color: '#9e0101',
     orientation: 'portrait-primary',
     categories: ['productivity', 'utilities'],
+    // 仅引用真实存在的图标 (上游 manifest 引用的 icon-192/512.png、screenshots/、icons/ 均不存在)
     icons: [
       {
         src: '/favicon.svg',
@@ -29,47 +30,25 @@ export default function manifest(): MetadataRoute.Manifest {
         type: 'image/svg+xml',
         purpose: 'any',
       },
-      {
-        src: '/icon-192.png',
-        sizes: '192x192',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
-      {
-        src: '/icon-512.png',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'maskable',
-      },
-    ],
-    screenshots: [
-      {
-        src: '/screenshots/home.png',
-        sizes: '1280x720',
-        type: 'image/png',
-      },
     ],
     shortcuts: [
       {
-        name: 'Merge PDF',
-        short_name: 'Merge',
-        description: 'Combine multiple PDF files',
-        url: '/en/tools/merge-pdf',
-        icons: [{ src: '/icons/merge.png', sizes: '96x96' }],
+        name: '合并 PDF',
+        short_name: '合并',
+        description: '将多个 PDF 合并成一个',
+        url: '/zh/tools/merge-pdf',
       },
       {
-        name: 'Split PDF',
-        short_name: 'Split',
-        description: 'Split PDF into multiple files',
-        url: '/en/tools/split-pdf',
-        icons: [{ src: '/icons/split.png', sizes: '96x96' }],
+        name: '拆分 PDF',
+        short_name: '拆分',
+        description: '将 PDF 拆分成多个文件',
+        url: '/zh/tools/split-pdf',
       },
       {
-        name: 'Compress PDF',
-        short_name: 'Compress',
-        description: 'Reduce PDF file size',
-        url: '/en/tools/compress-pdf',
-        icons: [{ src: '/icons/compress.png', sizes: '96x96' }],
+        name: '压缩 PDF',
+        short_name: '压缩',
+        description: '减小 PDF 文件体积',
+        url: '/zh/tools/compress-pdf',
       },
     ],
   };

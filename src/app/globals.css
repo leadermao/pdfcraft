@@ -1,54 +1,56 @@
 @import "tailwindcss";
 
-/* PDFCraft Design System - CSS Variables for Theming */
+/* 雨来 PDF 工具箱 — 雨来设计语言 (红系 #9E0101 / 暖纸底 / 墨色 / 衬线).
+   仅亮色主题；暗色已移除，dark: 变体统一钉死为亮色 (见 @custom-variant). */
 :root {
-  /* Primary Colors - Deep Blue/Indigo for trust and modern tech feel */
-  --color-primary: 226 71% 55%; /* #3b82f6 - slightly more vibrant */
+  /* 主色 — 雨来红 #9E0101 */
+  --color-primary: 0 99% 31%;
   --color-primary-foreground: 0 0% 100%;
-  --color-primary-hover: 226 71% 45%;
-  
-  /* Secondary Colors - Slate for neutral elements */
-  --color-secondary: 215 20% 90%;
-  --color-secondary-foreground: 215 25% 15%;
-  --color-secondary-hover: 215 20% 80%;
-  
-  /* Accent Colors - Teal/Cyan for highlights */
-  --color-accent: 172 66% 50%;
+  --color-primary-hover: 0 99% 24%;
+
+  /* 次级 — 暖米中性 */
+  --color-secondary: 28 25% 88%;
+  --color-secondary-foreground: 27 15% 20%;
+  --color-secondary-hover: 28 22% 80%;
+
+  /* 强调 — 暖红陶 #C64942 (用于渐变文字终点/高亮) */
+  --color-accent: 3 54% 52%;
   --color-accent-foreground: 0 0% 100%;
-  
-  /* Background Colors */
-  --color-background: 210 40% 98%; /* Slightly off-white for depth */
-  --color-foreground: 222 47% 11%;
-  
-  /* Muted Colors */
-  --color-muted: 210 40% 96%;
-  --color-muted-foreground: 215 16% 47%;
-  
-  /* Card Colors */
-  --color-card: 0 0% 100%;
-  --color-card-foreground: 222 47% 11%;
-  
-  /* Border Colors */
-  --color-border: 214 32% 91%;
-  --color-input: 214 32% 91%;
-  --color-ring: 226 71% 55%;
-  
-  /* Destructive Colors */
+
+  /* 背景 — 暖纸 #f4efec / 墨色文字 #1f1915 */
+  --color-background: 22 27% 94%;
+  --color-foreground: 24 19% 10%;
+
+  /* 弱化 — 暖米底 / 暖灰文字 */
+  --color-muted: 28 26% 91%;
+  --color-muted-foreground: 27 8% 40%;
+
+  /* 卡片 — 暖白 #F7F1ED (claymorphism 卡与页同色系靠柔影浮出) */
+  --color-card: 24 38% 95%;
+  --color-card-foreground: 24 19% 10%;
+
+  /* 边框 — 暖米描边 */
+  --color-border: 28 20% 85%;
+  --color-input: 28 20% 85%;
+  --color-ring: 0 99% 31%;
+
+  /* 危险态 — 亮红 (比品牌深红浅一档以区分) */
   --color-destructive: 0 84% 60%;
   --color-destructive-foreground: 0 0% 100%;
-  
-  /* Success Colors */
+
+  /* 成功态 — 绿 (语义色保留) */
   --color-success: 142 76% 36%;
   --color-success-foreground: 0 0% 100%;
-  
-  /* Warning Colors */
+
+  /* 警告态 — 琥珀 (语义色保留) */
   --color-warning: 38 92% 50%;
   --color-warning-foreground: 0 0% 100%;
-  
-  /* Typography */
-  --font-sans: var(--font-inter, 'Inter'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* 字体 — 正文清爽无衬线; 标题衬线 (FZ清刻→系统宋体逐字回退) */
+  --font-sans: var(--font-inter, 'Inter'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --font-mono: var(--font-jetbrains-mono, 'JetBrains Mono'), 'Fira Code', Consolas, monospace;
-  
+  --font-serif: 'FZ Qingke Yuesong', 'Songti SC', 'Source Han Serif SC', 'Noto Serif SC', 'STSong', ui-serif, Georgia, serif;
+
   /* Spacing Scale */
   --spacing-xs: 0.25rem;
   --spacing-sm: 0.5rem;
@@ -65,12 +67,12 @@
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
   
-  /* Shadows - Layered, smoother shadows for depth */
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-  --shadow-inner: inset 0 2px 4px 0 rgb(0 0 0 / 0.05);
+  /* Shadows — 暖褐柔影, claymorphism 观感 */
+  --shadow-sm: 0 1px 2px 0 rgb(60 40 22 / 0.06);
+  --shadow-md: 0 4px 12px -2px rgb(60 40 22 / 0.08), 0 2px 4px -2px rgb(60 40 22 / 0.06);
+  --shadow-lg: 0 10px 24px -4px rgb(60 40 22 / 0.10), 0 4px 8px -4px rgb(60 40 22 / 0.08);
+  --shadow-xl: 0 20px 40px -8px rgb(60 40 22 / 0.12), 0 8px 16px -8px rgb(60 40 22 / 0.10);
+  --shadow-inner: inset 0 2px 4px 0 rgb(60 40 22 / 0.05);
   
   /* Transitions */
   --transition-fast: 150ms;
@@ -78,37 +80,27 @@
   --transition-slow: 350ms;
 }
 
-/* Dark Mode Theme */
-.dark {
-  color-scheme: dark;
-  --color-primary: 226 71% 60%;
-  --color-primary-foreground: 222 47% 11%;
-  --color-primary-hover: 226 71% 70%;
-  
-  --color-secondary: 215 20% 20%;
-  --color-secondary-foreground: 210 40% 98%;
-  --color-secondary-hover: 215 20% 30%;
-  
-  --color-accent: 172 66% 50%;
-  --color-accent-foreground: 222 47% 11%;
-  
-  --color-background: 222 47% 7%; /* Darker background for more contrast */
-  --color-foreground: 210 40% 98%;
-  
-  --color-muted: 217 33% 13%;
-  --color-muted-foreground: 215 20% 65%;
-  
-  --color-card: 222 47% 10%;
-  --color-card-foreground: 210 40% 98%;
-  
-  --color-border: 217 33% 15%;
-  --color-input: 217 33% 15%;
-  --color-ring: 226 71% 60%;
+/* 暗色已移除 (雨来暖纸质感为纯亮色主题).
+   上游 702 处 dark: 工具类默认编译进 @media(prefers-color-scheme:dark);
+   声明一个永不匹配的 dark 变体, 把它们全部钉死为亮色, 避免 OS 暗色下工具面板变暗与暖纸壳层割裂. */
+@custom-variant dark (&:where(.__never-dark__ *));
+
+/* 方正清刻本悦宋 — 品牌字/标题衬线专用. 子集 woff2, 缺字逐字回退系统宋体.
+   字体二进制经部署 overlay 注入 (方正商用授权待确认, 不进 git). */
+@font-face {
+  font-family: "FZ Qingke Yuesong";
+  src: url("/fonts/fz-qingke-yuesong.woff2") format("woff2");
+  font-display: swap;
 }
 
 /* Base Styles */
 * {
   border-color: hsl(var(--color-border));
+}
+
+/* 标题走衬线 (雨来文学质感); 正文/UI 保持无衬线利于工具界面可读性 */
+h1, h2, h3 {
+  font-family: var(--font-serif);
 }
 
 body {
@@ -162,6 +154,7 @@ select option {
   /* Font Family */
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
 }
 
 /* Focus Ring Utility */
@@ -193,22 +186,11 @@ select option {
   border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-.dark .glass {
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
 .glass-card {
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.4));
   backdrop-filter: blur(5px);
   border: 1px solid rgba(255, 255, 255, 0.5);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.dark .glass-card {
-  background: linear-gradient(135deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.4));
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Animations */

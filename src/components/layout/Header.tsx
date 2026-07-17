@@ -11,7 +11,6 @@ import { RecentFilesDropdown } from '@/components/common/RecentFilesDropdown';
 import { searchTools, SearchResult } from '@/lib/utils/search';
 import { getToolContent } from '@/config/tool-content';
 import { getAllTools } from '@/config/tools';
-import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export interface HeaderProps {
   locale: Locale;
@@ -194,7 +193,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
                   <polyline points="14 2 14 8 20 8" />
                 </svg>
               </div>
-              <span className="text-xl tracking-tight" data-testid="brand-name">
+              <span className="font-serif text-xl tracking-tight text-[hsl(var(--color-foreground))]" data-testid="brand-name">
                 {t('brand')}
               </span>
             </Link>
@@ -318,7 +317,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
 
             {/* GitHub Repository Link */}
             <a
-              href="https://github.com/PDFCraftTool/pdfcraft"
+              href="https://github.com/leadermao/pdfcraft"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden sm:flex items-center justify-center h-9 w-9 rounded-lg text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))/0.5] transition-all"
@@ -326,9 +325,6 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
             >
               <Github className="h-5 w-5" aria-hidden="true" />
             </a>
-
-            {/* Theme Toggle */}
-            <ThemeToggle />
 
             {/* Language Selector placeholder */}
             <div id="language-selector-slot" />
@@ -375,7 +371,7 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
               {/* GitHub Link in Mobile Menu */}
               <li>
                 <a
-                  href="https://github.com/PDFCraftTool/pdfcraft"
+                  href="https://github.com/leadermao/pdfcraft"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-4 py-3 text-base font-medium text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))] rounded-lg transition-colors"

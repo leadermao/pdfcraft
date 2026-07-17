@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         .join(' ');
 
     return {
-        title: `${formattedCategory} Tools - PDFCraft`,
+        title: `${formattedCategory} Tools - 雨来 PDF 工具箱`,
         description: `Free online ${formattedCategory} tools. Secure, fast, and easy to use.`,
     };
 }

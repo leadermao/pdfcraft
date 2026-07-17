@@ -83,3 +83,5 @@ public/libreoffice-wasm/soffice.data.bin
 src-tauri/target/
 
 yarn.lock
+# 方正商用字体子集 — 部署时 overlay, 不进公开仓库 (授权原因)
+public/fonts/fz-qingke-yuesong.woff2

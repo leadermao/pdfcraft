@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import '@/app/globals.css';
 
 export const metadata: Metadata = {
-  title: 'PDFCraft - Professional PDF Tools',
-  description: 'Free online PDF tools for merging, splitting, compressing, and converting PDF files. All processing happens in your browser for maximum privacy.',
+  title: '雨来 PDF 工具箱 - 专业 PDF 工具',
+  description: '免费、私密、纯浏览器端的 PDF 工具箱。合并、拆分、压缩、转换、编辑 PDF，文件不上传服务器。',
   icons: {
     icon: '/favicon.svg',
     shortcut: '/favicon.svg',
@@ -21,21 +21,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <meta name="color-scheme" content="light dark" />
+        <meta name="color-scheme" content="light" />
         <style dangerouslySetInnerHTML={{ __html: 'html{scrollbar-gutter:stable}' }} />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                  document.documentElement.classList.add('dark')
-                } else {
-                  document.documentElement.classList.remove('dark')
-                }
-              } catch (_) {}
-            `,
-          }}
-        />
         {/* Google Analytics (async; fails silently if unreachable) */}
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YQPQZ26FC" />
         <script

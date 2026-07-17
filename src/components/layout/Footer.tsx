@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Shield, Lock, FileCheck, Github, Twitter, Mail, Globe } from 'lucide-react';
+import { Shield, Lock, FileCheck, Github, Globe } from 'lucide-react';
 import { type Locale, locales, localeConfig, getLocalizedPath } from '@/lib/i18n/config';
 import { saveLanguagePreference } from './LanguageSelector';
 
@@ -59,21 +59,15 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
                   <polyline points="14 2 14 8 20 8" />
                 </svg>
               </div>
-              <span data-testid="footer-brand-name">{t('brand')}</span>
+              <span className="font-serif" data-testid="footer-brand-name">{t('brand')}</span>
             </Link>
             <p className="text-sm text-[hsl(var(--color-muted-foreground))] leading-relaxed max-w-xs">
               {t('tagline') || 'Professional, secure, and free PDF tools for everyone. No installation required.'}
             </p>
 
             <div className="flex gap-4">
-              <a href="https://github.com/PDFCraftTool/pdfcraft" className="p-2 rounded-full bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] hover:bg-[hsl(var(--color-primary))] hover:text-white transition-all">
+              <a href="https://github.com/leadermao/pdfcraft" target="_blank" rel="noopener noreferrer" aria-label="GitHub (源代码)" className="p-2 rounded-full bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] hover:bg-[hsl(var(--color-primary))] hover:text-white transition-all">
                 <Github className="w-4 h-4" />
-              </a>
-              <a href="https://x.com/PDFCraftTool" className="p-2 rounded-full bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] hover:bg-[hsl(var(--color-primary))] hover:text-white transition-all">
-                <Twitter className="w-4 h-4" />
-              </a>
-              <a href="#" className="p-2 rounded-full bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] hover:bg-[hsl(var(--color-primary))] hover:text-white transition-all">
-                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
