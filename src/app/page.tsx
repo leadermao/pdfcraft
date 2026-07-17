@@ -3,13 +3,21 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { locales, defaultLocale } from '@/lib/i18n/config';
+import { getLanguagePreference } from '@/components/layout/LanguageSelector';
 
-// Root page handles client-side redirection based on browser language
+// Root page handles client-side redirection based on saved preference or browser language
 export default function RootPage() {
   const router = useRouter();
 
   useEffect(() => {
     try {
+      // Saved preference takes priority over browser language
+      const preferred = getLanguagePreference();
+      if (preferred) {
+        router.replace(`/${preferred}`);
+        return;
+      }
+
       // Get browser language
       const browserLang = navigator.language;
       const primaryLang = browserLang.split('-')[0];

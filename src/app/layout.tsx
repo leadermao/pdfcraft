@@ -36,6 +36,18 @@ export default function RootLayout({
             `,
           }}
         />
+        {/* Google Analytics (async; fails silently if unreachable) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-8YQPQZ26FC" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-8YQPQZ26FC');
+            `,
+          }}
+        />
       </head>
       <body className="min-h-screen bg-background text-foreground antialiased">
         {children}

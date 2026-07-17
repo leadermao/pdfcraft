@@ -1,5 +1,7 @@
 # PDFCraft
 
+> **About this fork** — This is a modified version of [PDFCraftTool/pdfcraft](https://github.com/PDFCraftTool/pdfcraft), deployed at [pdf.yusoong.com](https://pdf.yusoong.com) by 上海时雨有秋教育科技有限公司 (Yusoong). Modifications (first made 2026-07-17, see git history for details): default locale switched to Simplified Chinese, ICP filing number and source-code link added to the footer, Google Analytics added, root-path redirect respects saved language preference. Licensed under AGPL-3.0, same as upstream. All credit for the toolkit goes to the original authors.
+
 <div align="center">
   <img src="public/images/logo.png" alt="PDFCraft Logo" width="120" height="120" />
   <h1>Professional PDF Tools</h1>
