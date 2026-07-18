@@ -126,7 +126,7 @@ export function DeskewPDFTool({ className = '' }: DeskewPDFToolProps) {
             case 'pending':
                 return <div className="w-4 h-4 rounded-full bg-gray-300" />;
             case 'processing':
-                return <Loader2 className="w-4 h-4 animate-spin text-blue-500" />;
+                return <Loader2 className="w-4 h-4 animate-spin text-[hsl(var(--color-primary))]" />;
             case 'completed':
                 return <Check className="w-4 h-4 text-green-500" />;
             case 'error':
@@ -198,7 +198,7 @@ export function DeskewPDFTool({ className = '' }: DeskewPDFToolProps) {
                                                 {formatSize(batchFile.file.size)}
                                             </span>
                                             {batchFile.status === 'processing' && (
-                                                <span className="text-xs text-blue-500">
+                                                <span className="text-xs text-[hsl(var(--color-primary))]">
                                                     {batchFile.progress}%
                                                 </span>
                                             )}

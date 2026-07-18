@@ -430,7 +430,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
           </Card>
 
           {/* Visual Cropper */}
-          <Card variant="outlined" className="p-0 overflow-hidden bg-gray-100">
+          <Card variant="outlined" className="p-0 overflow-hidden bg-[hsl(var(--color-muted))]">
             <div
               ref={cropperContainerRef}
               className={`relative ${isFullscreen ? 'bg-gray-900 flex flex-col' : ''}`}
@@ -457,12 +457,12 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
 
               {/* Zoom Controls - positioned at bottom center of cropper */}
               {state.pageImage && (
-                <div className={`${isFullscreen ? 'fixed' : 'absolute'} left-1/2 bottom-4 -translate-x-1/2 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg px-4 py-2 border border-gray-200`}>
+                <div className={`${isFullscreen ? 'fixed' : 'absolute'} left-1/2 bottom-4 -translate-x-1/2 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg px-4 py-2 border border-[hsl(var(--color-border))]`}>
                   <button
                     type="button"
                     onClick={handleZoomOut}
                     disabled={isProcessing}
-                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[hsl(var(--color-muted))] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     title={tTools('cropPdf.zoomOut') || 'Zoom Out'}
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -470,7 +470,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     </svg>
                   </button>
 
-                  <span className="px-2 text-sm font-medium text-gray-600 min-w-[60px] text-center">
+                  <span className="px-2 text-sm font-medium text-[hsl(var(--color-muted-foreground))] min-w-[60px] text-center">
                     {Math.round(currentZoom * 100)}%
                   </span>
 
@@ -478,7 +478,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     type="button"
                     onClick={handleResetZoom}
                     disabled={isProcessing}
-                    className="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="px-3 py-1 text-sm font-medium text-[hsl(var(--color-muted-foreground))] hover:bg-[hsl(var(--color-muted))] rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     title={tTools('cropPdf.resetZoom') || 'Reset Zoom'}
                   >
                     {tTools('cropPdf.reset') || 'Reset'}
@@ -488,7 +488,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     type="button"
                     onClick={handleZoomIn}
                     disabled={isProcessing}
-                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[hsl(var(--color-muted))] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                     title={tTools('cropPdf.zoomIn') || 'Zoom In'}
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -501,7 +501,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                   <button
                     type="button"
                     onClick={handleToggleFullscreen}
-                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors"
+                    className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[hsl(var(--color-muted))] transition-colors"
                     title={isFullscreen ? (tTools('cropPdf.exitFullscreen') || 'Exit Fullscreen') : (tTools('cropPdf.fullscreen') || 'Fullscreen')}
                   >
                     {isFullscreen ? (
@@ -519,18 +519,18 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
 
               {/* Fullscreen page navigation */}
               {isFullscreen && state.pageImage && (
-                <div className="fixed top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg px-4 py-2 border border-gray-200">
+                <div className="fixed top-4 left-1/2 -translate-x-1/2 z-10 flex items-center gap-2 bg-white/95 backdrop-blur-sm rounded-full shadow-lg px-4 py-2 border border-[hsl(var(--color-border))]">
                   <button
                     type="button"
                     onClick={() => changePage(-1)}
                     disabled={state.currentPage <= 1 || isProcessing}
-                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[hsl(var(--color-muted))] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
-                  <div className="flex items-center gap-1 text-sm font-medium text-gray-600">
+                  <div className="flex items-center gap-1 text-sm font-medium text-[hsl(var(--color-muted-foreground))]">
                     <input
                       type="text"
                       value={pageInputValue}
@@ -538,7 +538,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                       onKeyDown={handlePageInputKeyDown}
                       onBlur={handlePageInputBlur}
                       disabled={isProcessing}
-                      className="w-12 text-center border border-gray-300 rounded px-1 py-0.5 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 disabled:opacity-50"
+                      className="w-12 text-center border border-[hsl(var(--color-border))] rounded px-1 py-0.5 text-sm focus:outline-none focus:ring-1 focus:ring-[hsl(var(--color-primary))] disabled:opacity-50"
                       aria-label="Go to page"
                     />
                     <span>/ {state.numPages}</span>
@@ -547,7 +547,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     type="button"
                     onClick={() => changePage(1)}
                     disabled={state.currentPage >= state.numPages || isProcessing}
-                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[hsl(var(--color-muted))] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -580,7 +580,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     onKeyDown={handlePageInputKeyDown}
                     onBlur={handlePageInputBlur}
                     disabled={isProcessing}
-                    className="w-14 text-center border border-gray-300 rounded px-1 py-0.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
+                    className="w-14 text-center border border-[hsl(var(--color-border))] rounded px-1 py-0.5 text-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--color-primary))] disabled:opacity-50"
                     aria-label="Go to page"
                   />
                   <span>/ {state.numPages}</span>
@@ -604,7 +604,7 @@ export function CropPDFTool({ className = '' }: CropPDFToolProps) {
                     type="checkbox"
                     checked={applyToAll}
                     onChange={(e) => setApplyToAll(e.target.checked)}
-                    className="w-4 h-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                    className="w-4 h-4 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     disabled={isProcessing}
                   />
                   <span className="text-sm font-medium">{tTools('cropPdf.applyToAll') || 'Apply to all pages'}</span>

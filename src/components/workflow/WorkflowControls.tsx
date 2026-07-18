@@ -109,7 +109,7 @@ export function WorkflowControls({
     const StatusIndicator = () => {
         if (executionState.status === 'running') {
             return (
-                <div className="flex items-center gap-2 px-3 py-1.5 bg-blue-100 text-blue-700 rounded-full">
+                <div className="flex items-center gap-2 px-3 py-1.5 bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-primary))] rounded-full">
                     <Loader2 className="w-4 h-4 animate-spin" />
                     <span className="text-sm font-medium">
                         {tWorkflow('running') || 'Running'} ({executionState.progress}%)

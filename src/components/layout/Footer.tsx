@@ -173,7 +173,7 @@ export const Footer: React.FC<FooterProps> = ({ locale }) => {
         {/* Copyright */}
         <div className="pt-8 border-t border-[hsl(var(--color-border))] flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[hsl(var(--color-muted-foreground))]">
-            &copy; {currentYear} {t('brand')}. {t('footer.copyright', { year: '' }).replace(/^\d{4}\s*/, '')}
+            {t('footer.copyright', { year: currentYear })}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
             <a

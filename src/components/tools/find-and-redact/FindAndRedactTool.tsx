@@ -394,8 +394,8 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6z" />
                                 </svg>
                                 <div>
-                                    <p className="font-medium text-gray-900 dark:text-gray-100">{file.name}</p>
-                                    <p className="text-sm text-gray-500 dark:text-gray-400">{formatSize(file.size)}</p>
+                                    <p className="font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100">{file.name}</p>
+                                    <p className="text-sm text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">{formatSize(file.size)}</p>
                                 </div>
                             </div>
                             <Button variant="ghost" size="sm" onClick={handleClearFile} disabled={isProcessing || isSearching}>
@@ -406,14 +406,14 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
 
                     {/* Search Section */}
                     <Card variant="outlined" size="lg">
-                        <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">
+                        <h3 className="text-lg font-medium mb-4 text-[hsl(var(--color-foreground))] dark:text-gray-100">
                             {tTools('searchTitle')}
                         </h3>
 
                         {/* Search Input - Multiple Terms */}
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                                <label className="block text-sm font-medium mb-2 text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                     {tTools('searchTermLabel')}
                                 </label>
 
@@ -430,7 +430,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             }
                                         }}
                                         placeholder={tTools('searchInputPlaceholder')}
-                                        className="w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                                        className="w-full px-4 py-3 border rounded-lg bg-white dark:bg-gray-800 border-[hsl(var(--color-border))] dark:border-gray-600 text-[hsl(var(--color-foreground))] dark:text-gray-100 focus:ring-2 focus:ring-[hsl(var(--color-primary))] focus:border-transparent transition-all"
                                         disabled={isProcessing || isSearching}
                                     />
                                     <div className="absolute right-2 top-1/2 -translate-y-1/2">
@@ -441,7 +441,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                 </div>
 
                                 {/* Help text */}
-                                <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+                                <p className="mt-1.5 text-xs text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                     {tTools('searchInputHelp')}
                                 </p>
 
@@ -449,7 +449,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                 {parsedTerms.length > 0 && (
                                     <div className="mt-3">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                                            <span className="text-xs font-medium text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                                 {tTools('termsCount', { count: parsedTerms.length })}
                                             </span>
                                             <button
@@ -465,7 +465,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             {parsedTerms.map((term, index) => (
                                                 <span
                                                     key={index}
-                                                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-800"
+                                                    className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-sm bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-primary))] dark:bg-blue-900/40 dark:text-blue-300 border border-[hsl(var(--color-primary)/0.3)] dark:border-blue-800"
                                                 >
                                                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -477,7 +477,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                             const newTerms = parsedTerms.filter((_, i) => i !== index);
                                                             setSearchTermsInput(newTerms.join(', '));
                                                         }}
-                                                        className="ml-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-200"
+                                                        className="ml-1 text-[hsl(var(--color-primary))] hover:text-[hsl(var(--color-primary))] dark:text-blue-400 dark:hover:text-blue-200"
                                                         disabled={isProcessing || isSearching}
                                                     >
                                                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -492,16 +492,16 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                             </div>
 
                             {/* Search Options */}
-                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 py-2 border-t border-gray-200 dark:border-gray-700">
+                            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 py-2 border-t border-[hsl(var(--color-border))] dark:border-gray-700">
                                 <label className="flex items-center gap-2 cursor-pointer">
                                     <input
                                         type="checkbox"
                                         checked={caseSensitive}
                                         onChange={(e) => setCaseSensitive(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                        className="w-4 h-4 text-[hsl(var(--color-primary))] rounded border-[hsl(var(--color-border))] focus:ring-[hsl(var(--color-primary))]"
                                         disabled={isProcessing || isSearching}
                                     />
-                                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="text-sm text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                         {tTools('caseSensitive')}
                                     </span>
                                 </label>
@@ -510,10 +510,10 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                         type="checkbox"
                                         checked={wholeWord}
                                         onChange={(e) => setWholeWord(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                        className="w-4 h-4 text-[hsl(var(--color-primary))] rounded border-[hsl(var(--color-border))] focus:ring-[hsl(var(--color-primary))]"
                                         disabled={isProcessing || isSearching || useRegex}
                                     />
-                                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="text-sm text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                         {tTools('wholeWord')}
                                     </span>
                                 </label>
@@ -525,10 +525,10 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             setUseRegex(e.target.checked);
                                             if (e.target.checked) setWholeWord(false);
                                         }}
-                                        className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                        className="w-4 h-4 text-[hsl(var(--color-primary))] rounded border-[hsl(var(--color-border))] focus:ring-[hsl(var(--color-primary))]"
                                         disabled={isProcessing || isSearching}
                                     />
-                                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="text-sm text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                         {tTools('useRegex')}
                                     </span>
                                 </label>
@@ -560,7 +560,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                             <div className="lg:col-span-3">
                                 <Card variant="outlined" size="lg" className="h-full">
                                     <div className="flex items-center justify-between mb-3">
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                        <h3 className="text-lg font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100">
                                             {tTools('previewTitle') || 'Preview'}
                                         </h3>
                                         <div className="flex items-center gap-2">
@@ -572,7 +572,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             >
                                                 ←
                                             </Button>
-                                            <span className="text-sm text-gray-600 dark:text-gray-400 min-w-[60px] text-center">
+                                            <span className="text-sm text-[hsl(var(--color-muted-foreground))] dark:text-gray-400 min-w-[60px] text-center">
                                                 {previewPage} / {totalPages}
                                             </span>
                                             <Button
@@ -586,7 +586,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             <select
                                                 value={previewScale}
                                                 onChange={(e) => setPreviewScale(parseFloat(e.target.value))}
-                                                className="ml-2 px-2 py-1 text-sm border rounded bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600"
+                                                className="ml-2 px-2 py-1 text-sm border rounded bg-white dark:bg-gray-800 border-[hsl(var(--color-border))] dark:border-gray-600"
                                             >
                                                 <option value="0.5">50%</option>
                                                 <option value="0.75">75%</option>
@@ -600,7 +600,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                     {/* Quick page navigation */}
                                     {pagesWithMatches.length > 1 && (
                                         <div className="mb-3 flex flex-wrap gap-1">
-                                            <span className="text-xs text-gray-500 dark:text-gray-400 mr-2">
+                                            <span className="text-xs text-[hsl(var(--color-muted-foreground))] dark:text-gray-400 mr-2">
                                                 {tTools('pagesWithMatches') || 'Pages with matches:'}
                                             </span>
                                             {pagesWithMatches.map(page => (
@@ -611,8 +611,8 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                         setSelectedPage(page);
                                                     }}
                                                     className={`px-2 py-1 text-xs rounded ${previewPage === page
-                                                        ? 'bg-blue-500 text-white'
-                                                        : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                                                        ? 'bg-[hsl(var(--color-primary))] text-white'
+                                                        : 'bg-[hsl(var(--color-muted))] dark:bg-gray-700 text-[hsl(var(--color-foreground))] dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                                                         }`}
                                                 >
                                                     {page}
@@ -625,15 +625,15 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                     <div className="mb-3 flex gap-4 text-xs">
                                         <div className="flex items-center gap-1">
                                             <span className="inline-block w-4 h-4 bg-red-500/30 border-2 border-red-500 rounded"></span>
-                                            <span className="text-gray-600 dark:text-gray-400">{tTools('selectedMatch') || 'Selected'}</span>
+                                            <span className="text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">{tTools('selectedMatch') || 'Selected'}</span>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <span className="inline-block w-4 h-4 bg-yellow-500/30 border-2 border-yellow-500 rounded"></span>
-                                            <span className="text-gray-600 dark:text-gray-400">{tTools('unselectedMatch') || 'Not selected'}</span>
+                                            <span className="text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">{tTools('unselectedMatch') || 'Not selected'}</span>
                                         </div>
                                     </div>
 
-                                    <div className="border rounded-lg overflow-auto bg-gray-100 dark:bg-gray-900" style={{ maxHeight: 'calc(100vh - 400px)', minHeight: '400px' }}>
+                                    <div className="border rounded-lg overflow-auto bg-[hsl(var(--color-muted))] dark:bg-gray-900" style={{ maxHeight: 'calc(100vh - 400px)', minHeight: '400px' }}>
                                         <canvas ref={canvasRef} className="mx-auto" />
                                     </div>
                                 </Card>
@@ -644,7 +644,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                 {/* Matches Header */}
                                 <Card variant="outlined" size="lg">
                                     <div className="flex items-center justify-between mb-3">
-                                        <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                        <h3 className="text-lg font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100">
                                             {tTools('matchesFound', { count: matches.length })}
                                         </h3>
                                         <div className="flex items-center gap-1">
@@ -674,8 +674,8 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                 <button
                                                     onClick={() => setSelectedPage('all')}
                                                     className={`px-2 py-1 text-xs rounded-full border transition-all ${selectedPage === 'all'
-                                                        ? 'bg-blue-600 text-white border-blue-600'
-                                                        : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                                                        ? 'bg-[hsl(var(--color-primary))] text-white border-[hsl(var(--color-primary))]'
+                                                        : 'bg-white dark:bg-gray-800 text-[hsl(var(--color-foreground))] dark:text-gray-300 border-[hsl(var(--color-border))] dark:border-gray-600 hover:border-[hsl(var(--color-primary))]'
                                                         }`}
                                                     disabled={isProcessing}
                                                 >
@@ -692,8 +692,8 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                                 setPreviewPage(page);
                                                             }}
                                                             className={`px-2 py-1 text-xs rounded-full border transition-all ${isSelected
-                                                                ? 'bg-blue-600 text-white border-blue-600'
-                                                                : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-600 hover:border-blue-400'
+                                                                ? 'bg-[hsl(var(--color-primary))] text-white border-[hsl(var(--color-primary))]'
+                                                                : 'bg-white dark:bg-gray-800 text-[hsl(var(--color-foreground))] dark:text-gray-300 border-[hsl(var(--color-border))] dark:border-gray-600 hover:border-[hsl(var(--color-primary))]'
                                                                 }`}
                                                             disabled={isProcessing}
                                                         >
@@ -710,14 +710,14 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                         {filteredMatches.map((match) => (
                                             <div
                                                 key={match.id}
-                                                className={`flex items-center gap-2 p-2.5 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${match.selected ? 'bg-blue-50 dark:bg-blue-900/20' : ''
+                                                className={`flex items-center gap-2 p-2.5 cursor-pointer hover:bg-[hsl(var(--color-muted))] dark:hover:bg-gray-800 transition-colors ${match.selected ? 'bg-[hsl(var(--color-primary)/0.08)] dark:bg-blue-900/20' : ''
                                                     } ${previewPage === match.page ? 'border-l-2 border-l-blue-500' : ''}`}
                                             >
                                                 <input
                                                     type="checkbox"
                                                     checked={match.selected}
                                                     onChange={() => toggleMatchSelection(match.id)}
-                                                    className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 flex-shrink-0"
+                                                    className="w-4 h-4 text-[hsl(var(--color-primary))] rounded border-[hsl(var(--color-border))] focus:ring-[hsl(var(--color-primary))] flex-shrink-0"
                                                     disabled={isProcessing}
                                                 />
                                                 <div
@@ -727,10 +727,10 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                         setSelectedPage(match.page);
                                                     }}
                                                 >
-                                                    <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                                                    <p className="text-sm font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100 truncate">
                                                         "{match.text}"
                                                     </p>
-                                                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                    <p className="text-xs text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                                         {tTools('pageInfo', { page: match.page })}
                                                     </p>
                                                 </div>
@@ -738,7 +738,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                         ))}
                                     </div>
 
-                                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                                    <p className="mt-2 text-sm text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                         {tTools('selectedCount', { selected: selectedCount, total: matches.length })}
                                     </p>
                                 </Card>
@@ -750,7 +750,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                     {!showPreview && hasSearched && matches.length > 0 && (
                         <Card variant="outlined" size="lg">
                             <div className="flex items-center justify-between mb-4">
-                                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
+                                <h3 className="text-lg font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100">
                                     {tTools('matchesFound', { count: matches.length })}
                                 </h3>
                                 <div className="flex items-center gap-2">
@@ -778,20 +778,20 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                 {filteredMatches.map((match) => (
                                     <div
                                         key={match.id}
-                                        className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${match.selected ? 'bg-blue-50 dark:bg-blue-900/20' : ''}`}
+                                        className={`flex items-center gap-3 p-3 cursor-pointer hover:bg-[hsl(var(--color-muted))] dark:hover:bg-gray-800 transition-colors ${match.selected ? 'bg-[hsl(var(--color-primary)/0.08)] dark:bg-blue-900/20' : ''}`}
                                     >
                                         <input
                                             type="checkbox"
                                             checked={match.selected}
                                             onChange={() => toggleMatchSelection(match.id)}
-                                            className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                                            className="w-4 h-4 text-[hsl(var(--color-primary))] rounded border-[hsl(var(--color-border))] focus:ring-[hsl(var(--color-primary))]"
                                             disabled={isProcessing}
                                         />
                                         <div className="flex-1 min-w-0">
-                                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">
+                                            <p className="text-sm font-medium text-[hsl(var(--color-foreground))] dark:text-gray-100 truncate">
                                                 "{match.text}"
                                             </p>
-                                            <p className="text-xs text-gray-500 dark:text-gray-400">
+                                            <p className="text-xs text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                                 {tTools('pageInfo', { page: match.page })}
                                             </p>
                                         </div>
@@ -799,7 +799,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                 ))}
                             </div>
 
-                            <p className="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                            <p className="mt-2 text-sm text-[hsl(var(--color-muted-foreground))] dark:text-gray-400">
                                 {tTools('selectedCount', { selected: selectedCount, total: matches.length })}
                             </p>
                         </Card>
@@ -808,14 +808,14 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                     {/* Redaction Options */}
                     {hasSearched && matches.length > 0 && (
                         <Card variant="outlined" size="lg">
-                            <h3 className="text-lg font-medium mb-4 text-gray-900 dark:text-gray-100">
+                            <h3 className="text-lg font-medium mb-4 text-[hsl(var(--color-foreground))] dark:text-gray-100">
                                 {tTools('redactionOptions')}
                             </h3>
 
                             <div className="space-y-4">
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                                        <label className="block text-sm font-medium mb-1 text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                             {tTools('redactionColor')}
                                         </label>
                                         <div className="flex items-center gap-2">
@@ -823,20 +823,20 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                                 type="color"
                                                 value={redactionColor}
                                                 onChange={(e) => setRedactionColor(e.target.value)}
-                                                className="w-10 h-10 p-1 cursor-pointer rounded border border-gray-300 dark:border-gray-600"
+                                                className="w-10 h-10 p-1 cursor-pointer rounded border border-[hsl(var(--color-border))] dark:border-gray-600"
                                                 disabled={isProcessing}
                                             />
                                             <input
                                                 type="text"
                                                 value={redactionColor}
                                                 onChange={(e) => setRedactionColor(e.target.value)}
-                                                className="flex-1 px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100 text-sm"
+                                                className="flex-1 px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 border-[hsl(var(--color-border))] dark:border-gray-600 text-[hsl(var(--color-foreground))] dark:text-gray-100 text-sm"
                                                 disabled={isProcessing}
                                             />
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300">
+                                        <label className="block text-sm font-medium mb-1 text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                             {tTools('replacementText')}
                                         </label>
                                         <input
@@ -844,7 +844,7 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                             value={replacementText}
                                             onChange={(e) => setReplacementText(e.target.value)}
                                             placeholder={tTools('replacementTextPlaceholder')}
-                                            className="w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-100"
+                                            className="w-full px-3 py-2 border rounded-lg bg-white dark:bg-gray-800 border-[hsl(var(--color-border))] dark:border-gray-600 text-[hsl(var(--color-foreground))] dark:text-gray-100"
                                             disabled={isProcessing}
                                         />
                                     </div>
@@ -855,10 +855,10 @@ export function FindAndRedactTool({ className = '' }: FindAndRedactToolProps) {
                                         type="checkbox"
                                         checked={addBorder}
                                         onChange={(e) => setAddBorder(e.target.checked)}
-                                        className="w-4 h-4 text-blue-600"
+                                        className="w-4 h-4 text-[hsl(var(--color-primary))]"
                                         disabled={isProcessing}
                                     />
-                                    <span className="text-sm text-gray-700 dark:text-gray-300">
+                                    <span className="text-sm text-[hsl(var(--color-foreground))] dark:text-gray-300">
                                         {tTools('addBorder')}
                                     </span>
                                 </label>

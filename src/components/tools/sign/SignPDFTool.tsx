@@ -307,14 +307,14 @@ export function SignPDFTool({ className = '' }: SignPDFToolProps) {
           </Card>
 
           {/* Instructions */}
-          <Card variant="outlined" className="bg-blue-50 border-blue-200">
+          <Card variant="outlined" className="bg-[hsl(var(--color-primary)/0.08)] border-[hsl(var(--color-primary)/0.3)]">
             <div className="flex gap-3">
-              <svg className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg className="w-5 h-5 text-[hsl(var(--color-primary))] flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <div className="text-sm text-blue-700">
+              <div className="text-sm text-[hsl(var(--color-primary))]">
                 <p className="font-medium mb-1">{tTools('signPdf.instructionsTitle') || 'How to Sign'}</p>
-                <ol className="list-decimal list-inside space-y-1 text-blue-600">
+                <ol className="list-decimal list-inside space-y-1 text-[hsl(var(--color-primary))]">
                   <li>{tTools('signPdf.instruction1') || 'Click the Signature tool (pen icon) in the toolbar'}</li>
                   <li>{tTools('signPdf.instruction2') || 'Draw, type, or upload your signature'}</li>
                   <li>{tTools('signPdf.instruction3') || 'Click where you want to place the signature'}</li>
@@ -331,7 +331,7 @@ export function SignPDFTool({ className = '' }: SignPDFToolProps) {
               ref={iframeRef}
               src={VIEWER_HTML}
               onLoad={handleIframeLoad}
-              className="w-full bg-gray-100"
+              className="w-full bg-[hsl(var(--color-muted))]"
               style={{ height: '600px', border: 'none' }}
               title="PDF Signature Editor"
             />

@@ -201,7 +201,7 @@ export function PDFToExcelTool({ className = '' }: PDFToExcelToolProps) {
 
             {/* Options Info Panel */}
             {file && (
-                <div className="bg-blue-100 text-blue-800 text-sm p-4 rounded-xl border border-blue-200 dark:bg-blue-900/40 dark:text-blue-100 dark:border-blue-700">
+                <div className="bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-primary))] text-sm p-4 rounded-xl border border-[hsl(var(--color-primary)/0.3)] dark:bg-blue-900/40 dark:text-blue-100 dark:border-blue-700">
                     <p className="flex items-center gap-2">
                         <AlertCircle className="w-4 h-4" />
                         <span>{tTools('pdfToExcel.extractNote') || 'Each page\'s tables will be extracted to separate sheets in the Excel file.'}</span>

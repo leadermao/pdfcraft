@@ -116,9 +116,9 @@ export function DeadLinkDebuggerTool({ className = '' }: DeadLinkDebuggerToolPro
       {file && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-4">
-            <Card variant="outlined" className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <Card variant="outlined" className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
+                <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                   <Unlink className="w-4 h-4 text-primary" />
                   {t('deadLinkDebugger.previewTitle')}
                 </span>
@@ -135,7 +135,7 @@ export function DeadLinkDebuggerTool({ className = '' }: DeadLinkDebuggerToolPro
                   </div>
                 ) : (
                   linkList.map((item, idx) => (
-                    <div key={idx} className="p-3 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl flex flex-col gap-2 shadow-sm">
+                    <div key={idx} className="p-3 bg-white dark:bg-zinc-900 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl flex flex-col gap-2 shadow-sm">
                       <div className="flex justify-between items-center text-[10px] font-bold">
                         <span className="text-primary">{t('deadLinkDebugger.pageNumberLabel', { page: item.pageNumber })}</span>
                         <span className="text-green-500">Status: Detected</span>
@@ -149,7 +149,7 @@ export function DeadLinkDebuggerTool({ className = '' }: DeadLinkDebuggerToolPro
                           placeholder={t('deadLinkDebugger.redirectPlaceholder')}
                           value={replacements[item.originalUrl] || ''}
                           onChange={(e) => handleUpdateLink(item.originalUrl, e.target.value)}
-                          className="flex-1 text-[11px] bg-zinc-50 dark:bg-zinc-950 border rounded-lg p-2 focus:outline-none"
+                          className="flex-1 text-[11px] bg-[hsl(var(--color-muted))] dark:bg-zinc-950 border rounded-lg p-2 focus:outline-none"
                         />
                       </div>
                     </div>
@@ -160,11 +160,11 @@ export function DeadLinkDebuggerTool({ className = '' }: DeadLinkDebuggerToolPro
           </div>
 
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <Sliders className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('deadLinkDebugger.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('deadLinkDebugger.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4 text-xs">

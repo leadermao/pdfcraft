@@ -528,7 +528,7 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                   filterPills.text 
                     ? 'bg-amber-500/10 text-amber-500 border border-amber-500/35 shadow-sm shadow-amber-500/5' 
-                    : 'bg-zinc-100 dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
+                    : 'bg-[hsl(var(--color-muted))] dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
                 }`}
               >
                 {t('comparePdfs.filterText')}
@@ -539,7 +539,7 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                   filterPills.formatting 
                     ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/35 shadow-sm shadow-emerald-500/5' 
-                    : 'bg-zinc-100 dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
+                    : 'bg-[hsl(var(--color-muted))] dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
                 }`}
               >
                 {t('comparePdfs.filterFont')}
@@ -549,8 +549,8 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 onClick={() => setFilterPills(p => ({ ...p, headerFooter: !p.headerFooter }))}
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                   filterPills.headerFooter 
-                    ? 'bg-blue-500/10 text-blue-500 border border-blue-500/35 shadow-sm shadow-blue-500/5' 
-                    : 'bg-zinc-100 dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
+                    ? 'bg-[hsl(var(--color-primary))]/10 text-[hsl(var(--color-primary))] border border-[hsl(var(--color-primary))]/35 shadow-sm shadow-blue-500/5' 
+                    : 'bg-[hsl(var(--color-muted))] dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
                 }`}
               >
                 {t('comparePdfs.filterHeaderFooter')}
@@ -561,7 +561,7 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 className={`px-3 py-1.5 rounded-full text-xs font-bold transition-all ${
                   filterPills.moved 
                     ? 'bg-purple-500/10 text-purple-500 border border-purple-500/35 shadow-sm shadow-purple-500/5' 
-                    : 'bg-zinc-100 dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
+                    : 'bg-[hsl(var(--color-muted))] dark:bg-zinc-800/50 text-zinc-400 border border-transparent'
                 }`}
               >
                 {t('comparePdfs.filterMoved')}
@@ -644,7 +644,7 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 <span className="text-[10px] font-black text-zinc-400 uppercase tracking-widest">
                   {t('comparePdfs.originalVersion')}
                 </span>
-                <span className="text-[10px] font-bold text-zinc-500">
+                <span className="text-[10px] font-bold text-[hsl(var(--color-muted-foreground))]">
                   {currentPair?.pageIndex1 !== -1 ? t('comparePdfs.pageNumber', { page: currentPair.pageIndex1 + 1 }) : '---'}
                 </span>
               </div>
@@ -710,10 +710,10 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                   </div>
                 ) : (
                   /* Deleted Page placeholder blank board */
-                  <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-500 w-full min-h-[500px] border border-dashed border-zinc-800 rounded-xl bg-zinc-950/60 backdrop-blur-md">
+                  <div className="flex flex-col items-center justify-center p-8 text-center text-[hsl(var(--color-muted-foreground))] w-full min-h-[500px] border border-dashed border-zinc-800 rounded-xl bg-zinc-950/60 backdrop-blur-md">
                     <AlertCircle className="w-10 h-10 text-emerald-500/70 mb-4 animate-bounce" />
                     {t('comparePdfs.insertedPageTitle')}
-                    <p className="text-[10px] text-zinc-600 mt-1 max-w-xs">
+                    <p className="text-[10px] text-[hsl(var(--color-muted-foreground))] mt-1 max-w-xs">
                       {t('comparePdfs.insertedPageDesc')}
                     </p>
                   </div>
@@ -727,7 +727,7 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                 <span className="text-[10px] font-black text-emerald-500 uppercase tracking-widest">
                   {t('comparePdfs.modifiedVersion')}
                 </span>
-                <span className="text-[10px] font-bold text-zinc-500">
+                <span className="text-[10px] font-bold text-[hsl(var(--color-muted-foreground))]">
                   {currentPair?.pageIndex2 !== -1 ? t('comparePdfs.pageNumber', { page: currentPair.pageIndex2 + 1 }) : '---'}
                 </span>
               </div>
@@ -793,10 +793,10 @@ export function ComparePDFsTool({ className = '' }: ComparePDFsToolProps) {
                   </div>
                 ) : (
                   /* Inserted Page placeholder blank board */
-                  <div className="flex flex-col items-center justify-center p-8 text-center text-zinc-500 w-full min-h-[500px] border border-dashed border-zinc-800 rounded-xl bg-zinc-950/60 backdrop-blur-md">
+                  <div className="flex flex-col items-center justify-center p-8 text-center text-[hsl(var(--color-muted-foreground))] w-full min-h-[500px] border border-dashed border-zinc-800 rounded-xl bg-zinc-950/60 backdrop-blur-md">
                     <AlertCircle className="w-10 h-10 text-red-500/70 mb-4 animate-bounce" />
                     {t('comparePdfs.deletedPageTitle')}
-                    <p className="text-[10px] text-zinc-600 mt-1 max-w-xs">
+                    <p className="text-[10px] text-[hsl(var(--color-muted-foreground))] mt-1 max-w-xs">
                       {t('comparePdfs.deletedPageDesc')}
                     </p>
                   </div>

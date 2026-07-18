@@ -662,7 +662,7 @@ export function RotatePDFTool({ className = '' }: RotatePDFToolProps) {
                         disabled={isProcessing || selectedPages.size === 0}
                         className="py-3 flex flex-col items-center gap-1.5 text-xs font-medium"
                       >
-                        <svg className="w-5 h-5 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg className="w-5 h-5 text-[hsl(var(--color-muted-foreground))]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 1121.21 7.89H17.5" />
                         </svg>
                         {t('rotate.rotate180')}

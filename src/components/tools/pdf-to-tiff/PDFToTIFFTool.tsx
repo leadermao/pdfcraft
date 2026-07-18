@@ -374,7 +374,7 @@ export function PDFToTIFFTool({ className = '' }: PDFToTIFFToolProps) {
               </div>
 
               {/* Halftone / 1-bit logic notice */}
-              <div className="p-3 rounded-xl bg-zinc-50 dark:bg-zinc-950/20 border border-[hsl(var(--color-border)/0.5)] text-[10px] text-[hsl(var(--color-muted-foreground))] leading-normal flex gap-2">
+              <div className="p-3 rounded-xl bg-[hsl(var(--color-muted))] dark:bg-zinc-950/20 border border-[hsl(var(--color-border)/0.5)] text-[10px] text-[hsl(var(--color-muted-foreground))] leading-normal flex gap-2">
                 <Info className="w-4 h-4 text-[hsl(var(--color-primary))] shrink-0 mt-0.5" />
                 <div>
                   <span className="font-bold text-[hsl(var(--color-foreground))]">{t('pdfToTiff.tipTitle')}</span>

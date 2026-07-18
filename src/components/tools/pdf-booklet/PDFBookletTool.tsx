@@ -298,12 +298,12 @@ export function PDFBookletTool({ className = '' }: PDFBookletToolProps) {
                                 {tTools('pdfBooklet.previewLabel') || 'Layout Preview'}
                             </label>
                             <div
-                                className="relative bg-gray-100 rounded-[var(--radius-md)] p-4 flex items-center justify-center"
+                                className="relative bg-[hsl(var(--color-muted))] rounded-[var(--radius-md)] p-4 flex items-center justify-center"
                                 style={{ minHeight: '200px' }}
                             >
                                 {/* Preview Paper */}
                                 <div
-                                    className="bg-white shadow-lg border border-gray-300 relative"
+                                    className="bg-white shadow-lg border border-[hsl(var(--color-border))] relative"
                                     style={{
                                         width: orientation === 'landscape' ? '280px' : '200px',
                                         height: orientation === 'landscape' ? '200px' : '280px',
@@ -322,7 +322,7 @@ export function PDFBookletTool({ className = '' }: PDFBookletToolProps) {
                                         {Array.from({ length: parseInt(gridMode.split('x')[0]) * parseInt(gridMode.split('x')[1]) }).map((_, i) => (
                                             <div
                                                 key={i}
-                                                className="bg-blue-50 border border-blue-200 flex items-center justify-center text-xs text-blue-500 font-medium"
+                                                className="bg-[hsl(var(--color-primary)/0.08)] border border-[hsl(var(--color-primary)/0.3)] flex items-center justify-center text-xs text-[hsl(var(--color-primary))] font-medium"
                                                 style={{
                                                     transform: rotation === '90cw' ? 'rotate(90deg)' : rotation === '90ccw' ? 'rotate(-90deg)' : rotation === 'alternate' && i % 2 === 1 ? 'rotate(180deg)' : 'none',
                                                 }}
@@ -335,7 +335,7 @@ export function PDFBookletTool({ className = '' }: PDFBookletToolProps) {
 
                                 {/* Preview Info */}
                                 <div className="absolute bottom-2 left-2 right-2 text-center">
-                                    <span className="text-xs text-gray-500 bg-white px-2 py-1 rounded shadow-sm">
+                                    <span className="text-xs text-[hsl(var(--color-muted-foreground))] bg-white px-2 py-1 rounded shadow-sm">
                                         {paperSize.toUpperCase()} • {orientation} • {gridMode} grid
                                     </span>
                                 </div>

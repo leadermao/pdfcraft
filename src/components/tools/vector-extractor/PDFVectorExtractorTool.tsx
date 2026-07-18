@@ -288,7 +288,7 @@ export function PDFVectorExtractorTool({ className = '' }: PDFVectorExtractorToo
                 
                 {/* Page Selector */}
                 {totalPages > 1 && (
-                  <div className="flex items-center gap-1.5 border border-zinc-200 dark:border-zinc-800 rounded-lg px-2 py-0.5 bg-white dark:bg-zinc-900">
+                  <div className="flex items-center gap-1.5 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-lg px-2 py-0.5 bg-white dark:bg-zinc-900">
                     <button 
                       onClick={() => handlePageChange(targetPage - 1)}
                       disabled={targetPage <= 1}
@@ -321,9 +321,9 @@ export function PDFVectorExtractorTool({ className = '' }: PDFVectorExtractorToo
           
           {/* LEFT: SVG Display Canvas */}
           <div className="lg:col-span-8 flex flex-col space-y-4">
-            <Card variant="outlined" className="p-4 bg-zinc-100 dark:bg-zinc-950 flex-1 flex flex-col justify-between rounded-[2rem] border-2 shadow-inner min-h-[480px]">
+            <Card variant="outlined" className="p-4 bg-[hsl(var(--color-muted))] dark:bg-zinc-950 flex-1 flex flex-col justify-between rounded-[2rem] border-2 shadow-inner min-h-[480px]">
               
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
                 <span className="text-xs font-bold text-[hsl(var(--color-foreground))] flex items-center gap-1.5">
                   <Search className="w-4 h-4 text-zinc-400" />
                   {tTools('vectorExtractor.previewHelp')}
@@ -337,7 +337,7 @@ export function PDFVectorExtractorTool({ className = '' }: PDFVectorExtractorToo
               <div className="flex-1 flex items-center justify-center p-6 overflow-auto">
                 <div 
                   ref={containerRef}
-                  className="w-full max-w-lg aspect-square bg-white border border-zinc-200 dark:border-zinc-800 shadow-md rounded-2xl p-4 overflow-hidden relative"
+                  className="w-full max-w-lg aspect-square bg-white border border-[hsl(var(--color-border))] dark:border-zinc-800 shadow-md rounded-2xl p-4 overflow-hidden relative"
                   style={{
                     transform: 'perspective(800px) rotateX(8deg)',
                     transformStyle: 'preserve-3d',

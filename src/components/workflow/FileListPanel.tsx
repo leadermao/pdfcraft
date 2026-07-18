@@ -28,12 +28,12 @@ interface FileListPanelProps {
 function getFileIcon(file: File) {
     const type = file.type;
     if (type.startsWith('image/')) {
-        return <Image className="w-5 h-5 text-blue-500" />;
+        return <Image className="w-5 h-5 text-[hsl(var(--color-primary))]" />;
     }
     if (type === 'application/pdf') {
         return <FileText className="w-5 h-5 text-red-500" />;
     }
-    return <File className="w-5 h-5 text-gray-500" />;
+    return <File className="w-5 h-5 text-[hsl(var(--color-muted-foreground))]" />;
 }
 
 /**

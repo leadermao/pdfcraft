@@ -83,7 +83,7 @@ export function BookletFoldingSimulatorTool() {
           <BookOpen className="w-6 h-6" />
         </div>
         <div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-violet-400 to-indigo-400 bg-clip-text text-transparent">
+          <h2 className="text-xl font-bold bg-gradient-to-r from-violet-400 to-[hsl(var(--color-primary))] bg-clip-text text-transparent">
             {tTools('optionsTitle')}
           </h2>
           <p className="text-xs text-neutral-400">
@@ -167,7 +167,7 @@ export function BookletFoldingSimulatorTool() {
                   onChange={(e) => setFoldProgress(parseInt(e.target.value))}
                   className="w-full h-1 bg-neutral-700 rounded-lg appearance-none cursor-pointer accent-violet-500"
                 />
-                <div className="flex justify-between text-[9px] text-neutral-500">
+                <div className="flex justify-between text-[9px] text-[hsl(var(--color-muted-foreground))]">
                   <span>{t('bookletFoldingSimulator.flatUnfold')}</span>
                   <span>{t('bookletFoldingSimulator.fullyFolded')}</span>
                 </div>
@@ -232,7 +232,7 @@ export function BookletFoldingSimulatorTool() {
               >
                 {/* Left Page (Static base) */}
                 <div
-                  className="absolute top-0 left-0 w-24 h-64 bg-neutral-100 rounded-l shadow-lg origin-right border-r border-neutral-300 flex flex-col justify-between p-3 text-neutral-800 transition-all duration-300"
+                  className="absolute top-0 left-0 w-24 h-64 bg-[hsl(var(--color-muted))] rounded-l shadow-lg origin-right border-r border-[hsl(var(--color-border))] flex flex-col justify-between p-3 text-[hsl(var(--color-foreground))] transition-all duration-300"
                   style={{
                     backfaceVisibility: 'hidden',
                   }}
@@ -244,7 +244,7 @@ export function BookletFoldingSimulatorTool() {
 
                 {/* Right Page (Folds over Left Page) */}
                 <div
-                  className="absolute top-0 left-24 w-24 h-64 bg-neutral-200 rounded-r shadow-lg origin-left flex flex-col justify-between p-3 text-neutral-800 transition-transform"
+                  className="absolute top-0 left-24 w-24 h-64 bg-neutral-200 rounded-r shadow-lg origin-left flex flex-col justify-between p-3 text-[hsl(var(--color-foreground))] transition-transform"
                   style={{
                     backfaceVisibility: 'hidden',
                     transform: `rotateY(${-foldProgress * 1.8}deg)`,

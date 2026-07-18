@@ -493,7 +493,7 @@ export function OrganizePDFTool({ className = '' }: OrganizePDFToolProps) {
                         type="button"
                         onClick={(e) => { e.stopPropagation(); handleDuplicatePage(index); }}
                         disabled={isProcessing}
-                        className="w-5 h-5 bg-blue-500/90 rounded flex items-center justify-center hover:bg-blue-600 text-white disabled:opacity-30 disabled:cursor-not-allowed"
+                        className="w-5 h-5 bg-[hsl(var(--color-primary))]/90 rounded flex items-center justify-center hover:bg-[hsl(var(--color-primary))] text-white disabled:opacity-30 disabled:cursor-not-allowed"
                         aria-label="Duplicate page"
                         title="Duplicate"
                       >
@@ -525,8 +525,8 @@ export function OrganizePDFTool({ className = '' }: OrganizePDFToolProps) {
           )}
 
           {hasOrderChanged() && (
-            <div className="mt-4 p-3 rounded-[var(--radius-md)] bg-blue-50 border border-blue-200">
-              <p className="text-sm text-blue-700">
+            <div className="mt-4 p-3 rounded-[var(--radius-md)] bg-[hsl(var(--color-primary)/0.08)] border border-[hsl(var(--color-primary)/0.3)]">
+              <p className="text-sm text-[hsl(var(--color-primary))]">
                 {tTools('organizePdf.orderChanged') || 'Page order has been changed. Click "Apply Changes" to save.'}
               </p>
             </div>

@@ -318,7 +318,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
             </p>
             <div className="w-full bg-zinc-200 dark:bg-zinc-800 h-1.5 rounded-full overflow-hidden">
               <div 
-                className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full rounded-full transition-all duration-300"
+                className="bg-gradient-to-r from-[hsl(var(--color-primary))] via-purple-500 to-pink-500 h-full rounded-full transition-all duration-300"
                 style={{ width: `${analyzingProgress}%` }}
               />
             </div>
@@ -331,7 +331,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
         <div className="space-y-6">
           
           {/* File Header Bar */}
-          <Card variant="outlined" className="p-4 flex flex-wrap items-center justify-between border border-zinc-200 dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-950/20 backdrop-blur-sm rounded-2xl gap-4">
+          <Card variant="outlined" className="p-4 flex flex-wrap items-center justify-between border border-[hsl(var(--color-border))] dark:border-zinc-800/80 bg-white/50 dark:bg-zinc-950/20 backdrop-blur-sm rounded-2xl gap-4">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-red-100 dark:bg-red-950/20 text-red-500">
                 <FileText className="w-6 h-6" />
@@ -352,7 +352,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
           </Card>
 
           {/* Control Workshop Controls */}
-          <Card variant="default" className="p-6 border border-zinc-200/60 dark:border-zinc-800/40 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md rounded-[2rem] shadow-xl space-y-6">
+          <Card variant="default" className="p-6 border border-[hsl(var(--color-border))]/60 dark:border-zinc-800/40 bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md rounded-[2rem] shadow-xl space-y-6">
             
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               
@@ -373,7 +373,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
                     className="flex-1 accent-[hsl(var(--color-primary))] cursor-pointer h-2 bg-zinc-200 dark:bg-zinc-700 rounded-lg appearance-none" 
                     disabled={isProcessing} 
                   />
-                  <span className="font-mono text-sm px-2.5 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-md font-bold text-[hsl(var(--color-primary))]">
+                  <span className="font-mono text-sm px-2.5 py-1 bg-[hsl(var(--color-muted))] dark:bg-zinc-800 rounded-md font-bold text-[hsl(var(--color-primary))]">
                     {threshold}%
                   </span>
                 </div>
@@ -384,13 +384,13 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
               </div>
 
               {/* Right Column: Summaries & Quick Action buttons */}
-              <div className="md:col-span-5 flex flex-col justify-between border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-800 pt-6 md:pt-0 md:pl-6 space-y-4">
+              <div className="md:col-span-5 flex flex-col justify-between border-t md:border-t-0 md:border-l border-[hsl(var(--color-border))] dark:border-zinc-800 pt-6 md:pt-0 md:pl-6 space-y-4">
                 <div className="space-y-1">
                   <h4 className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] uppercase tracking-wider">
                     {t('removeBlankPages.summaryTitle')}
                   </h4>
                   <div className="flex flex-wrap items-center gap-2.5 pt-1">
-                    <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">
+                    <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-[hsl(var(--color-muted))] dark:bg-zinc-800 text-[hsl(var(--color-muted-foreground))] dark:text-zinc-400">
                       {t('removeBlankPages.totalLabel', { count: pages.length })}
                     </span>
                     <span className="px-2.5 py-1 text-xs font-bold rounded-lg bg-red-100 dark:bg-red-950/30 text-red-600 dark:text-red-400">
@@ -420,7 +420,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
 
             {/* View filter mode tabs */}
             <div className="border-t border-zinc-100 dark:border-zinc-800/80 pt-4 flex items-center justify-between flex-wrap gap-4">
-              <div className="flex rounded-xl bg-zinc-100 dark:bg-zinc-900 p-1">
+              <div className="flex rounded-xl bg-[hsl(var(--color-muted))] dark:bg-zinc-900 p-1">
                 <button
                   onClick={() => setFilterMode('all')}
                   className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
@@ -473,7 +473,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
 
           {/* 3D Pages Queue Grid */}
           {displayedPages.length === 0 ? (
-            <Card variant="outlined" className="p-12 text-center rounded-[2rem] border-dashed border-zinc-200 dark:border-zinc-800">
+            <Card variant="outlined" className="p-12 text-center rounded-[2rem] border-dashed border-[hsl(var(--color-border))] dark:border-zinc-800">
               <Eye className="w-10 h-10 text-zinc-300 dark:text-zinc-700 mx-auto mb-3" />
               <p className="text-sm text-[hsl(var(--color-muted-foreground))] font-bold">
                 {t('removeBlankPages.noPagesToDisplay') || 'No pages to display'}
@@ -535,7 +535,7 @@ export function RemoveBlankPagesTool({ className = '' }: RemoveBlankPagesToolPro
               className="flex-1 font-bold shadow-lg"
               showFileSize 
             />
-            <Button variant="ghost" size="lg" onClick={handleClear} className="border border-zinc-200 dark:border-zinc-800">
+            <Button variant="ghost" size="lg" onClick={handleClear} className="border border-[hsl(var(--color-border))] dark:border-zinc-800">
               {t('removeBlankPages.processNewFile') || 'Process New File'}
             </Button>
           </div>
@@ -603,7 +603,7 @@ function PageCard({ page, isRemoved, isAutoBlank, isManualKeep, isManualRemove, 
       className={`relative group cursor-pointer transition-all duration-300 ease-out rounded-2xl overflow-hidden select-none bg-white dark:bg-zinc-900 border ${
         isRemoved 
           ? 'border-red-500/40 shadow-inner ring-2 ring-red-500/25' 
-          : 'border-zinc-200/80 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-zinc-300 dark:hover:border-zinc-700'
+          : 'border-[hsl(var(--color-border))]/80 dark:border-zinc-800 shadow-sm hover:shadow-xl hover:border-[hsl(var(--color-border))] dark:hover:border-zinc-700'
       }`}
       style={{
         transformStyle: 'preserve-3d',
@@ -611,7 +611,7 @@ function PageCard({ page, isRemoved, isAutoBlank, isManualKeep, isManualRemove, 
     >
       {/* Aspect Ratio Box */}
       <div 
-        className="w-full relative overflow-hidden bg-zinc-50 dark:bg-zinc-950 flex items-center justify-center p-3"
+        className="w-full relative overflow-hidden bg-[hsl(var(--color-muted))] dark:bg-zinc-950 flex items-center justify-center p-3"
         style={{ aspectRatio: page.aspectRatio ? `${page.aspectRatio}` : '0.707' }}
       >
         <img 
@@ -647,9 +647,9 @@ function PageCard({ page, isRemoved, isAutoBlank, isManualKeep, isManualRemove, 
       <div className={`p-2 flex items-center justify-between text-[11px] font-bold border-t ${
         isRemoved 
           ? 'bg-red-50/50 dark:bg-red-950/10 border-red-100 dark:border-red-950/40' 
-          : 'bg-zinc-50 dark:bg-zinc-900/60 border-zinc-100 dark:border-zinc-800'
+          : 'bg-[hsl(var(--color-muted))] dark:bg-zinc-900/60 border-zinc-100 dark:border-zinc-800'
       }`}>
-        <span className={isRemoved ? 'text-red-500' : 'text-zinc-500'}>
+        <span className={isRemoved ? 'text-red-500' : 'text-[hsl(var(--color-muted-foreground))]'}>
           {t('removeBlankPages.pageNumberLabel', { num: page.pageNumber })}
         </span>
         

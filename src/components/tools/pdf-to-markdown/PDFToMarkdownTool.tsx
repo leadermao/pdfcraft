@@ -384,18 +384,18 @@ export function PDFToMarkdownTool({ className = '' }: PDFToMarkdownToolProps) {
                                     prose-h2:text-2xl prose-h2:mb-3 prose-h2:mt-5
                                     prose-h3:text-xl prose-h3:mb-2 prose-h3:mt-4
                                     prose-p:leading-relaxed prose-p:mb-4
-                                    prose-a:text-blue-600 prose-a:no-underline hover:prose-a:underline
+                                    prose-a:text-[hsl(var(--color-primary))] prose-a:no-underline hover:prose-a:underline
                                     prose-strong:font-semibold prose-strong:text-[hsl(var(--color-foreground))]
-                                    prose-code:bg-gray-100 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
+                                    prose-code:bg-[hsl(var(--color-muted))] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded prose-code:text-sm prose-code:font-mono prose-code:before:content-none prose-code:after:content-none
                                     prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-pre:p-4 prose-pre:rounded-lg prose-pre:overflow-x-auto
                                     prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-4
                                     prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-4
                                     prose-li:mb-1
-                                    prose-blockquote:border-l-4 prose-blockquote:border-gray-300 prose-blockquote:pl-4 prose-blockquote:italic
+                                    prose-blockquote:border-l-4 prose-blockquote:border-[hsl(var(--color-border))] prose-blockquote:pl-4 prose-blockquote:italic
                                     prose-img:rounded-lg prose-img:shadow-md
                                     prose-table:border-collapse prose-table:w-full
-                                    prose-th:bg-gray-100 prose-th:p-2 prose-th:border prose-th:border-gray-300
-                                    prose-td:p-2 prose-td:border prose-td:border-gray-300
+                                    prose-th:bg-[hsl(var(--color-muted))] prose-th:p-2 prose-th:border prose-th:border-[hsl(var(--color-border))]
+                                    prose-td:p-2 prose-td:border prose-td:border-[hsl(var(--color-border))]
                                     dark:prose-code:bg-gray-800 dark:prose-code:text-gray-200
                                     dark:prose-th:bg-gray-800 dark:prose-td:border-gray-700 dark:prose-th:border-gray-700"
                                     dangerouslySetInnerHTML={{ __html: sanitizeHtml(htmlContent) }}

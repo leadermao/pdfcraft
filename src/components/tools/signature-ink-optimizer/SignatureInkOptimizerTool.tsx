@@ -108,9 +108,9 @@ export function SignatureInkOptimizerTool({ className = '' }: SignatureInkOptimi
       {file && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-4">
-            <Card variant="outlined" className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <Card variant="outlined" className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
+                <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                   <Brush className="w-4 h-4 text-primary" />
                   {t('signatureInkOptimizer.previewTitle')}
                 </span>
@@ -130,7 +130,7 @@ export function SignatureInkOptimizerTool({ className = '' }: SignatureInkOptimi
                   <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto text-primary">
                     🎨
                   </div>
-                  <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
+                  <h4 className="text-sm font-bold text-[hsl(var(--color-foreground))] dark:text-zinc-200">
                     {file.name}
                   </h4>
                   <p className="text-xs text-zinc-400">
@@ -142,20 +142,20 @@ export function SignatureInkOptimizerTool({ className = '' }: SignatureInkOptimi
           </div>
 
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <Sliders className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('signatureInkOptimizer.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('signatureInkOptimizer.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4 text-xs">
                   <div className="space-y-1.5">
-                    <label className="text-zinc-500 font-bold">{t('signatureInkOptimizer.optimizerTypeLabel')}</label>
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold">{t('signatureInkOptimizer.optimizerTypeLabel')}</label>
                     <select
                       value={inkType}
                       onChange={(e) => setInkType(e.target.value as any)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     >
                       <option value="auto">{t('signatureInkOptimizer.optimizerTypeAuto')}</option>
                       <option value="dark-ink">{t('signatureInkOptimizer.optimizerTypeDark')}</option>
@@ -164,7 +164,7 @@ export function SignatureInkOptimizerTool({ className = '' }: SignatureInkOptimi
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-zinc-500 font-bold flex justify-between">
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold flex justify-between">
                       <span>{t('signatureInkOptimizer.thresholdLabel')}</span>
                       <span className="font-mono text-primary font-bold">{threshold}</span>
                     </label>
@@ -179,7 +179,7 @@ export function SignatureInkOptimizerTool({ className = '' }: SignatureInkOptimi
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-zinc-500 font-bold flex justify-between">
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold flex justify-between">
                       <span>{t('signatureInkOptimizer.contrastLabel')}</span>
                       <span className="font-mono text-primary font-bold">{contrast.toFixed(1)}x</span>
                     </label>

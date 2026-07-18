@@ -302,7 +302,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                     className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${
                       quality === q
                         ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-foreground))]'
-                        : 'border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-zinc-500'
+                        : 'border-[hsl(var(--color-border))] dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-[hsl(var(--color-muted-foreground))]'
                     }`}
                   >
                     {q === 'low' && t('compress.qualityLow')}
@@ -328,7 +328,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                     className={`py-2 px-3 rounded-xl text-xs font-bold transition-all border ${
                       algorithm === alg
                         ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-foreground))]'
-                        : 'border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-zinc-500'
+                        : 'border-[hsl(var(--color-border))] dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-[hsl(var(--color-muted-foreground))]'
                     }`}
                   >
                     {alg.charAt(0).toUpperCase() + alg.slice(1)}
@@ -345,7 +345,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                   checked={optimizeImages}
                   onChange={(e) => setOptimizeImages(e.target.checked)}
                   disabled={isProcessing}
-                  className="w-4 h-4 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                  className="w-4 h-4 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                 />
                 <span className="text-sm">{t('compress.optimizeGraphics')}</span>
               </label>
@@ -355,7 +355,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                   checked={removeMetadata}
                   onChange={(e) => setRemoveMetadata(e.target.checked)}
                   disabled={isProcessing}
-                  className="w-4 h-4 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                  className="w-4 h-4 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                 />
                 <span className="text-sm">{t('compress.clearMetadata')}</span>
               </label>
@@ -382,9 +382,9 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
           
           {/* LEFT: Split screen live comparison */}
           <div className="lg:col-span-7 flex flex-col space-y-4">
-            <Card variant="outlined" className="p-4 bg-zinc-100 dark:bg-zinc-950 rounded-[2rem] flex flex-col justify-between shadow-inner h-full min-h-[480px]">
+            <Card variant="outlined" className="p-4 bg-[hsl(var(--color-muted))] dark:bg-zinc-950 rounded-[2rem] flex flex-col justify-between shadow-inner h-full min-h-[480px]">
               
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
                 <span className="text-xs font-bold text-[hsl(var(--color-foreground))] flex items-center gap-1.5">
                   <Eye className="w-4 h-4 text-zinc-400" />
                   {t('compress.sliderTooltip')}
@@ -557,7 +557,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                         className={`py-2 rounded-xl text-xs font-extrabold transition-all border ${
                           quality === q
                             ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-foreground))]'
-                            : 'border-zinc-200 dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-zinc-500'
+                            : 'border-[hsl(var(--color-border))] dark:border-zinc-800 bg-white/50 dark:bg-black/20 text-[hsl(var(--color-muted-foreground))]'
                         }`}
                       >
                         {q === 'low' && t('compress.qualityLow')}
@@ -582,7 +582,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                       type="checkbox"
                       checked={optimizeImages}
                       onChange={(e) => setOptimizeImages(e.target.checked)}
-                      className="w-4 h-4 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4 h-4 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     {t('compress.optimizeGraphics')}
                   </label>
@@ -591,7 +591,7 @@ export function CompressPDFTool({ className = '' }: CompressPDFToolProps) {
                       type="checkbox"
                       checked={removeMetadata}
                       onChange={(e) => setRemoveMetadata(e.target.checked)}
-                      className="w-4 h-4 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4 h-4 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     {t('compress.clearMetadata')}
                   </label>

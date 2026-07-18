@@ -632,7 +632,7 @@ export function EditPDFTool({ className = '' }: EditPDFToolProps) {
           </Card>
 
           {/* PDF Viewer iframe */}
-          <div className="relative border border-[hsl(var(--color-border))] rounded-[var(--radius-md)] overflow-hidden bg-gray-100">
+          <div className="relative border border-[hsl(var(--color-border))] rounded-[var(--radius-md)] overflow-hidden bg-[hsl(var(--color-muted))]">
             <iframe
               ref={iframeRef}
               src={`/pdfjs-annotation-viewer/web/viewer.html?file=${encodeURIComponent(pdfUrl)}`}

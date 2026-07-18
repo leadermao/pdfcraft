@@ -308,7 +308,7 @@ export function CitationLinkerTool({ className = '' }: CitationLinkerToolProps) 
                       type="checkbox"
                       checked={detectDoi}
                       onChange={(e) => setDetectDoi(e.target.checked)}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <span className="text-xs font-semibold text-[hsl(var(--color-foreground))]">{t('citationLinker.detectDoi')}</span>
                   </label>
@@ -317,7 +317,7 @@ export function CitationLinkerTool({ className = '' }: CitationLinkerToolProps) 
                       type="checkbox"
                       checked={fallbackToPageJump}
                       onChange={(e) => setFallbackToPageJump(e.target.checked)}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <span className="text-xs font-semibold text-[hsl(var(--color-foreground))]">{t('citationLinker.enableGoto')}</span>
                   </label>
@@ -331,7 +331,7 @@ export function CitationLinkerTool({ className = '' }: CitationLinkerToolProps) 
                       <span className="text-[10px] opacity-60">{t('citationLinker.citationPage', { page: selectedCitation.pageNum })}</span>
                     </div>
                     
-                    <p className="text-[11px] leading-relaxed line-clamp-2 text-zinc-500 dark:text-zinc-400">
+                    <p className="text-[11px] leading-relaxed line-clamp-2 text-[hsl(var(--color-muted-foreground))] dark:text-zinc-400">
                       {t('citationLinker.citationRef', { ref: selectedCitation.refText })}
                     </p>
 
@@ -502,7 +502,7 @@ export function CitationLinkerTool({ className = '' }: CitationLinkerToolProps) 
                           ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.15)] ring-2 ring-[hsl(var(--color-primary)/0.3)]'
                           : c.url
                             ? 'border-emerald-500/50 bg-emerald-50/90 dark:bg-emerald-950/20'
-                            : 'border-zinc-300 dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90'
+                            : 'border-[hsl(var(--color-border))] dark:border-zinc-700 bg-white/90 dark:bg-zinc-900/90'
                       }`}
                     >
                       <span className="text-[10px] font-bold leading-none">{c.marker}</span>
@@ -543,7 +543,7 @@ export function CitationLinkerTool({ className = '' }: CitationLinkerToolProps) 
             {/* Small offset gear */}
             <div 
               style={{ transform: `rotate(${-gearAngle * 1.5}deg)` }}
-              className="absolute -top-1 -right-1 w-10 h-10 text-zinc-500 opacity-60"
+              className="absolute -top-1 -right-1 w-10 h-10 text-[hsl(var(--color-muted-foreground))] opacity-60"
             >
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="w-full h-full">
                 <circle cx="12" cy="12" r="3" />

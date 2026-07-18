@@ -203,8 +203,8 @@ export function FlattenPDFTool({ className = '' }: FlattenPDFToolProps) {
           
           <div className="space-y-4">
             {/* Info */}
-            <div className="p-3 rounded-[var(--radius-sm)] bg-blue-50 border border-blue-200">
-              <p className="text-sm text-blue-700">
+            <div className="p-3 rounded-[var(--radius-sm)] bg-[hsl(var(--color-primary)/0.08)] border border-[hsl(var(--color-primary)/0.3)]">
+              <p className="text-sm text-[hsl(var(--color-primary))]">
                 {tTools('flattenPdf.info') || 'Flattening converts interactive elements (forms, annotations) into static page content. This makes the PDF non-editable but ensures consistent appearance across all viewers.'}
               </p>
             </div>

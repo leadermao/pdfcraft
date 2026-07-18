@@ -266,9 +266,9 @@ export function CertCryptorTool() {
                 {/* Mock document layout */}
                 <div className="space-y-2 pointer-events-none">
                   <div className="h-4 w-2/3 bg-neutral-200 rounded" />
-                  <div className="h-3 w-5/6 bg-neutral-100 rounded" />
-                  <div className="h-3 w-full bg-neutral-100 rounded" />
-                  <div className="h-3 w-4/5 bg-neutral-100 rounded" />
+                  <div className="h-3 w-5/6 bg-[hsl(var(--color-muted))] rounded" />
+                  <div className="h-3 w-full bg-[hsl(var(--color-muted))] rounded" />
+                  <div className="h-3 w-4/5 bg-[hsl(var(--color-muted))] rounded" />
                 </div>
 
                 <div className="space-y-2 pointer-events-none mt-12 text-center text-[10px] text-neutral-400 border-t border-neutral-100 pt-10">

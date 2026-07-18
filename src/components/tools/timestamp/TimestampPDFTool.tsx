@@ -319,7 +319,7 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
                 <div className="w-full space-y-5 animate-in zoom-in-95 duration-500 flex flex-col justify-between h-full">
                   
                   {/* Premium Seal Emblem */}
-                  <div className="flex items-start justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4">
+                  <div className="flex items-start justify-between border-b border-[hsl(var(--color-border))] dark:border-zinc-800 pb-4">
                     <div className="space-y-1">
                       <span className="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600 dark:bg-emerald-950/20 dark:text-emerald-400 font-bold uppercase tracking-wider">
                         TSA Verified & Secured
@@ -382,7 +382,7 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
 
                   {/* Complete Action Area */}
                   {result && (
-                    <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex gap-2">
+                    <div className="pt-4 border-t border-[hsl(var(--color-border))] dark:border-zinc-800 flex gap-2">
                       <DownloadButton
                         file={result}
                         filename={file.name.replace('.pdf', '_timestamped.pdf')}

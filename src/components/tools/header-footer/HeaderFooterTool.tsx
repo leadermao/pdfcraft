@@ -397,14 +397,14 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
                     <button
                       key={item.label}
                       onClick={() => navigator.clipboard.writeText(item.label)}
-                      className="px-3 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+                      className="px-3 py-1.5 text-xs bg-[hsl(var(--color-muted))] hover:bg-gray-200 rounded-full transition-colors"
                       title={`Copy "${item.label}" - ${item.desc}`}
                     >
                       <code>{item.label}</code>
                     </button>
                   ))}
                 </div>
-                <p className="text-xs text-gray-500 mt-1">Click to copy, then paste into any field</p>
+                <p className="text-xs text-[hsl(var(--color-muted-foreground))] mt-1">Click to copy, then paste into any field</p>
               </div>
 
               {/* Style Options */}
@@ -442,7 +442,7 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
                     type="color"
                     value={fontColor}
                     onChange={(e) => setFontColor(e.target.value)}
-                    className="w-full h-10 p-1 cursor-pointer rounded border border-gray-300"
+                    className="w-full h-10 p-1 cursor-pointer rounded border border-[hsl(var(--color-border))]"
                     disabled={isProcessing}
                   />
                 </div>
@@ -459,7 +459,7 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
                   className="w-full px-3 py-2 border rounded-[var(--radius-md)] text-sm"
                   disabled={isProcessing}
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-[hsl(var(--color-muted-foreground))] mt-1">
                   Use "all" for all pages, or specify ranges like "1-5, 8, 10-12"
                 </p>
               </div>
@@ -508,7 +508,7 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
                 </div>
               </div>
 
-              <div className="bg-gray-100 rounded-[var(--radius-md)] p-4 flex justify-center">
+              <div className="bg-[hsl(var(--color-muted))] rounded-[var(--radius-md)] p-4 flex justify-center">
                 <canvas
                   ref={previewCanvasRef}
                   className="shadow-lg bg-white max-w-full h-auto"
@@ -526,7 +526,7 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
                     Header/Footer will be added to this page
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-sm text-gray-500">
+                  <span className="inline-flex items-center gap-1 text-sm text-[hsl(var(--color-muted-foreground))]">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                     </svg>
@@ -536,7 +536,7 @@ export function HeaderFooterTool({ className = '' }: HeaderFooterToolProps) {
               </div>
 
               {!hasContent && (
-                <p className="text-sm text-center text-gray-500 mt-4">
+                <p className="text-sm text-center text-[hsl(var(--color-muted-foreground))] mt-4">
                   {tTools('headerFooter.previewHint') || 'Enter header or footer text to see preview'}
                 </p>
               )}

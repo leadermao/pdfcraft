@@ -381,7 +381,7 @@ export function OCRPDFTool({ className = '' }: OCRPDFToolProps) {
                           px-3 py-1.5 rounded-xl text-xs font-bold transition-all border
                           ${languages.includes(lang)
                             ? 'bg-[hsl(var(--color-primary))] text-white border-[hsl(var(--color-primary))]'
-                            : 'bg-white/50 dark:bg-zinc-800/50 text-zinc-600 border-[hsl(var(--color-border))]'
+                            : 'bg-white/50 dark:bg-zinc-800/50 text-[hsl(var(--color-muted-foreground))] border-[hsl(var(--color-border))]'
                           }
                         `}
                       >

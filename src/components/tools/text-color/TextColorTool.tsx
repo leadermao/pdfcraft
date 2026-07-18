@@ -144,7 +144,7 @@ export function TextColorTool({ className = '' }: TextColorToolProps) {
                   className="w-full" 
                   disabled={isProcessing}
                 />
-                <p className="text-xs text-gray-500 mt-1">
+                <p className="text-xs text-[hsl(var(--color-muted-foreground))] mt-1">
                   {t('thresholdHint') || 'Adjust to control which pixels are affected'}
                 </p>
               </div>

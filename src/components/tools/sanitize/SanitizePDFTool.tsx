@@ -205,8 +205,8 @@ export function SanitizePDFTool({ className = '' }: SanitizePDFToolProps) {
           
           <div className="space-y-4">
             {/* Info */}
-            <div className="p-3 rounded-[var(--radius-sm)] bg-blue-50 border border-blue-200">
-              <p className="text-sm text-blue-700">
+            <div className="p-3 rounded-[var(--radius-sm)] bg-[hsl(var(--color-primary)/0.08)] border border-[hsl(var(--color-primary)/0.3)]">
+              <p className="text-sm text-[hsl(var(--color-primary))]">
                 {tTools('sanitizePdf.info') || 'Sanitization removes potentially harmful content from PDFs, making them safer to open and share.'}
               </p>
             </div>

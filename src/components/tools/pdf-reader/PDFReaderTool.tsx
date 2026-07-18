@@ -124,7 +124,7 @@ export function PDFReaderTool({ className = '' }: PDFReaderToolProps) {
 
                     {/* PDF Viewer - Using browser's built-in PDF viewer */}
                     <div
-                        className="relative bg-gray-100 rounded-[var(--radius-md)] overflow-hidden"
+                        className="relative bg-[hsl(var(--color-muted))] rounded-[var(--radius-md)] overflow-hidden"
                         style={{ height: '80vh', minHeight: '600px' }}
                     >
                         <iframe

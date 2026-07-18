@@ -77,7 +77,7 @@ export function FontToOutlineTool({ className = '' }: FontToOutlineToolProps) {
     const getStatusIcon = (status: BatchFile['status']) => {
         switch (status) {
             case 'pending': return <div className="w-4 h-4 rounded-full bg-gray-300" />;
-            case 'processing': return <Loader2 className="w-4 h-4 animate-spin text-blue-500" />;
+            case 'processing': return <Loader2 className="w-4 h-4 animate-spin text-[hsl(var(--color-primary))]" />;
             case 'completed': return <Check className="w-4 h-4 text-green-500" />;
             case 'error': return <AlertCircle className="w-4 h-4 text-red-500" />;
         }
@@ -127,7 +127,7 @@ export function FontToOutlineTool({ className = '' }: FontToOutlineToolProps) {
                                         <p className="text-sm font-medium text-[hsl(var(--color-foreground))] truncate">{batchFile.file.name}</p>
                                         <div className="flex items-center gap-2">
                                             <span className="text-xs text-[hsl(var(--color-muted-foreground))]">{formatSize(batchFile.file.size)}</span>
-                                            {batchFile.status === 'processing' && <span className="text-xs text-blue-500">{batchFile.progress}%</span>}
+                                            {batchFile.status === 'processing' && <span className="text-xs text-[hsl(var(--color-primary))]">{batchFile.progress}%</span>}
                                             {batchFile.status === 'completed' && <span className="text-xs text-green-500">✓ Outlined</span>}
                                             {batchFile.status === 'error' && <span className="text-xs text-red-500">{batchFile.error}</span>}
                                         </div>

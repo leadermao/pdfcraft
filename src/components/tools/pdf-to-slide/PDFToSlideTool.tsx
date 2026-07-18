@@ -96,11 +96,11 @@ export function PDFToSlideTool() {
   return (
     <Card className="p-6 max-w-4xl mx-auto shadow-2xl bg-neutral-950 border-neutral-800 text-white">
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-3 rounded-lg bg-indigo-600/20 text-indigo-400">
+        <div className="p-3 rounded-lg bg-[hsl(var(--color-primary))]/20 text-[hsl(var(--color-primary))]">
           <Presentation className="w-6 h-6" />
         </div>
         <div>
-          <h2 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent">
+          <h2 className="text-xl font-bold bg-gradient-to-r from-[hsl(var(--color-primary))] to-pink-400 bg-clip-text text-transparent">
             {tTools('optionsTitle')}
           </h2>
           <p className="text-xs text-neutral-400">
@@ -138,7 +138,7 @@ export function PDFToSlideTool() {
             <div className="space-y-6 md:col-span-1">
               <div className="space-y-3">
                 <label className="text-sm font-semibold text-neutral-300 flex items-center gap-2">
-                  <Palette className="w-4 h-4 text-indigo-400" />
+                  <Palette className="w-4 h-4 text-[hsl(var(--color-primary))]" />
                   {t('pdfToSlide.themeLabel')}
                 </label>
                 <div className="grid grid-cols-5 gap-2">
@@ -158,7 +158,7 @@ export function PDFToSlideTool() {
               {status === 'idle' && (
                 <Button
                   onClick={handleProcess}
-                  className="w-full bg-indigo-600 hover:bg-indigo-700 font-bold flex items-center justify-center gap-2"
+                  className="w-full bg-[hsl(var(--color-primary))] hover:bg-[hsl(var(--color-primary))] font-bold flex items-center justify-center gap-2"
                 >
                   <Sparkles className="w-4 h-4" />
                   {tTools('processButton')}
@@ -193,20 +193,20 @@ export function PDFToSlideTool() {
             <div className="md:col-span-2 space-y-4">
               {isAnimating ? (
                 /* Starfield Flow Transition (WOW Effect) */
-                <div className="relative h-64 bg-neutral-900 rounded-xl overflow-hidden flex flex-col items-center justify-center border border-indigo-900/30">
-                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-950/40 via-neutral-950 to-neutral-950 -z-10" />
+                <div className="relative h-64 bg-neutral-900 rounded-xl overflow-hidden flex flex-col items-center justify-center border border-[hsl(var(--color-primary))]/30">
+                  <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-[hsl(var(--color-primary))]/40 via-neutral-950 to-neutral-950 -z-10" />
                   
                   {/* Floating particles */}
-                  <div className="absolute top-10 left-12 h-2 w-2 rounded-full bg-indigo-500 blur-sm animate-ping" />
+                  <div className="absolute top-10 left-12 h-2 w-2 rounded-full bg-[hsl(var(--color-primary))] blur-sm animate-ping" />
                   <div className="absolute bottom-10 right-20 h-3 w-3 rounded-full bg-pink-500 blur-sm animate-ping" />
 
                   {/* Flowing Outlines Card */}
                   <div className="space-y-3 text-center z-10">
                     <div className="flex gap-2 justify-center">
-                      <div className="p-4 rounded-xl bg-neutral-800/80 backdrop-blur-md border border-indigo-500/30 shadow-lg shadow-indigo-500/10 animate-bounce">
-                        <span className="text-xs font-semibold text-indigo-400 font-mono">TEXT OBJECTS</span>
+                      <div className="p-4 rounded-xl bg-neutral-800/80 backdrop-blur-md border border-[hsl(var(--color-primary))]/30 shadow-lg shadow-indigo-500/10 animate-bounce">
+                        <span className="text-xs font-semibold text-[hsl(var(--color-primary))] font-mono">TEXT OBJECTS</span>
                       </div>
-                      <div className="flex items-center text-neutral-600">
+                      <div className="flex items-center text-[hsl(var(--color-muted-foreground))]">
                         <ChevronRight className="w-5 h-5 animate-pulse" />
                       </div>
                       <div className="p-4 rounded-xl bg-neutral-800/80 backdrop-blur-md border border-pink-500/30 shadow-lg shadow-pink-500/10 animate-pulse">
@@ -247,7 +247,7 @@ export function PDFToSlideTool() {
                       <ul className="mt-4 space-y-2">
                         {slides[activeSlideIdx].bullets.map((bullet, bIdx) => (
                           <li key={bIdx} className="text-xs text-neutral-400 flex items-start gap-2">
-                            <span className="text-indigo-400 mt-1">•</span>
+                            <span className="text-[hsl(var(--color-primary))] mt-1">•</span>
                             <span>{bullet}</span>
                           </li>
                         ))}
@@ -281,7 +281,7 @@ export function PDFToSlideTool() {
                 /* Idle/Help display */
                 <div className="h-64 rounded-xl border border-neutral-800 bg-neutral-900/30 flex items-center justify-center p-6 text-center">
                   <div className="space-y-2">
-                    <Sparkles className="w-8 h-8 text-neutral-600 mx-auto" />
+                    <Sparkles className="w-8 h-8 text-[hsl(var(--color-muted-foreground))] mx-auto" />
                     {t('pdfToSlide.outlinePreviewTitle')}
                     {t('pdfToSlide.outlinePreviewDesc')}
                   </div>

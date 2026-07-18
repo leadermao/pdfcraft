@@ -106,7 +106,7 @@ export function RepairPDFTool({ className = '' }: RepairPDFToolProps) {
                         </div>
                         <div className="space-y-2 max-h-60 overflow-y-auto">
                             {files.map((file, index) => (
-                                <div key={index} className="flex items-center justify-between p-2 bg-gray-50 rounded">
+                                <div key={index} className="flex items-center justify-between p-2 bg-[hsl(var(--color-muted))] rounded">
                                     <span className="text-sm truncate">{file.name}</span>
                                     <Button
                                         variant="ghost"

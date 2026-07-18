@@ -357,7 +357,7 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
                       checked={stripMetadata}
                       onChange={(e) => setStripMetadata(e.target.checked)}
                       disabled={isProcessing}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <div className="text-xs">
                       {t('deepSanitize.clearXmp')}
@@ -371,7 +371,7 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
                       checked={stripPieceInfo}
                       onChange={(e) => setStripPieceInfo(e.target.checked)}
                       disabled={isProcessing}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <div className="text-xs">
                       {t('deepSanitize.clearPieceInfo')}
@@ -385,7 +385,7 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
                       checked={stripOcgWatermarks}
                       onChange={(e) => setStripOcgWatermarks(e.target.checked)}
                       disabled={isProcessing}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <div className="text-xs">
                       {t('deepSanitize.clearOcProperties')}
@@ -399,7 +399,7 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
                       checked={stripAnnotations}
                       onChange={(e) => setStripAnnotations(e.target.checked)}
                       disabled={isProcessing}
-                      className="w-4.5 h-4.5 rounded border-zinc-300 text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
+                      className="w-4.5 h-4.5 rounded border-[hsl(var(--color-border))] text-[hsl(var(--color-primary))] focus:ring-[hsl(var(--color-primary))]"
                     />
                     <div className="text-xs">
                       {t('deepSanitize.clearAnnotations')}
@@ -442,8 +442,8 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
                     </div>
                   ) : (
                     <div className="space-y-1">
-                      <Lock className="w-6 h-6 text-zinc-600 mx-auto" />
-                      <span className="text-[9px] font-bold text-zinc-600 uppercase tracking-widest">Secured</span>
+                      <Lock className="w-6 h-6 text-[hsl(var(--color-muted-foreground))] mx-auto" />
+                      <span className="text-[9px] font-bold text-[hsl(var(--color-muted-foreground))] uppercase tracking-widest">Secured</span>
                     </div>
                   )}
                 </div>

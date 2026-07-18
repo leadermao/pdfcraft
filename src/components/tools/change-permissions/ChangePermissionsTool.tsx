@@ -346,8 +346,8 @@ export function ChangePermissionsTool({ className = '' }: ChangePermissionsToolP
           
           <div className="space-y-4">
             {/* Privacy Notice */}
-            <div className="p-3 rounded-[var(--radius-sm)] bg-blue-50 border border-blue-200">
-              <p className="text-sm text-blue-700">
+            <div className="p-3 rounded-[var(--radius-sm)] bg-[hsl(var(--color-primary)/0.08)] border border-[hsl(var(--color-primary)/0.3)]">
+              <p className="text-sm text-[hsl(var(--color-primary))]">
                 {tTools('changePermissions.privacyNotice') || '🔒 Your passwords are processed locally and never sent to any server.'}
               </p>
             </div>

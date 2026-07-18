@@ -35,7 +35,7 @@ const ToolNode = memo(({ id, data, selected = false, isConnectable = true }: Too
     // Status colors
     const statusColors = {
         idle: 'bg-[hsl(var(--color-muted))]',
-        processing: 'bg-blue-100 border-blue-400',
+        processing: 'bg-[hsl(var(--color-primary)/0.08)] border-[hsl(var(--color-primary))]',
         complete: 'bg-green-100 border-green-400',
         error: 'bg-red-100 border-red-400',
     };
@@ -43,7 +43,7 @@ const ToolNode = memo(({ id, data, selected = false, isConnectable = true }: Too
     // Status indicator colors
     const statusIndicatorColors = {
         idle: 'bg-gray-300',
-        processing: 'bg-blue-500 animate-pulse',
+        processing: 'bg-[hsl(var(--color-primary))] animate-pulse',
         complete: 'bg-green-500',
         error: 'bg-red-500',
     };
@@ -95,7 +95,7 @@ const ToolNode = memo(({ id, data, selected = false, isConnectable = true }: Too
                 {/* Icon */}
                 <div className={`
           p-2 rounded-lg
-          ${data.status === 'processing' ? 'bg-blue-200' : 'bg-white/80'}
+          ${data.status === 'processing' ? 'bg-[hsl(var(--color-primary))]' : 'bg-white/80'}
         `}>
                     <IconComponent className="w-5 h-5 text-[hsl(var(--color-foreground))]" />
                 </div>
@@ -118,7 +118,7 @@ const ToolNode = memo(({ id, data, selected = false, isConnectable = true }: Too
             {data.status === 'processing' && (
                 <div className="mt-2 w-full h-1.5 bg-gray-200 rounded-full overflow-hidden">
                     <div
-                        className="h-full bg-blue-500 rounded-full transition-all duration-300"
+                        className="h-full bg-[hsl(var(--color-primary))] rounded-full transition-all duration-300"
                         style={{ width: `${data.progress}%` }}
                     />
                 </div>
@@ -143,11 +143,11 @@ const ToolNode = memo(({ id, data, selected = false, isConnectable = true }: Too
 
             {/* Format tags */}
             <div className="flex flex-wrap gap-1 mt-2">
-                <span className="text-[10px] px-1.5 py-0.5 bg-gray-200 rounded text-gray-600">
+                <span className="text-[10px] px-1.5 py-0.5 bg-gray-200 rounded text-[hsl(var(--color-muted-foreground))]">
                     in: {data.acceptedFormats.slice(0, 2).join(', ')}
                     {data.acceptedFormats.length > 2 && '...'}
                 </span>
-                <span className="text-[10px] px-1.5 py-0.5 bg-blue-100 rounded text-blue-600">
+                <span className="text-[10px] px-1.5 py-0.5 bg-[hsl(var(--color-primary)/0.08)] rounded text-[hsl(var(--color-primary))]">
                     out: {data.outputFormat}
                 </span>
             </div>

@@ -109,9 +109,9 @@ export function PassportIdComposerTool({ className = '' }: PassportIdComposerToo
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Files display & visual effect */}
           <div className="lg:col-span-8 space-y-4">
-            <Card variant="outlined" className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2 border-dashed">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <Card variant="outlined" className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2 border-dashed">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
+                <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                   <Layers className="w-4 h-4 text-primary" />
                   {t('passportIdComposer.layersCountLabel', { count: files.length })}
                 </span>
@@ -130,8 +130,8 @@ export function PassportIdComposerTool({ className = '' }: PassportIdComposerToo
                 )}
 
                 {files.map((f, idx) => (
-                  <div key={idx} className="w-48 h-32 bg-white dark:bg-zinc-900 border-2 border-zinc-200 dark:border-zinc-800 rounded-xl shadow-lg flex flex-col items-center justify-center p-4 relative group overflow-hidden">
-                    <div className="absolute top-2 left-2 text-[10px] font-black text-zinc-400 bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded">
+                  <div key={idx} className="w-48 h-32 bg-white dark:bg-zinc-900 border-2 border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl shadow-lg flex flex-col items-center justify-center p-4 relative group overflow-hidden">
+                    <div className="absolute top-2 left-2 text-[10px] font-black text-zinc-400 bg-[hsl(var(--color-muted))] dark:bg-zinc-800 px-1.5 py-0.5 rounded">
                       {idx === 0 ? t('passportIdComposer.frontLabel') : t('passportIdComposer.backLabel')}
                     </div>
                     <span className="text-xs font-semibold truncate max-w-full text-center mt-4">
@@ -148,16 +148,16 @@ export function PassportIdComposerTool({ className = '' }: PassportIdComposerToo
 
           {/* Options side panel */}
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <Sliders className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('passportIdComposer.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('passportIdComposer.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+                    <label className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                       <Shield className="w-4 h-4 text-primary" />
                       {t('passportIdComposer.watermarkLabel')}
                     </label>
@@ -166,17 +166,17 @@ export function PassportIdComposerTool({ className = '' }: PassportIdComposerToo
                       value={watermark}
                       onChange={(e) => setWatermark(e.target.value)}
                       placeholder={t('passportIdComposer.watermarkPlaceholder')}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-primary"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3 focus:outline-none focus:ring-1 focus:ring-primary"
                     />
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-zinc-500">{t('passportIdComposer.idCardHeightLabel')}</label>
+                    <label className="text-xs font-bold text-[hsl(var(--color-muted-foreground))]">{t('passportIdComposer.idCardHeightLabel')}</label>
                     <input
                       type="number"
                       value={idCardHeight}
                       onChange={(e) => setIdCardHeight(parseFloat(e.target.value) || 153)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     />
                   </div>
                 </div>

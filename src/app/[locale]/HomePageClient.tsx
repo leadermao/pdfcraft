@@ -48,7 +48,7 @@ export default function HomePageClient({ locale, localizedToolContent }: HomePag
       icon: Wrench,
       titleKey: 'home.features.powerful.title',
       descriptionKey: 'home.features.powerful.description',
-      color: 'text-blue-500',
+      color: 'text-[hsl(var(--color-primary))]',
     },
   ];
 

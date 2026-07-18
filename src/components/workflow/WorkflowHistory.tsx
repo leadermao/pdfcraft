@@ -92,7 +92,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
             case 'failed':
                 return <XCircle className="w-5 h-5 text-red-500" />;
             case 'running':
-                return <Clock className="w-5 h-5 text-blue-500 animate-spin" />;
+                return <Clock className="w-5 h-5 text-[hsl(var(--color-primary))] animate-spin" />;
             default:
                 return <Clock className="w-5 h-5 text-gray-400" />;
         }
@@ -115,13 +115,13 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
         <div className="flex flex-col h-full">
             {/* Statistics Panel */}
             {statistics && (
-                <div className="p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
+                <div className="p-4 bg-gradient-to-r from-[hsl(var(--color-primary))] to-[hsl(var(--color-primary))] border-b border-[hsl(var(--color-border))]">
                     <div className="grid grid-cols-3 gap-4 text-center">
                         <div>
-                            <div className="text-2xl font-bold text-blue-600">
+                            <div className="text-2xl font-bold text-[hsl(var(--color-primary))]">
                                 {statistics.total}
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-[hsl(var(--color-muted-foreground))]">
                                 {tWorkflow('totalExecutions') || 'Total Runs'}
                             </div>
                         </div>
@@ -129,7 +129,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                             <div className="text-2xl font-bold text-green-600">
                                 {statistics.successRate.toFixed(0)}%
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-[hsl(var(--color-muted-foreground))]">
                                 {tWorkflow('successRate') || 'Success Rate'}
                             </div>
                         </div>
@@ -137,7 +137,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                             <div className="text-2xl font-bold text-purple-600">
                                 {formatDuration(statistics.avgDuration)}
                             </div>
-                            <div className="text-xs text-gray-600">
+                            <div className="text-xs text-[hsl(var(--color-muted-foreground))]">
                                 {tWorkflow('avgDuration') || 'Avg Duration'}
                             </div>
                         </div>
@@ -146,14 +146,14 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
             )}
 
             {/* Header */}
-            <div className="p-4 border-b border-gray-200 bg-white">
+            <div className="p-4 border-b border-[hsl(var(--color-border))] bg-white">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                        <Clock className="w-5 h-5 text-gray-600" />
-                        <h3 className="font-semibold text-gray-900">
+                        <Clock className="w-5 h-5 text-[hsl(var(--color-muted-foreground))]" />
+                        <h3 className="font-semibold text-[hsl(var(--color-foreground))]">
                             {tWorkflow('executionHistory') || 'Execution History'}
                         </h3>
-                        <span className="px-2 py-0.5 text-xs bg-gray-100 text-gray-600 rounded-full">
+                        <span className="px-2 py-0.5 text-xs bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] rounded-full">
                             {records.length}
                         </span>
                     </div>
@@ -174,7 +174,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                 {records.length === 0 ? (
                     <div className="flex flex-col items-center justify-center h-full p-8 text-center">
                         <Clock className="w-16 h-16 text-gray-300 mb-4" />
-                        <p className="text-gray-500 mb-2">
+                        <p className="text-[hsl(var(--color-muted-foreground))] mb-2">
                             {tWorkflow('noHistory') || 'No execution history yet'}
                         </p>
                         <p className="text-sm text-gray-400">
@@ -186,8 +186,8 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                         {records.map((record) => (
                             <div
                                 key={record.id}
-                                className={`p-4 hover:bg-gray-50 cursor-pointer transition-colors ${
-                                    selectedRecord?.id === record.id ? 'bg-blue-50' : ''
+                                className={`p-4 hover:bg-[hsl(var(--color-muted))] cursor-pointer transition-colors ${
+                                    selectedRecord?.id === record.id ? 'bg-[hsl(var(--color-primary)/0.08)]' : ''
                                 }`}
                                 onClick={() => setSelectedRecord(selectedRecord?.id === record.id ? null : record)}
                             >
@@ -197,7 +197,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                                         {getStatusIcon(record.status)}
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 mb-1">
-                                                <h4 className="font-medium text-gray-900 truncate">
+                                                <h4 className="font-medium text-[hsl(var(--color-foreground))] truncate">
                                                     {record.workflowName || tWorkflow('unnamedWorkflow') || 'Unnamed Workflow'}
                                                 </h4>
                                                 <span className={`px-2 py-0.5 text-xs rounded-full ${
@@ -205,12 +205,12 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                                                         ? 'bg-green-100 text-green-700'
                                                         : record.status === 'failed'
                                                         ? 'bg-red-100 text-red-700'
-                                                        : 'bg-blue-100 text-blue-700'
+                                                        : 'bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-primary))]'
                                                 }`}>
                                                     {getStatusText(record.status)}
                                                 </span>
                                             </div>
-                                            <div className="flex items-center gap-4 text-xs text-gray-500">
+                                            <div className="flex items-center gap-4 text-xs text-[hsl(var(--color-muted-foreground))]">
                                                 <span className="flex items-center gap-1">
                                                     <Calendar className="w-3 h-3" />
                                                     {formatDate(record.startTime)}
@@ -243,7 +243,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
 
                                 {/* Expanded Details */}
                                 {selectedRecord?.id === record.id && (
-                                    <div className="mt-3 pt-3 border-t border-gray-200">
+                                    <div className="mt-3 pt-3 border-t border-[hsl(var(--color-border))]">
                                         {/* Node Statistics */}
                                         <div className="flex items-center gap-4 text-sm mb-3">
                                             <span className="text-green-600">
@@ -271,7 +271,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                                                         e.stopPropagation();
                                                         onLoadFromHistory(record);
                                                     }}
-                                                    className="flex-1 px-3 py-1.5 text-sm bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors flex items-center justify-center gap-2"
+                                                    className="flex-1 px-3 py-1.5 text-sm bg-[hsl(var(--color-primary))] text-white rounded hover:bg-[hsl(var(--color-primary))] transition-colors flex items-center justify-center gap-2"
                                                 >
                                                     <RotateCcw className="w-4 h-4" />
                                                     {tWorkflow('loadWorkflow') || 'Load Workflow'}
@@ -287,7 +287,7 @@ export function WorkflowHistory({ onLoadFromHistory }: WorkflowHistoryProps) {
                                                     });
                                                     alert(tWorkflow('detailsInConsole') || 'Details logged to console (F12)');
                                                 }}
-                                                className="px-3 py-1.5 text-sm bg-gray-100 text-gray-700 rounded hover:bg-gray-200 transition-colors flex items-center gap-2"
+                                                className="px-3 py-1.5 text-sm bg-[hsl(var(--color-muted))] text-[hsl(var(--color-foreground))] rounded hover:bg-gray-200 transition-colors flex items-center gap-2"
                                             >
                                                 <TrendingUp className="w-4 h-4" />
                                                 {tWorkflow('viewDetails') || 'View Details'}

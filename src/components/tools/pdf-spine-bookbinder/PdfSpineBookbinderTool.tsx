@@ -111,14 +111,14 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
         <div className="lg:col-span-8 space-y-4">
           <Card 
             variant="outlined" 
-            className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[400px] flex flex-col justify-between border-2 border-dashed border-zinc-200 dark:border-zinc-800 select-none"
+            className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[400px] flex flex-col justify-between border-2 border-dashed border-[hsl(var(--color-border))] dark:border-zinc-800 select-none"
             onMouseDown={handleMouseDown}
             onMouseMove={handleMouseMove}
             onMouseUp={handleMouseUp}
             onMouseLeave={handleMouseUp}
           >
-            <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800 pointer-events-none">
-              <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800 pointer-events-none">
+              <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                 <Compass className="w-4 h-4 text-primary animate-spin" style={{ animationDuration: '8s' }} />
                 {t('pdfSpineBookbinder.magnifierTitle')}
               </span>
@@ -136,7 +136,7 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
                 }}
               >
                 {/* Back Cover */}
-                <div className="absolute w-36 h-52 bg-zinc-400 border border-zinc-500 rounded-l-md origin-right -translate-x-36 z-10 flex items-center justify-center text-[10px] text-zinc-600 font-bold"
+                <div className="absolute w-36 h-52 bg-zinc-400 border border-zinc-500 rounded-l-md origin-right -translate-x-36 z-10 flex items-center justify-center text-[10px] text-[hsl(var(--color-muted-foreground))] font-bold"
                   style={{ transform: 'rotateY(180deg) translateZ(0px)', transformOrigin: 'right' }}
                 >
                   BACK COVER
@@ -161,7 +161,7 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
                   style={{ transform: 'translateZ(1px)' }}
                 >
                   <Book className="w-8 h-8 text-primary mb-2" />
-                  <span className="text-[10px] text-center font-black line-clamp-2 text-zinc-800 dark:text-zinc-200">
+                  <span className="text-[10px] text-center font-black line-clamp-2 text-[hsl(var(--color-foreground))] dark:text-zinc-200">
                     {bookTitle || 'Untitled Book'}
                   </span>
                   <span className="text-[8px] text-zinc-400 mt-2 font-mono">
@@ -174,11 +174,11 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
         </div>
 
         <div className="lg:col-span-4 space-y-6">
-          <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[400px]">
+          <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[400px]">
             <div className="space-y-6">
               <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                 <Sliders className="w-5 h-5 text-primary" />
-                <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('pdfSpineBookbinder.optionsTitle')}</h3>
+                <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('pdfSpineBookbinder.optionsTitle')}</h3>
               </div>
 
               <div className="space-y-4 text-xs">
@@ -189,12 +189,12 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
                     value={bookTitle}
                     onChange={(e) => setBookTitle(e.target.value)}
                     placeholder={t('pdfSpineBookbinder.spineTextPlaceholder')}
-                    className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                    className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                   />
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-zinc-500 font-bold flex justify-between">
+                  <label className="text-[hsl(var(--color-muted-foreground))] font-bold flex justify-between">
                     {t('pdfSpineBookbinder.totalPagesLabel')}
                     <span className="font-mono text-primary font-bold">{t('pdfSpineBookbinder.totalPagesUnit', { count: pageCount })}</span>
                   </label>
@@ -214,7 +214,7 @@ export function PdfSpineBookbinderTool({ className = '' }: PdfSpineBookbinderToo
                   <select
                     value={paperGsm}
                     onChange={(e) => setPaperGsm(parseInt(e.target.value) as any)}
-                    className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                    className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                   >
                     {t('pdfSpineBookbinder.gsm80')}
                     {t('pdfSpineBookbinder.gsm100')}

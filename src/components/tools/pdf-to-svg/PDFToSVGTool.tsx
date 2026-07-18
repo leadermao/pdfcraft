@@ -441,7 +441,7 @@ export function PDFToSVGTool({ className = '' }: PDFToSVGToolProps) {
                         className="relative max-w-[90vw] max-h-[90vh] bg-white rounded-lg overflow-auto"
                         onClick={(e) => e.stopPropagation()}
                     >
-                        <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex items-center justify-between">
+                        <div className="sticky top-0 bg-white border-b border-[hsl(var(--color-border))] p-4 flex items-center justify-between">
                             <h4 className="font-medium">
                                 {tTools('pdfToSvg.previewPage') || 'Page'} {svgResults[previewIndex].pageNumber}
                             </h4>

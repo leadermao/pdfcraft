@@ -37,13 +37,13 @@ export interface SavedProjectsPanelProps {
 const StatusIcon: React.FC<{ status: string }> = ({ status }) => {
   switch (status) {
     case 'in_progress':
-      return <Clock className="h-4 w-4 text-blue-500" aria-hidden="true" />;
+      return <Clock className="h-4 w-4 text-[hsl(var(--color-primary))]" aria-hidden="true" />;
     case 'paused':
       return <Pause className="h-4 w-4 text-yellow-500" aria-hidden="true" />;
     case 'completed':
       return <CheckCircle className="h-4 w-4 text-green-500" aria-hidden="true" />;
     default:
-      return <AlertCircle className="h-4 w-4 text-gray-500" aria-hidden="true" />;
+      return <AlertCircle className="h-4 w-4 text-[hsl(var(--color-muted-foreground))]" aria-hidden="true" />;
   }
 };
 

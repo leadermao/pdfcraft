@@ -232,7 +232,7 @@ export function ValidateSignatureTool({ className = '' }: { className?: string }
                           {trustedCertName && (
                             result.isTrusted
                               ? <span className="text-xs px-2 py-1 rounded bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">{tTool('trusted')}</span>
-                              : <span className="text-xs px-2 py-1 rounded bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400">{tTool('notTrusted')}</span>
+                              : <span className="text-xs px-2 py-1 rounded bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] dark:bg-gray-800 dark:text-gray-400">{tTool('notTrusted')}</span>
                           )}
                         </div>
                       </div>

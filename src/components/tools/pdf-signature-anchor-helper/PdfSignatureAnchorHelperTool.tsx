@@ -121,9 +121,9 @@ export function PdfSignatureAnchorHelperTool({ className = '' }: PdfSignatureAnc
       {file && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-4">
-            <Card variant="outlined" className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2 border-dashed border-zinc-200 dark:border-zinc-800">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <Card variant="outlined" className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2 border-dashed border-[hsl(var(--color-border))] dark:border-zinc-800">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
+                <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                   <PenTool className="w-4 h-4 text-primary animate-pulse" />
                   {t('pdfSignatureAnchorHelper.magnifierTitle')}
                 </span>
@@ -137,16 +137,16 @@ export function PdfSignatureAnchorHelperTool({ className = '' }: PdfSignatureAnc
                 <div 
                   ref={containerRef}
                   onClick={handleCanvasClick}
-                  className="relative w-60 h-80 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-xl rounded-md cursor-crosshair overflow-hidden"
+                  className="relative w-60 h-80 bg-white dark:bg-zinc-900 border border-[hsl(var(--color-border))] dark:border-zinc-800 shadow-xl rounded-md cursor-crosshair overflow-hidden"
                 >
                   {/* Fake paragraph mock lines */}
                   <div className="p-4 space-y-3">
                     <div className="h-4 w-3/4 bg-zinc-200 dark:bg-zinc-800 rounded" />
-                    <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800/40 rounded" />
-                    <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800/40 rounded" />
-                    <div className="h-2 w-5/6 bg-zinc-100 dark:bg-zinc-800/40 rounded" />
-                    <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800/40 rounded" />
-                    <div className="h-2 w-2/3 bg-zinc-100 dark:bg-zinc-800/40 rounded" />
+                    <div className="h-2 w-full bg-[hsl(var(--color-muted))] dark:bg-zinc-800/40 rounded" />
+                    <div className="h-2 w-full bg-[hsl(var(--color-muted))] dark:bg-zinc-800/40 rounded" />
+                    <div className="h-2 w-5/6 bg-[hsl(var(--color-muted))] dark:bg-zinc-800/40 rounded" />
+                    <div className="h-2 w-full bg-[hsl(var(--color-muted))] dark:bg-zinc-800/40 rounded" />
+                    <div className="h-2 w-2/3 bg-[hsl(var(--color-muted))] dark:bg-zinc-800/40 rounded" />
                   </div>
 
                   {/* Breathing radar pulse target indicator */}
@@ -171,11 +171,11 @@ export function PdfSignatureAnchorHelperTool({ className = '' }: PdfSignatureAnc
           </div>
 
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <Sliders className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('pdfSignatureAnchorHelper.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('pdfSignatureAnchorHelper.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4 text-xs">
@@ -185,7 +185,7 @@ export function PdfSignatureAnchorHelperTool({ className = '' }: PdfSignatureAnc
                       type="text"
                       value={anchorLabel}
                       onChange={(e) => setAnchorLabel(e.target.value)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     />
                   </div>
 
@@ -196,7 +196,7 @@ export function PdfSignatureAnchorHelperTool({ className = '' }: PdfSignatureAnc
                       min={1}
                       value={pageNumber}
                       onChange={(e) => setPageNumber(parseInt(e.target.value) || 1)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     />
                   </div>
 

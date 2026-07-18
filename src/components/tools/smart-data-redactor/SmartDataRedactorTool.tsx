@@ -123,9 +123,9 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
       {file && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <div className="lg:col-span-8 space-y-4">
-            <Card variant="outlined" className="p-6 bg-zinc-50 dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
-              <div className="flex items-center justify-between pb-3 border-b border-zinc-200 dark:border-zinc-800">
-                <span className="text-xs font-bold text-zinc-500 flex items-center gap-1.5">
+            <Card variant="outlined" className="p-6 bg-[hsl(var(--color-muted))] dark:bg-zinc-950/40 relative overflow-hidden rounded-[2rem] min-h-[380px] flex flex-col justify-between border-2">
+              <div className="flex items-center justify-between pb-3 border-b border-[hsl(var(--color-border))] dark:border-zinc-800">
+                <span className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1.5">
                   <ShieldCheck className="w-4 h-4 text-primary" />
                   {t('smartDataRedactor.previewTitle')}
                 </span>
@@ -146,7 +146,7 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
                   <div className="w-16 h-16 bg-red-500/10 rounded-2xl flex items-center justify-center mx-auto text-red-500">
                     👁️‍🌫️
                   </div>
-                  <h4 className="text-sm font-bold text-zinc-800 dark:text-zinc-200">
+                  <h4 className="text-sm font-bold text-[hsl(var(--color-foreground))] dark:text-zinc-200">
                     {file.name}
                   </h4>
                   <p className="text-xs text-zinc-400">
@@ -158,11 +158,11 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
           </div>
 
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <EyeOff className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('smartDataRedactor.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('smartDataRedactor.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4">
@@ -174,7 +174,7 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
                       onChange={(e) => setEmailRedact(e.target.checked)}
                       className="rounded text-primary focus:ring-primary w-4 h-4"
                     />
-                    <label htmlFor="email" className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                    <label htmlFor="email" className="text-xs font-bold text-[hsl(var(--color-foreground))] dark:text-zinc-300">
                       {t('smartDataRedactor.emailRedactLabel')}
                     </label>
                   </div>
@@ -187,7 +187,7 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
                       onChange={(e) => setPhoneRedact(e.target.checked)}
                       className="rounded text-primary focus:ring-primary w-4 h-4"
                     />
-                    <label htmlFor="phone" className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                    <label htmlFor="phone" className="text-xs font-bold text-[hsl(var(--color-foreground))] dark:text-zinc-300">
                       {t('smartDataRedactor.phoneRedactLabel')}
                     </label>
                   </div>
@@ -200,13 +200,13 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
                       onChange={(e) => setIdRedact(e.target.checked)}
                       className="rounded text-primary focus:ring-primary w-4 h-4"
                     />
-                    <label htmlFor="idcard" className="text-xs font-bold text-zinc-700 dark:text-zinc-300">
+                    <label htmlFor="idcard" className="text-xs font-bold text-[hsl(var(--color-foreground))] dark:text-zinc-300">
                       {t('smartDataRedactor.idRedactLabel')}
                     </label>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-bold text-zinc-500 flex items-center gap-1">
+                    <label className="text-xs font-bold text-[hsl(var(--color-muted-foreground))] flex items-center gap-1">
                       {t('smartDataRedactor.customKeywordsLabel')}
                       <HelpCircle className="w-3.5 h-3.5 text-zinc-400" />
                     </label>
@@ -215,7 +215,7 @@ export function SmartDataRedactorTool({ className = '' }: SmartDataRedactorToolP
                       value={customKeywords}
                       onChange={(e) => setCustomKeywords(e.target.value)}
                       placeholder={t('smartDataRedactor.customKeywordsPlaceholder')}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     />
                   </div>
                 </div>

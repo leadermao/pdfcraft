@@ -401,7 +401,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
             {/* Main Options Card */}
             <Card variant="outlined" className="p-4">
               {/* Position Section */}
-              <h4 className="text-sm font-semibold mb-2 text-gray-700">
+              <h4 className="text-sm font-semibold mb-2 text-[hsl(var(--color-foreground))]">
                 {tTools('pageNumbers.positionTitle')}
               </h4>
               <div className="grid grid-cols-3 gap-1.5 mb-4">
@@ -413,8 +413,8 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                     className={`
                       p-2 rounded-md border transition-all text-center
                       ${position === opt.value
-                        ? 'border-blue-500 bg-blue-50 text-blue-700'
-                        : 'border-gray-200 hover:border-gray-300'
+                        ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.08)] text-[hsl(var(--color-primary))]'
+                        : 'border-[hsl(var(--color-border))] hover:border-[hsl(var(--color-border))]'
                       }
                       disabled:opacity-50 disabled:cursor-not-allowed
                     `}
@@ -426,7 +426,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
               </div>
 
               {/* Format Section */}
-              <h4 className="text-sm font-semibold mb-2 text-gray-700">
+              <h4 className="text-sm font-semibold mb-2 text-[hsl(var(--color-foreground))]">
                 {tTools('pageNumbers.formatTitle')}
               </h4>
               <div className="grid grid-cols-2 gap-2 mb-3">
@@ -468,7 +468,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                     className="w-full px-2 py-1.5 text-sm border rounded-md"
                     disabled={isProcessing}
                   />
-                  <p className="text-xs text-gray-500 mt-1">{tTools('pageNumbers.customFormatHint')}</p>
+                  <p className="text-xs text-[hsl(var(--color-muted-foreground))] mt-1">{tTools('pageNumbers.customFormatHint')}</p>
                 </div>
               )}
 
@@ -498,7 +498,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
               </div>
 
               {/* Style Section */}
-              <h4 className="text-sm font-semibold mb-2 text-gray-700 pt-2 border-t">
+              <h4 className="text-sm font-semibold mb-2 text-[hsl(var(--color-foreground))] pt-2 border-t">
                 {tTools('pageNumbers.styleTitle')}
               </h4>
               <div className="grid grid-cols-2 gap-2 mb-3">
@@ -534,7 +534,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                     type="color"
                     value={fontColor}
                     onChange={(e) => setFontColor(e.target.value)}
-                    className="w-10 h-10 p-0.5 cursor-pointer rounded border border-gray-300"
+                    className="w-10 h-10 p-0.5 cursor-pointer rounded border border-[hsl(var(--color-border))]"
                     disabled={isProcessing}
                   />
                   <input
@@ -559,8 +559,8 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
               </label>
 
               {/* Odd/Even Page Mode */}
-              <div className="mt-3 pt-3 border-t border-gray-200">
-                <h4 className="text-sm font-semibold mb-2 text-gray-700">
+              <div className="mt-3 pt-3 border-t border-[hsl(var(--color-border))]">
+                <h4 className="text-sm font-semibold mb-2 text-[hsl(var(--color-foreground))]">
                   {tTools('pageNumbers.oddEvenTitle')}
                 </h4>
 
@@ -597,7 +597,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                           <option value="top-center">{tTools('pageNumbers.posTopCenter')}</option>
                           <option value="top-right">{tTools('pageNumbers.posTopRight')}</option>
                         </select>
-                        <p className="text-xs text-gray-500">{tTools('pageNumbers.oddPositionHint')}</p>
+                        <p className="text-xs text-[hsl(var(--color-muted-foreground))]">{tTools('pageNumbers.oddPositionHint')}</p>
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-1">{tTools('pageNumbers.evenPosition')}</label>
@@ -614,13 +614,13 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                           <option value="top-center">{tTools('pageNumbers.posTopCenter')}</option>
                           <option value="top-right">{tTools('pageNumbers.posTopRight')}</option>
                         </select>
-                        <p className="text-xs text-gray-500">{tTools('pageNumbers.evenPositionHint')}</p>
+                        <p className="text-xs text-[hsl(var(--color-muted-foreground))]">{tTools('pageNumbers.evenPositionHint')}</p>
                       </div>
                     </div>
                   )}
 
                   {pageMode === 'odd-even-different' && (
-                    <div className="p-2 bg-blue-50 rounded text-sm text-blue-700">
+                    <div className="p-2 bg-[hsl(var(--color-primary)/0.08)] rounded text-sm text-[hsl(var(--color-primary))]">
                       <p>{tTools('pageNumbers.differentModeHint')}</p>
                     </div>
                   )}
@@ -697,7 +697,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                 </Button>
               </div>
 
-              <div className="bg-gray-100 dark:bg-gray-800 rounded-[var(--radius-md)] p-4 overflow-auto" style={{ maxHeight: '600px', minHeight: '500px' }}>
+              <div className="bg-[hsl(var(--color-muted))] dark:bg-gray-800 rounded-[var(--radius-md)] p-4 overflow-auto" style={{ maxHeight: '600px', minHeight: '500px' }}>
                 <div
                   className="flex justify-center"
                   style={{
@@ -713,7 +713,7 @@ export function PageNumbersTool({ className = '' }: PageNumbersToolProps) {
                 </div>
               </div>
 
-              <p className="text-sm text-center text-gray-500 dark:text-gray-400 mt-4">
+              <p className="text-sm text-center text-[hsl(var(--color-muted-foreground))] dark:text-gray-400 mt-4">
                 {skipFirstPage && currentPreviewPage === 1
                   ? tTools('pageNumbers.firstPageSkipped')
                   : tTools('pageNumbers.previewText', { text: formatPageNumber(currentPreviewPage, totalPages) })

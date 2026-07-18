@@ -145,20 +145,20 @@ export function PhotoTilingPrepressTool({ className = '' }: PhotoTilingPrepressT
           </div>
 
           <div className="lg:col-span-4 space-y-6">
-            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
+            <Card variant="default" className="p-6 bg-white/40 dark:bg-black/30 backdrop-blur-md border border-[hsl(var(--color-border))]/50 dark:border-zinc-850 rounded-[2rem] shadow-xl flex flex-col justify-between min-h-[380px]">
               <div className="space-y-6">
                 <div className="border-b border-zinc-150 dark:border-zinc-800 pb-3 flex items-center gap-2">
                   <Sliders className="w-5 h-5 text-primary" />
-                  <h3 className="text-sm font-black text-zinc-800 dark:text-zinc-200">{t('photoTilingPrepress.optionsTitle')}</h3>
+                  <h3 className="text-sm font-black text-[hsl(var(--color-foreground))] dark:text-zinc-200">{t('photoTilingPrepress.optionsTitle')}</h3>
                 </div>
 
                 <div className="space-y-4 text-xs">
                   <div className="space-y-1.5">
-                    <label className="text-zinc-500 font-bold">{t('photoTilingPrepress.photoSpecLabel')}</label>
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold">{t('photoTilingPrepress.photoSpecLabel')}</label>
                     <select
                       value={photoSpec}
                       onChange={(e) => setPhotoSpec(e.target.value as any)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     >
                       <option value="1-inch">{t('photoTilingPrepress.photoSpec1Inch')}</option>
                       <option value="2-inch">{t('photoTilingPrepress.photoSpec2Inch')}</option>
@@ -166,11 +166,11 @@ export function PhotoTilingPrepressTool({ className = '' }: PhotoTilingPrepressT
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-zinc-500 font-bold">{t('photoTilingPrepress.paperSizeLabel')}</label>
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold">{t('photoTilingPrepress.paperSizeLabel')}</label>
                     <select
                       value={paperSize}
                       onChange={(e) => setPaperSize(e.target.value as any)}
-                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl p-3"
+                      className="w-full text-xs bg-white dark:bg-zinc-950 border border-[hsl(var(--color-border))] dark:border-zinc-800 rounded-xl p-3"
                     >
                       <option value="5-inch">{t('photoTilingPrepress.paperSize5Inch')}</option>
                       <option value="6-inch">{t('photoTilingPrepress.paperSize6Inch')}</option>
@@ -178,7 +178,7 @@ export function PhotoTilingPrepressTool({ className = '' }: PhotoTilingPrepressT
                   </div>
 
                   <div className="space-y-1">
-                    <label className="text-zinc-500 font-bold flex justify-between">
+                    <label className="text-[hsl(var(--color-muted-foreground))] font-bold flex justify-between">
                       <span>{t('photoTilingPrepress.gapPtLabel')}</span>
                       <span className="font-mono text-primary font-bold">{gapPt} pt</span>
                     </label>

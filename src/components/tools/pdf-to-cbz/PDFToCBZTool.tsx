@@ -279,7 +279,7 @@ export function PDFToCBZTool({ className = '' }: PDFToCBZToolProps) {
                     
                     <div className="border-t border-zinc-700/60 pt-2 flex justify-between items-end">
                       <div>
-                        <p className="text-[8px] text-zinc-500 uppercase tracking-wider font-bold">Artist / Writer</p>
+                        <p className="text-[8px] text-[hsl(var(--color-muted-foreground))] uppercase tracking-wider font-bold">Artist / Writer</p>
                         <p className="text-[10px] font-bold truncate max-w-[100px] text-zinc-300">
                           {writer || t('pdfToCbz.comicArtistDefault')}
                         </p>
@@ -294,7 +294,7 @@ export function PDFToCBZTool({ className = '' }: PDFToCBZToolProps) {
 
                   {/* Book Spine (thickness) */}
                   <div 
-                    className="absolute top-0 bottom-0 bg-zinc-950 border-r border-zinc-800 flex items-center justify-center text-[7px] font-extrabold text-zinc-500 select-none"
+                    className="absolute top-0 bottom-0 bg-zinc-950 border-r border-zinc-800 flex items-center justify-center text-[7px] font-extrabold text-[hsl(var(--color-muted-foreground))] select-none"
                     style={{
                       width: '20px',
                       left: manga === 'YesAndRightToLeft' ? 'auto' : '-10px',

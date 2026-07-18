@@ -52,7 +52,7 @@ const FileStatusIcon: React.FC<{ status: BatchFile['status'] }> = ({ status }) =
     case 'pending':
       return <Files className="h-4 w-4 text-gray-400" aria-hidden="true" />;
     case 'processing':
-      return <Loader2 className="h-4 w-4 text-blue-500 animate-spin" aria-hidden="true" />;
+      return <Loader2 className="h-4 w-4 text-[hsl(var(--color-primary))] animate-spin" aria-hidden="true" />;
     case 'completed':
       return <CheckCircle className="h-4 w-4 text-green-500" aria-hidden="true" />;
     case 'error':
