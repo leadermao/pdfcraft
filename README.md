@@ -2,6 +2,51 @@
 
 > **About this fork** — This is a modified version of [PDFCraftTool/pdfcraft](https://github.com/PDFCraftTool/pdfcraft), deployed at [pdf.yusoong.com](https://pdf.yusoong.com) by 上海时雨有秋教育科技有限公司 (Yusoong). Modifications (first made 2026-07-17, see git history for details): default locale switched to Simplified Chinese, ICP filing number and source-code link added to the footer, Google Analytics added, root-path redirect respects saved language preference. Licensed under AGPL-3.0, same as upstream. All credit for the toolkit goes to the original authors.
 
+## 合规与署名 / Compliance & Attribution
+
+**中文**
+
+本仓库是上游 [PDFCraftTool/pdfcraft](https://github.com/PDFCraftTool/pdfcraft) 的**修改版 fork**，由**上海时雨有秋教育科技有限公司**（品牌"雨来"）部署运营于 [pdf.yusoong.com](https://pdf.yusoong.com)。**首次修改日期：2026-07-17。**
+
+改动摘要（详见 git 提交记录）：
+
+- **默认语言**改为简体中文（`zh`），根路径跳转尊重用户已保存的语言偏好；
+- **改名**为"雨来 PDF 工具箱"（`src/config/site.ts` + 14 种语言的品牌名/标语 + `manifest` + SEO 标题）；
+- **换肤为"雨来"红系设计语言**（token 层改为红 `#9E0101` / 暖纸底 `#f4efec` / 墨色文字，`globals.css`）；
+- **移除暗色模式**（删除 `.dark` 样式块、`ThemeToggle` 及防闪脚本，将 `dark:` 变体钉死为亮色）；
+- **工具内部配色 codemod**（冷中性色 → 暖色 token、旧品牌蓝 → 红 primary，逐组件替换）；
+- **接入 Google Analytics**（gtag）；
+- **页脚**增加 ICP 备案号（沪ICP备2026020452号-1）与源代码链接。
+
+我们据此履行 **AGPL-3.0** 的以下义务：
+
+- **§13（网络交互）**：站内页脚常驻"**源代码 (AGPL-3.0)**"链接，指向本 fork 的完整源码仓库（`https://github.com/leadermao/pdfcraft`），供任何通过网络使用本部署版的用户获取对应源代码；
+- **§5（修改条款）**：完整保留上游随附的 [LICENSE](LICENSE)（AGPL-3.0 全文）；保留对上游 PDFCraftTool/pdfcraft 的署名；所有修改均以带日期的 Git commit 形式留痕，标注了修改内容与时间。
+
+**⚠️ 关于第三方专有字体资产（重要）**
+
+部署版的标题使用**方正 FZ清刻（FZ Qingke Yuesong，woff2 子集）**字体。该字体：
+
+- **不属于**本 AGPL 程序的 corresponding source（对应源代码），是一项**独立的第三方专有资产**；
+- 受**方正自有的商用字体授权**约束，与本项目的 AGPL-3.0 许可相互独立、互不影响；
+- 因授权原因**不随本公开仓库分发**——字体文件已在 `.gitignore` 中排除（`public/fonts/fz-qingke-yuesong.woff2`），仅在部署时以 overlay 方式提供；
+- 当该字体缺失时，标题会**自动逐字回退到系统宋体**（`Songti SC` / `Source Han Serif SC` / `Noto Serif SC` / `STSong` 等），因此拉取本公开仓库自行构建不受影响。
+
+> 换言之：本仓库公开的全部代码遵循 AGPL-3.0；方正 FZ清刻字体是一项独立的专有资产，不在本 AGPL 分发范围内，其使用另受方正商用授权约束。
+
+**English**
+
+This repository is a **modified fork** of the upstream [PDFCraftTool/pdfcraft](https://github.com/PDFCraftTool/pdfcraft), deployed and operated at [pdf.yusoong.com](https://pdf.yusoong.com) by **Shanghai Shiyu Youqiu Education Technology Co., Ltd.** (brand "雨来 / Yulai"). **First modified on 2026-07-17.**
+
+Summary of changes (see the Git history for the authoritative record): default locale changed to Simplified Chinese (with root-path redirect honoring the saved language preference); rebranded to "雨来 PDF 工具箱" across `site.ts`, 14 language files, the web manifest and SEO titles; reskinned to the "雨来" red design language (token-level `#9E0101` red / warm paper `#f4efec` / ink text in `globals.css`); dark mode removed (`.dark` block, `ThemeToggle` and anti-flash script deleted; `dark:` variants pinned to light); a codemod recoloring in-tool UI (cold neutrals → warm tokens, legacy brand blue → red primary); Google Analytics (gtag) added; and an ICP filing number plus a source-code link added to the footer.
+
+We meet our **AGPL-3.0** obligations accordingly:
+
+- **§13 (network use):** a persistent "**源代码 (AGPL-3.0)**" link in the site footer points to the complete source of this fork (`https://github.com/leadermao/pdfcraft`), so anyone interacting with the deployed instance over the network can obtain the corresponding source.
+- **§5 (modified versions):** the upstream [LICENSE](LICENSE) (full AGPL-3.0 text) is retained; attribution to upstream PDFCraftTool/pdfcraft is preserved; and every modification is recorded as dated Git commits carrying prominent notices of what changed and when.
+
+**⚠️ Third-party proprietary font asset (important).** The deployed build renders headings in **Founder FZ Qingke Yuesong (方正 FZ清刻, a subset woff2)**. This font is **not** part of the corresponding source of this AGPL program — it is a **separate, third-party proprietary asset** governed by **Founder's own commercial font license**, independent of and unaffected by this project's AGPL-3.0 grant. For licensing reasons it is **not distributed with this public repository**: the file is excluded via `.gitignore` (`public/fonts/fz-qingke-yuesong.woff2`) and supplied only as a deployment-time overlay. When the font is absent, headings **automatically fall back, glyph by glyph, to system Song/serif fonts** (`Songti SC` / `Source Han Serif SC` / `Noto Serif SC` / `STSong`, …), so cloning and building this public repo works without it.
+
 <div align="center">
   <img src="public/images/logo.png" alt="PDFCraft Logo" width="120" height="120" />
   <h1>Professional PDF Tools</h1>

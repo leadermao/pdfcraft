@@ -4,13 +4,28 @@ import React, { useState, useCallback, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { Search, Menu, X, Command, Github } from 'lucide-react';
+import { Search, Menu, X, Command, Github, ChevronDown } from 'lucide-react';
 import { type Locale } from '@/lib/i18n/config';
 import { Button } from '@/components/ui/Button';
 import { RecentFilesDropdown } from '@/components/common/RecentFilesDropdown';
 import { searchTools, SearchResult } from '@/lib/utils/search';
 import { getToolContent } from '@/config/tool-content';
-import { getAllTools } from '@/config/tools';
+import { getAllTools, getToolsByCategory } from '@/config/tools';
+import { getToolIcon as getToolLucideIcon } from '@/config/icons';
+import { TOOL_CATEGORIES, type ToolCategory } from '@/types/tool';
+
+/** How many tools to preview per category inside the desktop mega-menu. */
+const MEGA_MENU_TOOLS_PER_CATEGORY = 8;
+
+/** Maps a tool category id to its `home.categories.*` i18n key (same mapping the /tools page uses). */
+const CATEGORY_TRANSLATION_KEYS: Record<ToolCategory, string> = {
+  'edit-annotate': 'editAnnotate',
+  'convert-to-pdf': 'convertToPdf',
+  'convert-from-pdf': 'convertFromPdf',
+  'organize-manage': 'organizeManage',
+  'optimize-repair': 'optimizeRepair',
+  'secure-pdf': 'securePdf',
+};
 
 export interface HeaderProps {
   locale: Locale;
@@ -19,16 +34,22 @@ export interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => {
   const t = useTranslations('common');
+  // Root-scoped translations for the mega-menu (category names live under `home.*`, not `common.*`).
+  const tHome = useTranslations('home');
   const router = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<SearchResult[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [localizedTools, setLocalizedTools] = useState<Record<string, { title: string; description: string }>>({});
   const searchInputRef = useRef<HTMLInputElement>(null);
   const searchContainerRef = useRef<HTMLDivElement>(null);
+  const megaMenuNavRef = useRef<HTMLElement>(null);
+  const toolsTriggerRef = useRef<HTMLAnchorElement>(null);
+  const megaMenuTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Load localized tool content on mount
   useEffect(() => {
@@ -141,6 +162,62 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
     setIsMobileMenuOpen((prev) => !prev);
   }, []);
 
+  // Desktop "工具" mega-menu: open on hover/focus, close on leave/blur/Esc with a small
+  // delay so the pointer can travel the gap between the trigger and the panel.
+  const openMegaMenu = useCallback(() => {
+    if (megaMenuTimer.current) {
+      clearTimeout(megaMenuTimer.current);
+      megaMenuTimer.current = null;
+    }
+    setIsMegaMenuOpen(true);
+  }, []);
+
+  const closeMegaMenu = useCallback(() => {
+    if (megaMenuTimer.current) {
+      clearTimeout(megaMenuTimer.current);
+      megaMenuTimer.current = null;
+    }
+    setIsMegaMenuOpen(false);
+  }, []);
+
+  const scheduleCloseMegaMenu = useCallback(() => {
+    if (megaMenuTimer.current) clearTimeout(megaMenuTimer.current);
+    megaMenuTimer.current = setTimeout(() => setIsMegaMenuOpen(false), 150);
+  }, []);
+
+  // Clean up any pending close timer on unmount.
+  useEffect(() => () => {
+    if (megaMenuTimer.current) clearTimeout(megaMenuTimer.current);
+  }, []);
+
+  const handleMegaMenuKeyDown = useCallback((e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeMegaMenu();
+      toolsTriggerRef.current?.focus();
+      return;
+    }
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      const items = Array.from(
+        e.currentTarget.querySelectorAll<HTMLAnchorElement>('a[data-mega-item]')
+      );
+      if (items.length === 0) return;
+      e.preventDefault();
+      const current = items.findIndex((el) => el === document.activeElement);
+      let next = e.key === 'ArrowDown' ? current + 1 : current - 1;
+      if (next < 0) next = items.length - 1;
+      if (next >= items.length) next = 0;
+      items[next]?.focus();
+    }
+  }, [closeMegaMenu]);
+
+  // Close the mega-menu when focus leaves the whole nav region (keyboard tab-out).
+  const handleMegaMenuBlur = useCallback((e: React.FocusEvent<HTMLElement>) => {
+    if (megaMenuNavRef.current && !megaMenuNavRef.current.contains(e.relatedTarget as Node)) {
+      closeMegaMenu();
+    }
+  }, [closeMegaMenu]);
+
   // Get tool icon based on category
   const getToolIcon = (category: string) => {
     const icons: Record<string, string> = {
@@ -201,20 +278,146 @@ export const Header: React.FC<HeaderProps> = ({ locale, showSearch = true }) => 
 
           {/* Desktop Navigation */}
           <nav
-            className={`hidden md:flex items-center gap-1 rounded-full border border-[hsl(var(--color-border))/0.4] bg-[hsl(var(--color-background))/0.5] p-1.5 backdrop-blur-sm shadow-sm transition-all duration-300 ${isSearchOpen ? 'opacity-0 translate-y-[-10px] pointer-events-none' : 'opacity-100 translate-y-0'
+            ref={megaMenuNavRef}
+            onBlur={handleMegaMenuBlur}
+            className={`relative hidden md:flex items-center gap-1 rounded-full border border-[hsl(var(--color-border))/0.4] bg-[hsl(var(--color-background))/0.5] p-1.5 backdrop-blur-sm shadow-sm transition-all duration-300 ${isSearchOpen ? 'opacity-0 translate-y-[-10px] pointer-events-none' : 'opacity-100 translate-y-0'
               }`}
             role="navigation"
             aria-label="Main navigation"
           >
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="px-4 py-1.5 text-sm font-medium text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))/0.5] rounded-full transition-all"
+            {navItems.map((item) => {
+              const isToolsTrigger = item.href === `/${locale}/tools`;
+
+              if (isToolsTrigger) {
+                return (
+                  <div
+                    key={item.href}
+                    className="flex items-center"
+                    onMouseEnter={openMegaMenu}
+                    onMouseLeave={scheduleCloseMegaMenu}
+                  >
+                    <Link
+                      ref={toolsTriggerRef}
+                      href={item.href}
+                      className="flex items-center gap-1 px-4 py-1.5 text-sm font-medium text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))/0.5] rounded-full transition-all"
+                      aria-haspopup="true"
+                      aria-expanded={isMegaMenuOpen}
+                      aria-controls="tools-mega-menu"
+                      onFocus={openMegaMenu}
+                      onClick={closeMegaMenu}
+                    >
+                      {item.label}
+                      <ChevronDown
+                        className={`h-3.5 w-3.5 transition-transform duration-200 ${isMegaMenuOpen ? 'rotate-180' : ''}`}
+                        aria-hidden="true"
+                      />
+                    </Link>
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="px-4 py-1.5 text-sm font-medium text-[hsl(var(--color-muted-foreground))] hover:text-[hsl(var(--color-foreground))] hover:bg-[hsl(var(--color-muted))/0.5] rounded-full transition-all"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+
+            {/* Tools mega-menu (desktop only — rendered inside the desktop-only <nav>) */}
+            {isMegaMenuOpen && (
+              <div
+                id="tools-mega-menu"
+                role="region"
+                aria-label={t('navigation.tools')}
+                className="absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3"
+                onMouseEnter={openMegaMenu}
+                onMouseLeave={scheduleCloseMegaMenu}
+                onKeyDown={handleMegaMenuKeyDown}
               >
-                {item.label}
-              </Link>
-            ))}
+                <div className="w-[min(92vw,880px)] max-h-[min(78vh,620px)] overflow-y-auto rounded-2xl border border-[hsl(var(--color-border))] bg-[hsl(var(--color-card))] p-6 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200">
+                  <div className="grid grid-cols-2 gap-x-6 gap-y-6 lg:grid-cols-3">
+                    {TOOL_CATEGORIES.map((category) => {
+                      const categoryTools = getToolsByCategory(category);
+                      if (categoryTools.length === 0) return null;
+
+                      const categoryName = tHome(`categories.${CATEGORY_TRANSLATION_KEYS[category]}`);
+                      const previewTools = categoryTools.slice(0, MEGA_MENU_TOOLS_PER_CATEGORY);
+                      const hasMore = categoryTools.length > MEGA_MENU_TOOLS_PER_CATEGORY;
+
+                      return (
+                        <div key={category} className="min-w-0">
+                          <div className="mb-2 flex items-center gap-2 px-1">
+                            <span className="text-base leading-none" aria-hidden="true">
+                              {getToolIcon(category)}
+                            </span>
+                            <h3 className="font-serif text-sm font-semibold text-[hsl(var(--color-foreground))]">
+                              {categoryName}
+                            </h3>
+                          </div>
+                          <ul className="space-y-0.5">
+                            {previewTools.map((tool) => {
+                              const localized = localizedTools[tool.id];
+                              const toolName = localized?.title
+                                || tool.id.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+                              const ToolIcon = getToolLucideIcon(tool.icon);
+
+                              return (
+                                <li key={tool.id}>
+                                  <Link
+                                    href={`/${locale}/tools/${tool.slug}`}
+                                    data-mega-item
+                                    onClick={closeMegaMenu}
+                                    className="group/mega flex items-center gap-2.5 rounded-lg px-2 py-1.5 text-sm text-[hsl(var(--color-muted-foreground))] transition-colors hover:bg-[hsl(var(--color-muted))/0.6] hover:text-[hsl(var(--color-primary))] focus:outline-none focus-visible:bg-[hsl(var(--color-muted))/0.6] focus-visible:text-[hsl(var(--color-primary))]"
+                                  >
+                                    <ToolIcon
+                                      className="h-4 w-4 shrink-0 text-[hsl(var(--color-muted-foreground))] transition-colors group-hover/mega:text-[hsl(var(--color-primary))]"
+                                      aria-hidden="true"
+                                    />
+                                    <span className="truncate">{toolName}</span>
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                            {hasMore && (
+                              <li>
+                                <Link
+                                  href={`/${locale}/tools?category=${category}`}
+                                  data-mega-item
+                                  onClick={closeMegaMenu}
+                                  className="flex items-center gap-1 rounded-lg px-2 py-1.5 text-xs font-medium text-[hsl(var(--color-primary))] transition-colors hover:underline"
+                                >
+                                  {tHome('categoriesSection.toolsCount', { count: categoryTools.length })}
+                                  <ChevronDown className="h-3 w-3 -rotate-90" aria-hidden="true" />
+                                </Link>
+                              </li>
+                            )}
+                          </ul>
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  <div className="mt-5 flex items-center justify-between gap-4 border-t border-[hsl(var(--color-border))] pt-4">
+                    <p className="text-xs text-[hsl(var(--color-muted-foreground))]">
+                      {tHome('categoriesSection.description', { count: getAllTools().length })}
+                    </p>
+                    <Link
+                      href={`/${locale}/tools`}
+                      data-mega-item
+                      onClick={closeMegaMenu}
+                      className="flex shrink-0 items-center gap-1 text-sm font-medium text-[hsl(var(--color-primary))] hover:underline"
+                    >
+                      {tHome('categoriesSection.title')}
+                      <ChevronDown className="h-3.5 w-3.5 -rotate-90" aria-hidden="true" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            )}
           </nav>
 
           {/* Right side actions */}
