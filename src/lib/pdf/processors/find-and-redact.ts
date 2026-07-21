@@ -8,6 +8,7 @@
 
 import { PDFDocument, rgb, StandardFonts } from 'pdf-lib';
 import { loadPdfjs } from '../loader';
+import { rasterizePDF } from './rasterize';
 
 /**
  * Text match found in the PDF
@@ -405,21 +406,31 @@ export async function applyFindAndRedact(
             redactedCount++;
         }
 
-        onProgress?.(95, 'Saving PDF...');
+        onProgress?.(85, 'Saving redacted overlay...');
 
-        // Save the modified PDF
         const pdfBytes = await pdfDoc.save({ useObjectStreams: true });
-        const outputBuffer = pdfBytes.buffer.slice(
-            pdfBytes.byteOffset,
-            pdfBytes.byteOffset + pdfBytes.byteLength
-        ) as ArrayBuffer;
-        const blob = new Blob([outputBuffer], { type: 'application/pdf' });
+
+        onProgress?.(90, 'Rasterizing to remove underlying text...');
+        const overlayFile = new File(
+            [new Uint8Array(pdfBytes)],
+            'redacted.pdf',
+            { type: 'application/pdf' }
+        );
+        const rasterResult = await rasterizePDF(overlayFile, { format: 'pdf', dpi: 200 });
+
+        if (!rasterResult.success || !rasterResult.result) {
+            return {
+                success: false,
+                error: 'Redaction overlay succeeded but rasterization failed',
+                redactedCount,
+            };
+        }
 
         onProgress?.(100, 'Complete!');
 
         return {
             success: true,
-            result: blob,
+            result: rasterResult.result as Blob,
             redactedCount,
         };
     } catch (error) {

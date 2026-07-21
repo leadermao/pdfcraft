@@ -883,11 +883,6 @@
       "pageNumber": "Pagina {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Autoritate de încredere MeSign TSA",
-      "tsaDigicertDesc": "Nod criptografic PKI global DigiCert TSA",
-      "tsaSectigoDesc": "Server ceas atomic Sectigo TSA Comodo",
-      "tsaSslDesc": "Furnizor american de încredere TSA SSL.com",
-      "tsaFreetsaDesc": "Serviciu gratuit TSA de înaltă calitate FreeTSA.org",
       "uploadLabel": "Încărcați PDF pentru marca temporală TSA",
       "uploadDescription": "Trageți și plasați PDF-ul aici. Suportă complet PDF-urile criptate cu decriptare locală automată.",
       "uploadSuccess": "{count} pagină(e) • {size} MB",

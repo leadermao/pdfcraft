@@ -883,11 +883,6 @@
       "pageNumber": "第 {page} ページ"
     },
     "timestamp": {
-      "tsaMesignDesc": "MeSign TSA認証局",
-      "tsaDigicertDesc": "DigiCert TSAグローバルPKI暗号ノード",
-      "tsaSectigoDesc": "Sectigo TSA Comodo 原子時計サーバー",
-      "tsaSslDesc": "SSL.com 信頼できるアメリカの TSA プロバイダー",
-      "tsaFreetsaDesc": "FreeTSA.org 無料のハイグレード TSA サービス",
       "uploadLabel": "TSA タイムスタンプの PDF をアップロードする",
       "uploadDescription": "PDFをここにドラッグ＆ドロップします。自動ローカル復号化による暗号化 PDF を完全にサポートします。",
       "uploadSuccess": "{count} ページ • {size} MB",

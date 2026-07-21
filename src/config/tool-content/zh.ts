@@ -595,12 +595,12 @@ export const toolContentZh: Record<string, ToolContent> = {
     keywords: ['删除pdf注释', '删除评论', '删除高亮', '清理pdf'],
     description: `
       <p>删除注释可以从PDF文档中去除评论、高亮、便签和其他注释。这将创建一个没有标记的干净文档版本。</p>
-      <p>您可以删除所有注释或选择性地删除特定类型。非常适合创建已审阅文档的最终版本或删除敏感评论。</p>
+      <p>该工具会一次性删除所有注释，没有选择性保留特定类型的选项。非常适合创建已审阅文档的最终版本或删除敏感评论。</p>
       <p>所有处理都在您的浏览器本地进行，确保您的文档保持私密。</p>
     `,
     howToUse: [
       { step: 1, title: '上传PDF文件', description: '拖放您的PDF文件或点击选择文档。' },
-      { step: 2, title: '选择注释类型', description: '选择要删除的注释类型：评论、高亮、链接等。' },
+      { step: 2, title: '确认删除', description: '确认要删除所有注释——评论、高亮、链接等。' },
       { step: 3, title: '删除并下载', description: '点击删除去除注释并下载干净的PDF。' },
     ],
     useCases: [
@@ -610,7 +610,7 @@ export const toolContentZh: Record<string, ToolContent> = {
     ],
     faq: [
       { question: '可以删除哪些类型的注释？', answer: '评论、高亮、下划线、删除线、便签、印章和链接都可以删除。' },
-      { question: '可以保留一些注释吗？', answer: '是的，您可以选择要删除的注释类型和要保留的类型。' },
+      { question: '可以保留一些注释吗？', answer: '不可以，该工具会无条件删除所有注释，没有选择性保留特定类型的选项。' },
       { question: '这是可逆的吗？', answer: '不，注释删除是永久的。如果需要，请保留原始文件的备份。' },
     ],
   },
@@ -621,7 +621,7 @@ export const toolContentZh: Record<string, ToolContent> = {
     keywords: ['填写pdf表单', 'pdf表单填写器', '完成pdf表单', '交互式pdf'],
     description: `
       <p>表单填写允许您直接在浏览器中完成交互式PDF表单。填写文本字段、勾选复选框、选择选项并添加签名，无需打印文档。</p>
-      <p>该工具支持标准PDF表单和XFA表单。您填写的数据可以保存，表单可以扁平化以防止进一步编辑。</p>
+      <p>该工具支持标准 AcroForm 字段（文本框、复选框、下拉菜单、单选组）。您填写的数据可以保存，表单可以扁平化以防止进一步编辑。</p>
       <p>所有处理都在您的浏览器本地进行，确保您的表单数据保持私密。</p>
     `,
     howToUse: [
@@ -637,7 +637,7 @@ export const toolContentZh: Record<string, ToolContent> = {
     faq: [
       { question: '可以保存进度吗？', answer: '是的，您可以保存部分填写的表单并稍后继续。' },
       { question: '什么是表单扁平化？', answer: '扁平化将表单字段转换为静态内容，防止进一步编辑。' },
-      { question: '支持XFA表单吗？', answer: '是的，该工具支持标准AcroForms和XFA表单。' },
+      { question: '支持XFA表单吗？', answer: '不支持，该工具仅支持标准 AcroForm 字段，无法识别动态 XFA 表单。' },
     ],
   },
 
@@ -1694,12 +1694,12 @@ export const toolContentZh: Record<string, ToolContent> = {
     keywords: ['反转pdf', '翻转页面顺序', '倒置页面', '反转文档'],
     description: `
       <p>反转页面翻转PDF文档中页面的顺序，将最后一页放在最前，第一页放在最后。对于以相反顺序扫描的文档或特定打印需求非常有用。</p>
-      <p>该工具处理整个文档或选定的页面范围，保持所有内容和格式。</p>
+      <p>该工具会反转整个文档，保留页面内容和格式。请注意，书签/大纲不会被保留到反转后的文件中。</p>
       <p>所有处理都在您的浏览器本地进行，确保您的文档保持私密。</p>
     `,
     howToUse: [
       { step: 1, title: '上传PDF文件', description: '拖放您的PDF文件或点击选择。' },
-      { step: 2, title: '选择页面', description: '选择反转所有页面或特定范围。' },
+      { step: 2, title: '查看信息', description: '确认文档页数及反转预览。' },
       { step: 3, title: '反转并下载', description: '点击反转翻转页面顺序并下载。' },
     ],
     useCases: [
@@ -1708,8 +1708,8 @@ export const toolContentZh: Record<string, ToolContent> = {
       { title: '文档重新排序', description: '快速翻转文档顺序以供审阅。', icon: 'arrow-up-down' },
     ],
     faq: [
-      { question: '书签会更新吗？', answer: '是的，书签会更新以指向正确的反转页面。' },
-      { question: '可以只反转部分页面吗？', answer: '是的，您可以选择要反转的页面范围。' },
+      { question: '书签会更新吗？', answer: '不会，反转后的文件不会保留书签/大纲，只会保留页面内容和格式。' },
+      { question: '可以只反转部分页面吗？', answer: '不可以，该工具会反转整个文档，没有选择部分页面范围的选项。' },
       { question: '这和旋转一样吗？', answer: '不，反转改变页面顺序；旋转改变页面方向。' },
     ],
   },
@@ -1768,18 +1768,18 @@ export const toolContentZh: Record<string, ToolContent> = {
   },
 
   'timestamp-pdf': {
-    title: 'PDF 可信时间戳',
-    metaDescription: '为 PDF 文档添加 RFC 3161 可信时间戳。无需证书，即可在司法上确凿证明文档在特定时间点存在且未被篡改。',
-    keywords: ['pdf时间戳', 'rfc 3161', 'tsa服务器', '可信时间戳', '存在性证明'],
+    title: 'PDF 本地时间戳',
+    metaDescription: '为 PDF 文档添加本地时间戳证书，生成文件存在性的自签名记录。',
+    keywords: ['pdf时间戳', '时间戳', '存在性证明', '文档时间戳'],
     description: `
-      <p>PDF 可信时间戳工具利用外部权威时间戳机构 (TSA)，为您的 PDF 文件追加符合 RFC 3161 标准的安全时间戳。这能为您的电子文件在司法、知识产权确权或合规审计上，提供无可辩驳的数学和法律凭证，客观证明该文件在某个精确的历史时间点就已完整存在且未经任何改动。</p>
-      <p>支持选择 MeSign、DigiCert、Sectigo、SSL.com、FreeTSA 等全球知名时间戳服务器。整个签名操作不依赖任何个人私钥证书，轻松对文档加锁，保障长久安全性。</p>
-      <p>安全加密原则：在与外部服务器通信握手前，只会在本地计算文档的安全 SHA-256 哈希值并发送，您的文档具体内容绝对不会泄露给任何外部网络。</p>
+      <p>PDF 本地时间戳工具在浏览器中本地生成自签名时间戳证书，为您的 PDF 文件创建存在性记录。</p>
+      <p>时间戳完全在浏览器本地生成，使用自签名证书。这不是来自证书颁发机构的 RFC 3161 可信时间戳——它作为文档处理时间的个人记录。</p>
+      <p>所有处理完全在您的浏览器中进行，文档不会离开您的设备。</p>
     `,
     howToUse: [
-      { step: 1, title: '上传待签名 PDF', description: '选择并上传您要进行时间戳确权签名的 PDF 文件。' },
-      { step: 2, title: '选择时间戳服务器', description: '在列表中选择一家全球受信任的权威时间戳服务商 (TSA)。' },
-      { step: 3, title: '签署并下载', description: '点击开始签署，系统会快速向 TSA 握手获取可信 TST 令牌并完美嵌入 PDF 中。' },
+      { step: 1, title: '上传 PDF 文件', description: '选择并上传您要添加时间戳的 PDF 文件。' },
+      { step: 2, title: '应用本地时间戳', description: '点击生成自签名时间戳证书并嵌入 PDF。' },
+      { step: 3, title: '下载', description: '下载已嵌入时间戳证书的 PDF 文件。' },
     ],
     useCases: [
       { title: '知识产权与版权证明', description: '在发明、设计底稿、小说草稿公开发布前抢先签署，提供绝对的原创时间证明。', icon: 'lightbulb' },
@@ -1787,9 +1787,9 @@ export const toolContentZh: Record<string, ToolContent> = {
       { title: '财务报表与合规日志', description: '对历史账目、合规审计日志进行时间戳锚定，满足行业严苛的档案完整性审查。', icon: 'activity' },
     ],
     faq: [
-      { question: '什么是 RFC 3161 可信时间戳？', answer: 'RFC 3161 时间戳是由第三方权威时间戳服务商 (TSA) 采用私钥对您的文件哈希值和权威原子钟时间联合签署生成的加密令牌，具有极高的法律证明效力。' },
-      { question: '我需要自己去申请数字证书吗？', answer: '完全不需要。签名证书是由 TSA 时间戳机构提供的，您作为文档拥有者不需要具备任何证书，只需一键点击即可完成签署。' },
-      { question: '时间戳服务器会看到我的机密文件内容吗？', answer: '绝对不会。该工具在浏览器本地计算文件的哈希摘要（SHA-256），只把这串无规律的 64 位字符发送给时间戳服务器，服务器无法倒推出您的任何文件内容，隐私万无一失。' },
+      { question: '这是什么类型的时间戳？', answer: '这是本地自签名时间戳，在您的浏览器中生成。它不是来自第三方权威机构的 RFC 3161 可信时间戳，而是文档处理时间的个人记录。' },
+      { question: '需要证书吗？', answer: '不需要。工具会自动在本地生成自签名证书，无需任何外部证书。' },
+      { question: '我的文件会被上传吗？', answer: '不会。所有处理完全在浏览器本地进行，文件不会离开您的设备。' },
     ],
   },
 
@@ -2779,13 +2779,13 @@ export const toolContentZh: Record<string, ToolContent> = {
     ],
   },
   'ai-pdf-reflower': {
-    title: 'AI 智能自适应重排',
+    title: 'PDF 自适应重排',
     metaDescription: '将PDF文档重新排版为响应式移动端布局，支持Markdown和EPUB导出，改善小屏阅读体验。',
     keywords: ['pdf重排', '自适应pdf', 'pdf转markdown', 'epub导出', '移动端阅读pdf'],
     description: `
-      <p>AI 智能自适应重排工具是您在移动设备上阅读PDF的最佳伴侣。传统的PDF文档采用固定版面，在手机或平板电脑上查看时往往需要不断缩放和横向滚动，体验极差。</p>
-      <p>该工具智能解析PDF页面上的文本流、行高以及空间分布坐标，重建段落与标题结构。如果是多栏或双栏文档，它会智能归并栏目顺序，输出为自适应宽度的文字流。</p>
-      <p>此外，它支持将数学公式完美转化为 MathJax 格式渲染，并提供多种阅读主题（纸张黄、极客黑、护眼绿），支持一键导出为 EPUB 电子书或 Markdown 格式。</p>
+      <p>PDF 自适应重排工具是您在移动设备上阅读PDF的最佳伴侣。传统的PDF文档采用固定版面，在手机或平板电脑上查看时往往需要不断缩放和横向滚动，体验极差。</p>
+      <p>该工具基于版面规则解析PDF页面上的文本流、行高以及空间分布坐标，重建段落与标题结构。如果是多栏或双栏文档，它会按顺序归并栏目，输出为自适应宽度的文字流。</p>
+      <p>此外，它会识别常见数学符号（如 \\sum、\\alpha）并用 Markdown 数学定界符包裹，同时提供多种阅读主题（纸张黄、极客黑、护眼绿），支持一键导出为 EPUB 电子书或 Markdown 格式。</p>
     `,
     howToUse: [
       { step: 1, title: '上传PDF文件', description: '将PDF拖放到上传区或点击浏览选择文件。' },
@@ -2799,7 +2799,7 @@ export const toolContentZh: Record<string, ToolContent> = {
     ],
     faq: [
       { question: '双栏PDF能正确识别阅读顺序吗？', answer: '是的，重排算法会分析文本块的横坐标区间，将双栏布局拆解为左栏和右栏的纵向级联，不会出现左右行错乱。' },
-      { question: '图片和公式会丢失吗？', answer: '数学公式会被转换为可被前端渲染的LaTeX/MathJax语法，图片会保留其上下文关联位置。' },
+      { question: '图片和公式会丢失吗？', answer: '含有常见数学符号（如 \\sum、\\alpha）的文本会被 Markdown 数学定界符包裹，但这只是简单的文本匹配而非完整的公式识别，复杂公式可能无法被识别。图片会保留其上下文关联位置。' },
       { question: '转换是在云端进行的吗？', answer: '不，所有的排版解析和EPUB/Markdown编译都在您的浏览器本地完成，保护敏感文档的绝对私密。' },
     ],
   },
@@ -3057,27 +3057,27 @@ export const toolContentZh: Record<string, ToolContent> = {
   },
   'batch-watermark-remover': {
     title: '批量去水印',
-    metaDescription: '采用内容流物理擦除技术（Content Stream Purge），无损擦除 PDF 底层文本或矢量水印流。',
+    metaDescription: '尝试从 PDF 内容流中擦除文本类水印，可选同时清除图片 XObject。图片水印和复杂矢量水印可能无法被完全擦除。',
     keywords: ['水印擦除', 'pdf去水印', '批量水印删除', '物理内容流擦除', '图片水印删除'],
     description: `
-      <p>PDF 水印批量一键智能擦除器是业内罕见的无损 PDF 净化引擎。</p>
-      <p>普通工具去水印往往只是加个白盒子盖住，或者导致 PDF 排版彻底崩塌。本工具采用硬核的 <strong>内容流物理擦除 (Content Stream Purge)</strong> 策略。</p>
-      <p>它深入解析 PDF 页面的底层内容算子流，匹配与水印文字（如 "Confidential"、"DRAFT"）或图片相关的底层操作指令，将其物理剔除或用空格无损替换。水印瞬间消解，完全保留原文档排版和文字质量。</p>
+      <p>PDF 批量去水印工具尝试从内容流层面擦除水印，而不是简单地在上面盖一层白色色块。</p>
+      <p>您输入需要擦除的水印文字（如 "Confidential"、"DRAFT"），工具会在每页内容流中查找匹配的文本绘制指令并将其清空，也可以选择同时移除页面上的所有图片 XObject。</p>
+      <p>该方法适用于简单的精确文本匹配水印。图片水印、以矢量路径或轮廓绘制的水印，以及被拆分成多段定位指令的文字，可能无法被完全擦除。</p>
     `,
     howToUse: [
       { step: 1, title: '上传有水印的PDF', description: '上传含有系统防伪水印或商业标识的 PDF 报告。' },
-      { step: 2, title: '设定擦除关键词', description: '输入您要擦除的水印文字，或开启图像水印一键物理脱敏。' },
-      { step: 3, title: '一键物理净化', description: '点击执行，伴随微型量子解构粉碎波效，水印瞬间被物理清空。' },
+      { step: 2, title: '设定擦除关键词', description: '输入您要查找的精确水印文字，或开启图片 XObject 清除功能。' },
+      { step: 3, title: '执行擦除', description: '点击执行，清除内容流中匹配的水印指令。' },
     ],
     useCases: [
-      { title: '机密报告净化存档', description: '将废弃或公开报告上的“机密”或“草稿”水印无损擦除，用于归档和重新分发。', icon: 'archive' },
-      { title: '背景图片干扰消除', description: '快速物理擦除 PDF 各页底部的半透明大图水印，让页面文本阅读更加清爽。', icon: 'eye' },
-      { title: '企业模板二次开发', description: '物理擦除旧版官方文件的页脚水印，以便快速套用新的企业标准。', icon: 'copy' },
+      { title: '机密报告净化存档', description: '将废弃或公开报告上的“机密”或“草稿”水印擦除，用于归档和重新分发。', icon: 'archive' },
+      { title: '背景图片干扰消除', description: '擦除 PDF 各页底部的半透明大图水印，让页面文本阅读更加清爽。', icon: 'eye' },
+      { title: '企业模板二次开发', description: '擦除旧版官方文件的页脚水印，以便快速套用新的企业标准。', icon: 'copy' },
     ],
     faq: [
-      { question: '擦除水印后会被重新复原吗？', answer: '绝对不会。与视觉遮挡不同，我们是直接修改了 PDF 页面的二进制内容流（Content Stream），将相关算子物理清除，不留任何痕迹。' },
-      { question: '能擦除复杂的彩色渐变背景水印吗？', answer: '如果水印在 PDF 中是作为独立的 XObject 图像或特定文本算子存在，该工具可以精准物理定位并擦除。' },
-      { question: '会破坏 PDF 中的原有文字和排版吗？', answer: '不会。擦除动作仅仅针对匹配水印特性的操作码，非匹配的主体文字和矢量插图会得到 100% 的保留。' },
+      { question: '擦除水印后会被重新复原吗？', answer: '成功匹配并清除的文字会被直接从内容流中重写擦除，而非仅做视觉遮挡。但如果水印文字不能精确匹配——例如被拆分成多段指令，或以轮廓方式绘制——则不会被检测和擦除。' },
+      { question: '能擦除复杂的渐变或矢量水印吗？', answer: '不能。该工具只能匹配内容流中的字面文本字符串，并可选择清除图片 XObject。以矢量路径或渐变绘制的水印不会被检测或擦除。' },
+      { question: '会破坏 PDF 中的原有文字和排版吗？', answer: '文字擦除只会针对与您指定的水印文字匹配的字符串。但如果您开启图片移除功能，页面上的所有图片 XObject 都会被清除，而不仅仅是水印图片。' },
     ],
   },
   'smart-data-redactor': {

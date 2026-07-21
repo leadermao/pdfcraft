@@ -599,12 +599,12 @@ export const toolContentEn: Record<string, ToolContent> = {
     keywords: ['remove pdf annotations', 'delete comments', 'remove highlights', 'clean pdf'],
     description: `
       <p>Remove Annotations strips comments, highlights, sticky notes, and other annotations from your PDF documents. This creates a clean version of the document without markup.</p>
-      <p>You can remove all annotations or selectively remove specific types. Perfect for creating final versions of reviewed documents or removing sensitive comments.</p>
+      <p>This tool removes all annotations at once — there is no option to selectively keep specific types. Perfect for creating final versions of reviewed documents or removing sensitive comments.</p>
       <p>All processing happens locally in your browser, ensuring your documents remain private.</p>
     `,
     howToUse: [
       { step: 1, title: 'Upload Your PDF', description: 'Drag and drop your PDF file or click to select the document.' },
-      { step: 2, title: 'Select Annotation Types', description: 'Choose which types of annotations to remove: comments, highlights, links, etc.' },
+      { step: 2, title: 'Confirm Removal', description: 'Confirm you want to remove all annotations — comments, highlights, links, and more.' },
       { step: 3, title: 'Remove and Download', description: 'Click Remove to strip annotations and download the clean PDF.' },
     ],
     useCases: [
@@ -614,7 +614,7 @@ export const toolContentEn: Record<string, ToolContent> = {
     ],
     faq: [
       { question: 'What types of annotations can be removed?', answer: 'Comments, highlights, underlines, strikethroughs, sticky notes, stamps, and links can all be removed.' },
-      { question: 'Can I keep some annotations?', answer: 'Yes, you can select which types of annotations to remove and which to keep.' },
+      { question: 'Can I keep some annotations?', answer: 'No, this tool removes all annotations unconditionally. There is no option to selectively keep specific types.' },
       { question: 'Is this reversible?', answer: 'No, annotation removal is permanent. Keep a backup of the original if needed.' },
     ],
   },
@@ -625,7 +625,7 @@ export const toolContentEn: Record<string, ToolContent> = {
     keywords: ['fill pdf form', 'pdf form filler', 'complete pdf form', 'interactive pdf'],
     description: `
       <p>Form Filler allows you to complete interactive PDF forms directly in your browser. Fill text fields, check boxes, select options, and add signatures without printing the document.</p>
-      <p>The tool supports standard PDF forms and XFA forms. Your filled data can be saved and the form can be flattened to prevent further editing.</p>
+      <p>The tool supports standard AcroForm fields (text fields, checkboxes, dropdowns, radio groups). Your filled data can be saved and the form can be flattened to prevent further editing.</p>
       <p>All processing happens locally in your browser, ensuring your form data remains private.</p>
     `,
     howToUse: [
@@ -641,7 +641,7 @@ export const toolContentEn: Record<string, ToolContent> = {
     faq: [
       { question: 'Can I save my progress?', answer: 'Yes, you can save partially filled forms and continue later.' },
       { question: 'What is form flattening?', answer: 'Flattening converts form fields to static content, preventing further editing.' },
-      { question: 'Are XFA forms supported?', answer: 'Yes, the tool supports both standard AcroForms and XFA forms.' },
+      { question: 'Are XFA forms supported?', answer: 'No, only standard AcroForm fields are supported. Dynamic XFA forms are not recognized.' },
     ],
   },
 
@@ -1699,12 +1699,12 @@ export const toolContentEn: Record<string, ToolContent> = {
     keywords: ['reverse pdf', 'flip page order', 'invert pages', 'reverse document'],
     description: `
       <p>Reverse Pages flips the order of pages in your PDF document, putting the last page first and the first page last. Useful for documents scanned in reverse order or for specific printing needs.</p>
-      <p>The tool processes the entire document or selected page ranges, maintaining all content and formatting.</p>
+      <p>The tool reverses the entire document, preserving page content and formatting. Note that bookmarks/outlines are not carried over to the reversed file.</p>
       <p>All processing happens in your browser, ensuring your documents remain private.</p>
     `,
     howToUse: [
       { step: 1, title: 'Upload Your PDF', description: 'Drag and drop your PDF file or click to select.' },
-      { step: 2, title: 'Select Pages', description: 'Choose to reverse all pages or a specific range.' },
+      { step: 2, title: 'Review', description: 'Check the page count and reversal preview shown for your document.' },
       { step: 3, title: 'Reverse and Download', description: 'Click Reverse to flip page order and download.' },
     ],
     useCases: [
@@ -1713,8 +1713,8 @@ export const toolContentEn: Record<string, ToolContent> = {
       { title: 'Document Reordering', description: 'Quickly flip document order for review.', icon: 'arrow-up-down' },
     ],
     faq: [
-      { question: 'Are bookmarks updated?', answer: 'Yes, bookmarks are updated to point to the correct reversed pages.' },
-      { question: 'Can I reverse only some pages?', answer: 'Yes, you can select a page range to reverse.' },
+      { question: 'Are bookmarks updated?', answer: 'No, bookmarks and outlines are not preserved in the reversed output. Only the page content and formatting carry over.' },
+      { question: 'Can I reverse only some pages?', answer: 'No, this tool reverses the entire document. There is no option to select a partial page range.' },
       { question: 'Is this the same as rotating?', answer: 'No, reversing changes page order; rotating changes page orientation.' },
     ],
   },
@@ -1774,17 +1774,17 @@ export const toolContentEn: Record<string, ToolContent> = {
 
   'timestamp-pdf': {
     title: 'Timestamp PDF',
-    metaDescription: 'Add RFC 3161 trusted timestamps to PDF documents. Prove document existence at a specific point in time without certificates.',
-    keywords: ['timestamp pdf', 'rfc 3161', 'tsa server', 'trusted timestamping', 'proof of existence'],
+    metaDescription: 'Add a local timestamp certificate to PDF documents. Create a self-signed proof of existence for your files.',
+    keywords: ['timestamp pdf', 'pdf timestamp', 'proof of existence', 'document timestamping'],
     description: `
-      <p>Timestamp PDF adds RFC 3161 compliant trusted timestamps to your PDF documents using external Time Stamping Authorities (TSA). It provides legally-binding mathematical proof that a document existed in a specific, unaltered state at a precise instant in time.</p>
-      <p>Select from global trusted TSA servers such as DigiCert, Sectigo, SSL.com, FreeTSA, or MeSign. No personal signing certificates are required to secure your documents against future tampering.</p>
-      <p>Supports fully secure local hashing before handshake, guaranteeing absolute document contents remain 100% confidential.</p>
+      <p>Timestamp PDF adds a local timestamp certificate to your PDF documents, creating a self-signed proof that a document existed at a specific point in time.</p>
+      <p>The timestamp is generated locally in your browser using a self-signed certificate. This is not an RFC 3161 trusted timestamp from a certificate authority — it serves as a personal record of when the document was processed.</p>
+      <p>All processing happens entirely in your browser. Your documents never leave your device.</p>
     `,
     howToUse: [
       { step: 1, title: 'Upload PDF Document', description: 'Select the target PDF file you want to timestamp.' },
-      { step: 2, title: 'Select TSA Server', description: 'Choose a trusted global Time Stamping Authority from the list.' },
-      { step: 3, title: 'Apply and Timestamp', description: 'Click Timestamp to fetch secure response from TSA and embed the token.' },
+      { step: 2, title: 'Apply Local Timestamp', description: 'Click to generate a self-signed timestamp certificate and embed it in the PDF.' },
+      { step: 3, title: 'Download', description: 'Download the timestamped PDF with the embedded certificate.' },
     ],
     useCases: [
       { title: 'Intellectual Property', description: 'Establish clear priority proof of patents, drafts, and ideas before public release.', icon: 'lightbulb' },
@@ -1792,9 +1792,9 @@ export const toolContentEn: Record<string, ToolContent> = {
       { title: 'Legal Contracts', description: 'Lock legal agreements with a trusted time proof to avoid backdating arguments.', icon: 'file-check' },
     ],
     faq: [
-      { question: 'What is a trusted timestamp (RFC 3161)?', answer: 'An RFC 3161 timestamp is a cryptographically signed token issued by a recognized third-party authority (TSA) that links a document hash to a specific, verified clock source.' },
-      { question: 'Do I need a digital certificate?', answer: 'No, the cryptographic signature is provided directly by the trusted TSA server, making the process effortless for document owners.' },
-      { question: 'Does the TSA see my document contents?', answer: 'Never. The tool only sends a secure SHA-256 hash of your document to the TSA server, keeping your actual document completely private.' },
+      { question: 'What type of timestamp is this?', answer: 'This is a local self-signed timestamp generated in your browser. It is not an RFC 3161 trusted timestamp from a certificate authority — it serves as a personal record of when the document was processed.' },
+      { question: 'Do I need a certificate?', answer: 'No. The tool automatically generates a self-signed certificate locally. No external certificates are required.' },
+      { question: 'Does my document leave my device?', answer: 'No. All processing happens entirely in your browser. Your documents are never uploaded anywhere.' },
     ],
   },
 
@@ -2725,13 +2725,13 @@ export const toolContentEn: Record<string, ToolContent> = {
     ],
   },
   'ai-pdf-reflower': {
-    title: 'AI PDF Layout Reflower',
+    title: 'PDF Layout Reflower',
     metaDescription: 'Re-typeset PDF documents into responsive mobile-friendly layouts. Support Markdown and EPUB export for enhanced small-screen reading.',
     keywords: ['pdf reflow', 'responsive pdf', 'pdf to markdown', 'epub export', 'mobile pdf reader'],
     description: `
-      <p>AI PDF Layout Reflower is your ultimate companion for reading PDF documents on mobile devices. Traditional PDFs use a fixed layout, which often requires endless zooming and horizontal scrolling on smartphones or tablets, resulting in a tedious reading experience.</p>
-      <p>This tool intelligently parses the text flow, line spacing, and physical coordinates of the PDF pages, reconstructing the semantic paragraphs and heading hierarchies. For multi-column or dual-column documents, it intelligently merges column flows into a single responsive flow, ensuring smooth reading.</p>
-      <p>Additionally, it supports rendering mathematical formulas into LaTeX/MathJax and offers multiple reading themes (Sepia, Dark, Eye-protecting Green). You can export the reflowed layout as Markdown or a standard EPUB ebook with a single click.</p>
+      <p>PDF Layout Reflower is your ultimate companion for reading PDF documents on mobile devices. Traditional PDFs use a fixed layout, which often requires endless zooming and horizontal scrolling on smartphones or tablets, resulting in a tedious reading experience.</p>
+      <p>This tool parses the text flow, line spacing, and physical coordinates of the PDF pages, reconstructing paragraphs and heading hierarchies based on layout heuristics. For multi-column or dual-column documents, it merges column flows into a single responsive flow, ensuring smooth reading.</p>
+      <p>Additionally, it detects common math notation (such as \\sum, \\alpha) and wraps it in Markdown-style math delimiters, and offers multiple reading themes (Sepia, Dark, Eye-protecting Green). You can export the reflowed layout as Markdown or a standard EPUB ebook with a single click.</p>
     `,
     howToUse: [
       { step: 1, title: 'Upload PDF File', description: 'Drag and drop your PDF file or click to browse and select it.' },
@@ -2745,7 +2745,7 @@ export const toolContentEn: Record<string, ToolContent> = {
     ],
     faq: [
       { question: 'Does it handle dual-column PDFs correctly?', answer: 'Yes, the layout reflower detects the horizontal coordinates of text blocks and structures left and right columns sequentially, preventing line interleaving.' },
-      { question: 'Will images and math formulas be lost?', answer: 'Mathematical formulas are converted to LaTeX/MathJax syntax for clean web rendering, and images are preserved in their corresponding semantic positions.' },
+      { question: 'Will images and math formulas be lost?', answer: 'Text containing common math notation (such as \\sum, \\alpha) is wrapped in Markdown-style math delimiters, but this is simple pattern matching rather than full formula recognition, so complex equations may not be detected. Images are preserved in their corresponding semantic positions.' },
       { question: 'Is the conversion done in the cloud?', answer: 'No, all layout analysis and format packaging are performed locally in your browser to guarantee the absolute privacy of your documents.' },
     ],
   },
@@ -3003,17 +3003,17 @@ export const toolContentEn: Record<string, ToolContent> = {
   },
   'batch-watermark-remover': {
     title: 'Batch Remove Watermarks',
-    metaDescription: 'Physically scrub watermark strings and XObject images from the PDF content stream without messing up layouts.',
+    metaDescription: 'Attempts to remove text-based watermarks from PDF content streams, with an option to strip image XObjects. Image and complex vector watermarks may not be fully removed.',
     keywords: ['remove watermark', 'pdf watermark eraser', 'content stream purge', 'batch watermark cleaning', 'remove draft watermark'],
     description: `
-      <p>The Batch Watermark Remover is a state-of-the-art PDF sanitizer that physically cleanses documents.</p>
-      <p>Generic watermark removers usually just overlay white blocks or distort document spacing. This tool utilizes a robust <strong>Content Stream Purge</strong> technique.</p>
-      <p>It parses the low-level rendering operators of each page, identifies specific watermark string commands (e.g. "Confidential", "DRAFT") or background image objects, and physically deletes or overwrites them. The watermarks disappear completely, preserving the original formatting and vector quality.</p>
+      <p>The Batch Watermark Remover attempts to remove watermarks from a PDF's content stream rather than simply overlaying a white block on top of them.</p>
+      <p>You provide the exact watermark text (e.g. "Confidential", "DRAFT"), and the tool searches each page's content stream for matching text-drawing operators and blanks them out. It can optionally also strip all image XObjects from a page.</p>
+      <p>This works best for simple, exact-match text watermarks. Image-based watermarks, watermarks rendered as vector paths or outlines, or text split across multiple positioning operators may not be fully removed.</p>
     `,
     howToUse: [
       { step: 1, title: 'Upload watermarked file', description: 'Provide the PDF document showing commercial logos or security labels.' },
-      { step: 2, title: 'Define target watermark', description: 'Input the exact string to delete, or toggle translucent XObject image cleanup.' },
-      { step: 3, title: 'Run physical purge', description: 'Click execute to scrub the content operators with high fidelity.' },
+      { step: 2, title: 'Define target watermark', description: 'Input the exact watermark text to search for, or toggle image XObject removal.' },
+      { step: 3, title: 'Run removal', description: 'Click execute to scrub matching content stream operators.' },
     ],
     useCases: [
       { title: 'Archiving corporate assets', description: 'Remove expired "Confidential" or "Draft" watermarks for general public distribution.', icon: 'archive' },
@@ -3021,9 +3021,9 @@ export const toolContentEn: Record<string, ToolContent> = {
       { title: 'Document reusing', description: 'Cleanse old page footer branding elements to apply new corporate templates easily.', icon: 'copy' },
     ],
     faq: [
-      { question: 'Can the purged watermarks be recovered?', answer: 'No. Unlike visual masks, we rewrite the page binary stream to erase the operators, leaving no traces.' },
-      { question: 'Does it support complex gradients?', answer: 'If the watermark is stored as a separate text node or image XObject, the tool can isolate and physically wipe it.' },
-      { question: 'Will it modify normal page text?', answer: 'No. The scrubbing engine only target operators matching the specified watermark signature; regular text remains untouched.' },
+      { question: 'Can the purged watermarks be recovered?', answer: 'Text that is matched and removed is rewritten out of the content stream rather than just visually covered. However, if the watermark text does not match exactly — for example if it is split across multiple operators or rendered as outlines — it will not be detected or removed at all.' },
+      { question: 'Does it support complex gradients or vector watermarks?', answer: 'No. This tool matches literal text strings in content streams and can optionally strip image XObjects. Vector-drawn watermarks such as paths or gradients are not detected or removed.' },
+      { question: 'Will it modify normal page text?', answer: 'The text search only targets strings matching your specified watermark text. However, if you enable image removal, all image XObjects on the page are stripped, not just watermark images.' },
     ],
   },
   'smart-data-redactor': {
@@ -3046,7 +3046,7 @@ export const toolContentEn: Record<string, ToolContent> = {
       { title: 'Financial statement distribution', description: 'Conceal specific ledger numbers or shareholder names before publishing reports.', icon: 'pie-chart' },
     ],
     faq: [
-      { question: 'Are redacted details truly un-copyable?', answer: 'Yes. We rewrite the page content stream to erase the characters. Copy-pasting from the redacted box will only extract the string "[REDACTED]".' },
+      { question: 'Are redacted details truly un-copyable?', answer: 'Yes. The redacted pages are rasterized into bitmap images, physically destroying any underlying text. No text can be extracted from the redacted areas.' },
       { question: 'Does it work for scanned image PDFs?', answer: 'This tool targets vector text streams. For scanned image files, use our OCR tool first or crop manually.' },
       { question: 'Is the red HUD target scope saved in the file?', answer: 'No, that is a gorgeous frontend interactive loading effect. The output PDF displays standard clean black rectangles.' },
     ],
@@ -3128,12 +3128,12 @@ export const toolContentEn: Record<string, ToolContent> = {
   },
   'dead-link-debugger': {
     title: 'Fix Dead Links',
-    metaDescription: 'Scan all URL actions and link annotations in PDF, detect reachability, and inject redirects.',
-    keywords: ['dead link pdf', 'edit pdf hyperlinks', 'pdf link validation', 'redirect link pdf', 'update urls in pdf'],
+    metaDescription: 'Extract and list all hyperlinks from PDF documents. Edit or replace link URLs.',
+    keywords: ['pdf hyperlinks', 'edit pdf links', 'extract links pdf', 'update urls in pdf'],
     description: `
-      <p>The Dead Link Debugger is a deep structural editor that guarantees link interaction quality in published files.</p>
-      <p>Broken urls (404/500) inside manuals, whitepapers, or guides reduce branding authority. This tool lets you manage the hyperlinks database seamlessly.</p>
-      <p>It parses the low-level <code>/Link</code> dictionaries on each page, Probes them, and displays link status in an interactive grid (red for dead links, orange for redirects). Simply type the updated redirect URL, and the tool writes the new target directly back into the PDF binary stream.</p>
+      <p>The Link Debugger extracts and lists all hyperlinks embedded in your PDF document.</p>
+      <p>It parses the <code>/Link</code> annotations on each page and displays all URLs in an interactive list. You can then edit or replace any URL, and the tool writes the updated target back into the PDF.</p>
+      <p>Note: Link reachability checking is not available in the browser due to CORS restrictions. The tool extracts and lists links for manual review.</p>
     `,
     howToUse: [
       { step: 1, title: 'Provide target document', description: 'Upload the PDF manual or catalog containing links to debug.' },

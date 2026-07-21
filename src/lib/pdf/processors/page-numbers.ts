@@ -7,6 +7,7 @@ import type { ProcessInput, ProcessOutput, ProgressCallback } from '@/types/pdf'
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 export interface PageNumberOptions {
   position?: 'bottom-center' | 'bottom-left' | 'bottom-right' | 'top-center' | 'top-left' | 'top-right';
@@ -59,7 +60,12 @@ export class PageNumbersProcessor extends BasePDFProcessor {
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-      const font = await pdf.embedFont(pdfLib.StandardFonts.Helvetica);
+      const allText = [
+        pageNumOptions.prefix, pageNumOptions.suffix, pageNumOptions.customFormat,
+      ].filter(Boolean).join('');
+      const font = containsCjk(allText)
+        ? await getCjkFont(pdf)
+        : await pdf.embedFont(pdfLib.StandardFonts.Helvetica);
       const totalPages = pdf.getPageCount();
       const skipSet = new Set(pageNumOptions.skipPages || []);
 

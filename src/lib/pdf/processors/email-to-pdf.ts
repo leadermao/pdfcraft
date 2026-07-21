@@ -153,9 +153,9 @@ async function parseEmlFile(file: File): Promise<ParsedEmail> {
                 const contentId = partHeaders['content-id']?.replace(/[<>]/g, '');
 
                 if (partContentType.includes('text/html')) {
-                    htmlBody = decodeQuotedPrintable(partContent, transferEncoding);
+                    htmlBody = decodeTextContent(partContent, transferEncoding);
                 } else if (partContentType.includes('text/plain')) {
-                    textBody = decodeQuotedPrintable(partContent, transferEncoding);
+                    textBody = decodeTextContent(partContent, transferEncoding);
                 } else if (partContentType.includes('image/') || contentDisposition || contentId) {
                     // This is an attachment or inline image
                     const isInline = !!(contentDisposition?.includes('inline') || (contentId && !contentDisposition?.includes('attachment')));
@@ -229,17 +229,14 @@ async function parseMsgFile(file: File): Promise<ParsedEmail> {
         throw new Error('Invalid MSG file format');
     }
 
-    // Extract text strings from the file (simplified approach)
-    // MSG files contain UTF-16LE encoded strings
     const extractStrings = (data: Uint8Array): string[] => {
         const strings: string[] = [];
         let current = '';
 
-        for (let i = 0; i < data.length - 1; i++) {
-            // Look for printable UTF-16LE characters
-            if (data[i] >= 0x20 && data[i] < 0x7F && data[i + 1] === 0) {
-                current += String.fromCharCode(data[i]);
-                i++; // Skip the null byte
+        for (let i = 0; i < data.length - 1; i += 2) {
+            const codeUnit = data[i] | (data[i + 1] << 8);
+            if (codeUnit >= 0x20 && codeUnit !== 0xFFFE && codeUnit !== 0xFFFD) {
+                current += String.fromCharCode(codeUnit);
             } else if (current.length > 3) {
                 strings.push(current);
                 current = '';
@@ -302,21 +299,22 @@ async function parseMsgFile(file: File): Promise<ParsedEmail> {
     };
 }
 
-/**
- * Decode base64 content
- */
-function decodeBase64(text: string, encoding?: string): string {
-    if (!encoding || !encoding.toLowerCase().includes('base64')) {
-        return text;
+function decodeTextContent(text: string, transferEncoding?: string): string {
+    const enc = (transferEncoding || '').toLowerCase();
+    if (enc.includes('base64')) {
+        try {
+            const cleanedBase64 = text.replace(/\s/g, '');
+            const binaryString = atob(cleanedBase64);
+            const bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0));
+            return new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+        } catch {
+            return text;
+        }
     }
-    
-    try {
-        // Remove whitespace and newlines
-        const cleanedBase64 = text.replace(/\s/g, '');
-        return atob(cleanedBase64);
-    } catch {
-        return text;
+    if (enc.includes('quoted-printable')) {
+        return decodeQuotedPrintable(text, transferEncoding);
     }
+    return text;
 }
 
 /**
@@ -341,11 +339,17 @@ function decodeQuotedPrintable(text: string, encoding?: string): string {
         return text;
     }
 
-    return text
-        .replace(/=\r?\n/g, '')
-        .replace(/=([0-9A-Fa-f]{2})/g, (_, hex) =>
-            String.fromCharCode(parseInt(hex, 16))
-        );
+    const joined = text.replace(/=\r?\n/g, '');
+    const bytes: number[] = [];
+    for (let i = 0; i < joined.length; i++) {
+        if (joined[i] === '=' && i + 2 < joined.length && /[0-9A-Fa-f]{2}/.test(joined.substring(i + 1, i + 3))) {
+            bytes.push(parseInt(joined.substring(i + 1, i + 3), 16));
+            i += 2;
+        } else {
+            bytes.push(joined.charCodeAt(i));
+        }
+    }
+    return new TextDecoder('utf-8', { fatal: false }).decode(new Uint8Array(bytes));
 }
 
 /**
@@ -354,19 +358,21 @@ function decodeQuotedPrintable(text: string, encoding?: string): string {
 function decodeEncodedWord(text: string): string {
     return text.replace(
         /=\?([^?]+)\?([BQ])\?([^?]+)\?=/gi,
-        (_, charset, encoding, content) => {
-            if (encoding.toUpperCase() === 'B') {
-                // Base64
-                try {
-                    return atob(content);
-                } catch {
-                    return content;
+        (_, _charset, encoding, content) => {
+            try {
+                let bytes: Uint8Array;
+                if (encoding.toUpperCase() === 'B') {
+                    const binaryString = atob(content);
+                    bytes = Uint8Array.from(binaryString, c => c.charCodeAt(0));
+                } else {
+                    const decoded = content.replace(/_/g, ' ').replace(/=([0-9A-Fa-f]{2})/g, (_m: string, hex: string) =>
+                        String.fromCharCode(parseInt(hex, 16))
+                    );
+                    bytes = Uint8Array.from(decoded, (c: string) => c.charCodeAt(0));
                 }
-            } else {
-                // Quoted-printable
-                return content.replace(/_/g, ' ').replace(/=([0-9A-Fa-f]{2})/g, (_match: string, hex: string) =>
-                    String.fromCharCode(parseInt(hex, 16))
-                );
+                return new TextDecoder('utf-8', { fatal: false }).decode(bytes);
+            } catch {
+                return content;
             }
         }
     );

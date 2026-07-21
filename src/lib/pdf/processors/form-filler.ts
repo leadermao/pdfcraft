@@ -7,6 +7,7 @@ import type { ProcessInput, ProcessOutput, ProgressCallback } from '@/types/pdf'
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 export interface FormFieldValue {
   fieldName: string;
@@ -91,6 +92,11 @@ export class FormFillerProcessor extends BasePDFProcessor {
       this.updateProgress(80, 'Processing form...');
 
       if (formOptions.flatten) {
+        const allValues = formOptions.fields?.map(fv => String(fv.value)).join('') || '';
+        if (containsCjk(allValues)) {
+          const cjkFont = await getCjkFont(pdf);
+          form.updateFieldAppearances(cjkFont);
+        }
         form.flatten();
       }
 

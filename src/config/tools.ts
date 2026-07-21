@@ -274,7 +274,7 @@ export const tools: Tool[] = [
     outputFormat: 'pdf',
     maxFileSize: DEFAULT_MAX_FILE_SIZE,
     maxFiles: 1,
-    features: ['remove-comments', 'remove-highlights', 'remove-links', 'selective-removal'],
+    features: ['remove-comments', 'remove-highlights', 'remove-links'],
     relatedTools: ['edit-pdf', 'flatten-pdf', 'sanitize-pdf'],
   },
   {
@@ -286,7 +286,7 @@ export const tools: Tool[] = [
     outputFormat: 'pdf',
     maxFileSize: DEFAULT_MAX_FILE_SIZE,
     maxFiles: 1,
-    features: ['fill-forms', 'xfa-support', 'save-data', 'flatten-after'],
+    features: ['fill-forms', 'save-data', 'flatten-after'],
     relatedTools: ['form-creator', 'sign-pdf', 'edit-pdf'],
   },
   {
@@ -1286,7 +1286,7 @@ export const tools: Tool[] = [
     outputFormat: 'md',
     maxFileSize: DEFAULT_MAX_FILE_SIZE,
     maxFiles: 1,
-    features: ['layout-recognition', 'mobile-responsive', 'mathjax-support', 'markdown-export', 'epub-export'],
+    features: ['layout-recognition', 'mobile-responsive', 'markdown-export', 'epub-export'],
     relatedTools: ['pdf-to-markdown', 'pdf-to-json', 'ocr-pdf'],
   },
   {
@@ -1478,7 +1478,7 @@ export const tools: Tool[] = [
     outputFormat: 'pdf',
     maxFileSize: DEFAULT_MAX_FILE_SIZE,
     maxFiles: 1,
-    features: ['link-annot-extraction', 'async-ping-probing', 'redirect-replacement', 'network-graph-visualizer'],
+    features: ['link-annot-extraction'],
     relatedTools: ['repair-pdf', 'table-of-contents', 'edit-metadata'],
   },
   {

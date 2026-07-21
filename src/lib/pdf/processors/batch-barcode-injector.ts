@@ -12,6 +12,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import QRCode from 'qrcode';
 
 export interface BatchBarcodeOptions {
   barcodeType: 'qr' | 'code128';
@@ -76,45 +77,11 @@ export class BatchBarcodeInjectorProcessor extends BasePDFProcessor {
         const base64Data = barcodeOptions.barcodeImages[0].split(',').pop() || '';
         imageBuffer = Uint8Array.from(atob(base64Data), c => c.charCodeAt(0));
       } else {
-        // Fallback: draw an high quality canvas mockup representation of QR Code
-        const canvas = document.createElement('canvas');
-        canvas.width = 250;
-        canvas.height = 250;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(0, 0, 250, 250);
-          ctx.fillStyle = '#1e293b';
-          // Outer finder patterns
-          ctx.fillRect(20, 20, 60, 60);
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(30, 30, 40, 40);
-          ctx.fillStyle = '#1e293b';
-          ctx.fillRect(40, 40, 20, 20);
-
-          ctx.fillRect(170, 20, 60, 60);
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(180, 30, 40, 40);
-          ctx.fillStyle = '#1e293b';
-          ctx.fillRect(190, 40, 20, 20);
-
-          ctx.fillRect(20, 170, 60, 60);
-          ctx.fillStyle = '#ffffff';
-          ctx.fillRect(30, 180, 40, 40);
-          ctx.fillStyle = '#1e293b';
-          ctx.fillRect(40, 190, 20, 20);
-
-          // Random modules
-          for (let r = 8; r < 17; r++) {
-            for (let c = 0; c < 25; c++) {
-              if (Math.random() > 0.4) {
-                ctx.fillRect(20 + c * 8, 20 + r * 8, 8, 8);
-              }
-            }
-          }
-        }
-        
-        const dataUrl = canvas.toDataURL('image/png');
+        const dataUrl = await QRCode.toDataURL(barcodeOptions.value, {
+          width: 250,
+          margin: 2,
+          color: { dark: '#1e293b', light: '#ffffff' },
+        });
         const base64 = dataUrl.split(',').pop() || '';
         imageBuffer = Uint8Array.from(atob(base64), c => c.charCodeAt(0));
       }

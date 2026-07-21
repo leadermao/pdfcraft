@@ -883,11 +883,6 @@
       "pageNumber": "Page {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Autorité de confiance MeSign TSA",
-      "tsaDigicertDesc": "Nœud cryptographique PKI mondial DigiCert TSA",
-      "tsaSectigoDesc": "Serveur d'horloge atomique Sectigo TSA Comodo",
-      "tsaSslDesc": "Fournisseur TSA américain de confiance SSL.com",
-      "tsaFreetsaDesc": "FreeTSA.org Service TSA gratuit de haute qualité",
       "uploadLabel": "Télécharger le PDF pour l'horodatage TSA",
       "uploadDescription": "Faites glisser et déposez le PDF ici. Prend entièrement en charge les PDF cryptés avec décryptage local automatisé.",
       "uploadSuccess": "{count} page(s) • {size} Mo",

@@ -8,6 +8,7 @@ import type { ProcessInput, ProcessOutput, ProgressCallback } from '@/types/pdf'
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 export interface PdfSignatureAnchorHelperOptions {
   anchorX: number; // Percent 0-1 relative to top-left of page
@@ -92,7 +93,9 @@ export class PdfSignatureAnchorHelperProcessor extends BasePDFProcessor {
       });
 
       // Label text
-      const font = await pdfDoc.embedFont(pdfLib.StandardFonts.HelveticaBold);
+      const font = containsCjk(anchorOptions.anchorLabel)
+        ? await getCjkFont(pdfDoc)
+        : await pdfDoc.embedFont(pdfLib.StandardFonts.HelveticaBold);
       const labelFontSize = 9;
       page.drawText(anchorOptions.anchorLabel, {
         x: ptX - stampW / 2 + 30,

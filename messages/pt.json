@@ -883,11 +883,6 @@
       "pageNumber": "Página {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Autoridade confiável MeSign TSA",
-      "tsaDigicertDesc": "Nó criptográfico de PKI global DigiCert TSA",
-      "tsaSectigoDesc": "Servidor de relógio atômico Sectigo TSA Comodo",
-      "tsaSslDesc": "Provedor americano confiável de TSA SSL.com",
-      "tsaFreetsaDesc": "FreeTSA.org Serviço TSA gratuito de alta qualidade",
       "uploadLabel": "Carregar PDF para carimbo de data/hora TSA",
       "uploadDescription": "Arraste e solte o PDF aqui. Suporta totalmente PDFs criptografados com descriptografia local automatizada.",
       "uploadSuccess": "{count} página(s) • {size} MB",

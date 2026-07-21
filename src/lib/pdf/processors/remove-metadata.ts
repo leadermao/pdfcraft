@@ -189,8 +189,12 @@ export class RemoveMetadataProcessor extends BasePDFProcessor {
         removedFields.push('producer');
       }
 
-      // Note: pdf-lib doesn't support removing creation/modification dates directly
-      // They will be updated when saving
+      // Remove XMP Metadata stream from catalog (contains creator details, modification logs)
+      const catalog = (sourcePdf as any).catalog;
+      if (catalog && catalog.has(pdfLib.PDFName.of('Metadata'))) {
+        catalog.delete(pdfLib.PDFName.of('Metadata'));
+        removedFields.push('xmpMetadata');
+      }
 
       if (this.checkCancelled()) {
         return this.createErrorOutput(

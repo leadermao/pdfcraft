@@ -8,6 +8,7 @@ import type { ProcessInput, ProcessOutput, ProgressCallback } from '@/types/pdf'
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 export interface PdfSpineBookbinderOptions {
   pageCount: number;
@@ -92,7 +93,9 @@ export class PdfSpineBookbinderProcessor extends BasePDFProcessor {
 
       // Draw title on the spine vertically if title is present and spine is wide enough
       if (bindOptions.bookTitle && spineWidthPt > 12) {
-        const font = await pdfDoc.embedFont(pdfLib.StandardFonts.HelveticaBold);
+        const font = containsCjk(bindOptions.bookTitle)
+          ? await getCjkFont(pdfDoc)
+          : await pdfDoc.embedFont(pdfLib.StandardFonts.HelveticaBold);
         const fontSize = Math.min(spineWidthPt - 4, 12);
         const titleWidth = font.widthOfTextAtSize(bindOptions.bookTitle, fontSize);
         
@@ -113,7 +116,9 @@ export class PdfSpineBookbinderProcessor extends BasePDFProcessor {
       this.updateProgress(85, 'Injecting print specs stamp details...');
 
       // Embed details text at bottom of spine for binder info
-      const detailFont = await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
+      const detailFont = containsCjk(bindOptions.bookTitle || '')
+        ? await getCjkFont(pdfDoc)
+        : await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
       const stampText = `Spine: ${spineWidthMm.toFixed(2)}mm (${spineWidthPt.toFixed(1)}pt) | ${bindOptions.pageCount} Pages | ${bindOptions.paperGsm}g GSM`;
       
       page.drawText(stampText, {

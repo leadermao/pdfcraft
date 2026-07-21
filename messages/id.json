@@ -883,11 +883,6 @@
       "pageNumber": "Halaman {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Otoritas Tepercaya MeSign TSA",
-      "tsaDigicertDesc": "Node Kriptografi PKI Global DigiCert TSA",
-      "tsaSectigoDesc": "Server Jam Atom Comodo TSA Sectigo",
-      "tsaSslDesc": "Penyedia TSA Amerika Terpercaya SSL.com",
-      "tsaFreetsaDesc": "Layanan TSA Kelas Tinggi Gratis FreeTSA.org",
       "uploadLabel": "Unggah PDF untuk Stempel Waktu TSA",
       "uploadDescription": "Seret & letakkan PDF di sini. Mendukung penuh PDF terenkripsi dengan dekripsi lokal otomatis.",
       "uploadSuccess": "{count} halaman • {size} MB",

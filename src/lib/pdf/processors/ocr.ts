@@ -14,6 +14,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfjs, loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 /**
  * Supported OCR languages
@@ -324,8 +325,10 @@ export class OCRProcessor extends BasePDFProcessor {
     const arrayBuffer = await originalFile.arrayBuffer();
     const pdfDoc = await pdfLib.PDFDocument.load(arrayBuffer);
 
-    // Embed standard fonts (Helvetica is safe and standard)
-    const font = await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
+    const allOcrText = ocrPagesData.flatMap(p => p.words.map((w: any) => w.text)).join('');
+    const font = containsCjk(allOcrText)
+      ? await getCjkFont(pdfDoc)
+      : await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
 
     for (const pageData of ocrPagesData) {
       const pageIdx = pageData.pageNum - 1;

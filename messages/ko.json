@@ -883,11 +883,6 @@
       "pageNumber": "제 {page} 페이지"
     },
     "timestamp": {
-      "tsaMesignDesc": "MeSign TSA 공인 시점인증(TSA) 기관",
-      "tsaDigicertDesc": "DigiCert TSA 글로벌 PKI 암호화 노드",
-      "tsaSectigoDesc": "Sectigo TSA Comodo 원자 시계 서버",
-      "tsaSslDesc": "SSL.com 신뢰할 수 있는 미국 TSA 제공업체",
-      "tsaFreetsaDesc": "FreeTSA.org 무료 고급 TSA 서비스",
       "uploadLabel": "TSA 타임스탬프용 PDF 업로드",
       "uploadDescription": "PDF를 여기에 드래그 앤 드롭하세요. 자동화된 로컬 암호 해독으로 암호화된 PDF를 완벽하게 지원합니다.",
       "uploadSuccess": "{count} 페이지 • {size} MB",

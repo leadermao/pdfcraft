@@ -150,16 +150,59 @@ export function validateSignature(
     }
 
     if (signature.byteRange && signature.byteRange.length === 4) {
-      const [, len1, start2, len2] = signature.byteRange;
+      const [offset1, len1, start2, len2] = signature.byteRange;
       const totalEnd = start2 + len2;
       if (totalEnd === pdfBytes.length) {
         result.coverageStatus = 'full';
       } else if (totalEnd < pdfBytes.length) {
         result.coverageStatus = 'partial';
       }
-    }
 
-    result.isValid = true;
+      try {
+        const data1 = pdfBytes.subarray(offset1, offset1 + len1);
+        const data2 = pdfBytes.subarray(start2, start2 + len2);
+        const md = forge.md.sha256.create();
+        md.update(uint8ArrayToBinaryString(data1));
+        md.update(uint8ArrayToBinaryString(data2));
+        const computedDigest = md.digest().getBytes();
+
+        const root = asn1 as any;
+        const contentValue = root.value?.[1]?.value?.[0];
+        if (contentValue) {
+          const lastSet = contentValue.value?.[contentValue.value.length - 1];
+          const firstSigner = lastSet?.value?.[0];
+          if (firstSigner) {
+            for (const attr of firstSigner.value) {
+              if (attr.tagClass === forge.asn1.Class.CONTEXT_SPECIFIC && attr.type === 0 && attr.constructed) {
+                for (const authAttr of (attr as any).value) {
+                  if (authAttr.value?.[0]?.value) {
+                    const oid = forge.asn1.derToOid(authAttr.value[0].value);
+                    if (oid === '1.2.840.113549.1.9.4') {
+                      const digestOctet = authAttr.value?.[1]?.value?.[0]?.value;
+                      if (digestOctet && digestOctet === computedDigest) {
+                        result.isValid = true;
+                      } else {
+                        result.isValid = false;
+                        result.errorMessage = 'Document content has been modified after signing';
+                      }
+                    }
+                  }
+                }
+                break;
+              }
+            }
+          }
+        }
+
+        if (!result.isValid && !result.errorMessage) {
+          result.errorMessage = 'Could not extract message digest for verification';
+        }
+      } catch {
+        result.errorMessage = 'Signature integrity verification failed';
+      }
+    } else {
+      result.errorMessage = 'Missing ByteRange for signature verification';
+    }
   } catch (e) {
     result.errorMessage = e instanceof Error ? e.message : 'Failed to parse signature';
   }

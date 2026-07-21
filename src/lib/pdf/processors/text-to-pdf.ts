@@ -15,6 +15,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 /**
  * Page size presets in points (72 points = 1 inch)
@@ -284,16 +285,20 @@ export class TextToPDFProcessor extends BasePDFProcessor {
       let font: Awaited<ReturnType<typeof pdfDoc.embedFont>>;
 
       if (fontConfig.type === 'standard') {
-        // Use standard PDF fonts (no embedding, small file size)
-        const standardFontMap: Record<string, keyof typeof pdfLib.StandardFonts> = {
-          'helvetica': 'Helvetica',
-          'times': 'TimesRoman',
-          'courier': 'Courier',
-        };
-        const standardFontName = standardFontMap[fontConfig.id] || 'Helvetica';
-        font = await pdfDoc.embedFont(pdfLib.StandardFonts[standardFontName]);
+        if (containsCjk(combinedText)) {
+          font = await getCjkFont(pdfDoc);
+        } else {
+          const standardFontMap: Record<string, keyof typeof pdfLib.StandardFonts> = {
+            'helvetica': 'Helvetica',
+            'times': 'TimesRoman',
+            'courier': 'Courier',
+          };
+          const standardFontName = standardFontMap[fontConfig.id] || 'Helvetica';
+          font = await pdfDoc.embedFont(pdfLib.StandardFonts[standardFontName]);
+        }
+      } else if (fontConfig.id === 'noto-sans-sc') {
+        font = await getCjkFont(pdfDoc);
       } else {
-        // Load Noto font with fontkit
         const fontkit = await import('@pdf-lib/fontkit');
         pdfDoc.registerFontkit(fontkit.default || fontkit);
 
@@ -301,7 +306,7 @@ export class TextToPDFProcessor extends BasePDFProcessor {
         const fontBytes = await loadFont(fontConfig.id, (fontConfig as { url: string }).url);
 
         this.updateProgress(40, 'Embedding font...');
-        font = await pdfDoc.embedFont(fontBytes, { subset: false });
+        font = await pdfDoc.embedFont(fontBytes, { subset: true });
       }
 
       this.updateProgress(50, 'Creating PDF pages...');

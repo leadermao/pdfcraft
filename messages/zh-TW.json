@@ -883,11 +883,6 @@
       "pageNumber": "第 {page} 页"
     },
     "timestamp": {
-      "tsaMesignDesc": "中国信安可信时间戳权威机构",
-      "tsaDigicertDesc": "全球领先的 PKI 安全时间戳提供商",
-      "tsaSectigoDesc": "Comodo 安全原子钟授时服务",
-      "tsaSslDesc": "北美可信第三方权威授时节点",
-      "tsaFreetsaDesc": "开源高强密碼学免费確權机构",
       "uploadLabel": "上傳待签名確權 PDF",
       "uploadDescription": "将 PDF 文件拖放到此处。支持所有标准和加密 PDF 的自動解密载入。",
       "uploadSuccess": "{count} 页 • {size} MB",

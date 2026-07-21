@@ -3057,7 +3057,7 @@ export const toolContentPt: Record<string, ToolContent> = {
       "rfc 3161",
       "data digital pdf"
     ],
-    "description": "\n      <p>Timestamp PDF adds RFC 3161 compliant trusted timestamps to your PDF documents using external Time Stamping Authorities (TSA). It provides legally-binding mathematical proof that a document existed in a specific, unaltered state at a precise instant in time.</p>\n      <p>Select from global trusted TSA servers such as DigiCert, Sectigo, SSL.com, FreeTSA, or MeSign. No personal signing certificates are required to secure your documents against future tampering.</p>\n      <p>Supports fully secure local hashing before handshake, guaranteeing absolute document contents remain 100% confidential.</p>\n    ",
+    "description": "\n      <p>Timestamp PDF adds a local timestamp certificate to your PDF documents, creating a self-signed proof that a document existed at a specific point in time.</p>\n      <p>The timestamp is generated locally in your browser using a self-signed certificate. This is not an RFC 3161 trusted timestamp from a certificate authority.</p>\n      <p>All processing happens entirely in your browser. Your documents never leave your device.</p>\n    ",
     "howToUse": [
       {
         "step": 1,

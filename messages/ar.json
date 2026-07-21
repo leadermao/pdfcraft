@@ -883,11 +883,6 @@
       "pageNumber": "الصفحة {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "سلطة التوقيع الزمني الموثوقة MeSign TSA",
-      "tsaDigicertDesc": "عقدة تشفير PKI العالمية DigiCert TSA",
-      "tsaSectigoDesc": "خادم الساعة الذرية Sectigo TSA Comodo",
-      "tsaSslDesc": "مزود TSA الأمريكي الموثوق من SSL.com",
-      "tsaFreetsaDesc": "خدمة TSA مجانية عالية الجودة من FreeTSA.org",
       "uploadLabel": "تحميل PDF لختم الوقت TSA",
       "uploadDescription": "اسحب وأفلت ملف PDF هنا. يدعم بالكامل ملفات PDF المشفرة مع فك التشفير المحلي التلقائي.",
       "uploadSuccess": "{count} صفحة • {size} ميجابايت",

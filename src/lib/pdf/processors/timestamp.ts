@@ -17,13 +17,11 @@ import { loadPdfLib } from '../loader';
 import forge from 'node-forge';
 
 export interface TimestampOptions {
-  /** The selected TSA Authority server name */
+  /** Unused, kept for API compatibility */
   tsaServer?: string;
 }
 
-const DEFAULT_TIMESTAMP_OPTIONS: TimestampOptions = {
-  tsaServer: 'MeSign',
-};
+const DEFAULT_TIMESTAMP_OPTIONS: TimestampOptions = {};
 
 /**
  * Highly optimized byte array search helper to avoid String.fromCharCode Call Stack limits.
@@ -113,11 +111,8 @@ export class TimestampPDFProcessor extends BasePDFProcessor {
 
       this.updateProgress(30, 'Preparing trusted signature fields...');
       
-      const tsaName = timestampOptions.tsaServer || 'MeSign';
       const timestampDate = new Date();
-      
-      // 1. Generate keys & certificate for our virtual TSA on the fly using node-forge
-      // This guarantees legal math proof and runs 100% locally avoiding CORS TSA cross-origin blocks
+
       const keys = forge.pki.rsa.generateKeyPair(2048);
       const cert = forge.pki.createCertificate();
       cert.publicKey = keys.publicKey;
@@ -125,13 +120,13 @@ export class TimestampPDFProcessor extends BasePDFProcessor {
       cert.validity.notBefore = new Date();
       cert.validity.notAfter = new Date();
       cert.validity.notAfter.setFullYear(cert.validity.notBefore.getFullYear() + 10);
-      
+
       const attrs = [{
         name: 'commonName',
-        value: `PDFCraft Trusted TSA Authority (${tsaName})`
+        value: 'PDFCraft Local Timestamp'
       }, {
         name: 'organizationName',
-        value: 'PDFCraft Secure Group'
+        value: 'PDFCraft (self-signed, not a trusted CA)'
       }];
       cert.setSubject(attrs);
       cert.setIssuer(attrs);
@@ -159,9 +154,9 @@ export class TimestampPDFProcessor extends BasePDFProcessor {
         SubFilter: 'adbe.pkcs7.detached',
         Contents: (pdfLib as any).PDFHexString.of('0'.repeat(8192)), // Pre-allocate 8192 characters (4096 bytes)
         ByteRange: [0, 0, 0, 0], // Placeholders to fill in later
-        Name: pdfLib.PDFString.of(`Trusted TSA Server: ${tsaName}`),
+        Name: pdfLib.PDFString.of('PDFCraft Local Timestamp'),
         M: pdfLib.PDFString.fromDate(timestampDate),
-        Reason: pdfLib.PDFString.of('RFC 3161 Trusted Timestamp Proof of Existence'),
+        Reason: pdfLib.PDFString.of('Local timestamp proof of existence (self-signed, not RFC 3161)'),
       });
 
       const sigRef = pdfDoc.context.register(signatureDict);
@@ -291,7 +286,7 @@ export class TimestampPDFProcessor extends BasePDFProcessor {
 
       // Return metadata audit logs
       return this.createSuccessOutput(blob, outputFilename, {
-        tsaAuthority: tsaName,
+        tsaAuthority: 'PDFCraft Local (self-signed)',
         hash: forge.util.bytesToHex(fileDigest),
         timestamp: timestampDate.toISOString(),
         serial: cert.serialNumber,

@@ -60,6 +60,7 @@ export class BatchWatermarkRemoverProcessor extends BasePDFProcessor {
       const targetText = removerOptions.watermarkText?.trim();
 
       const progressInterval = 60 / totalPages;
+      let totalRemoved = 0;
 
       for (let i = 0; i < totalPages; i++) {
         this.updateProgress(30 + i * progressInterval, `Purging watermark operators from page ${i + 1}...`);
@@ -90,29 +91,37 @@ export class BatchWatermarkRemoverProcessor extends BasePDFProcessor {
           }
         }
 
-        // If target watermark text is provided, scrub text operators from content streams
         if (targetText) {
           const contents = page.node.get(pdfLib.PDFName.of('Contents'));
           if (contents) {
-            const contentStreams = Array.isArray(contents) ? contents : [contents];
-            for (const contentStreamRef of contentStreams) {
+            const refs = contents instanceof pdfLib.PDFArray
+              ? contents.asArray()
+              : [contents];
+            for (const contentStreamRef of refs) {
               const contentStream = pdfDoc.context.lookup(contentStreamRef);
               if (contentStream instanceof pdfLib.PDFStream) {
-                // Get decoded content stream data
                 const rawData = (contentStream as any).getUncompressedContents();
-                const contentText = new TextDecoder('utf-8').decode(rawData);
-                
-                // Scrub target text TJ/Tj operators
-                // Watermark text might be represented in PDF like (Confidential) Tj or [ (Con) -20 (fidential) ] TJ
-                // Simple physical regex matching can scrub targetText
+                const contentText = new TextDecoder('latin1').decode(rawData);
                 const escapedText = targetText.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                
-                // Remove operators containing the text
-                const searchRegex = new RegExp(`\\([^\\)]*${escapedText}[^\\)]*\\)\\s*(Tj|TJ)`, 'gi');
-                const scrubbedText = contentText.replace(searchRegex, '() Tj');
-                
-                // Set the scrubbed contents back
-                (contentStream as any).setContent(new TextEncoder().encode(scrubbedText));
+
+                let scrubbed = contentText;
+                const tjRegex = new RegExp(`\\([^)]*${escapedText}[^)]*\\)\\s*Tj`, 'gi');
+                scrubbed = scrubbed.replace(tjRegex, '() Tj');
+                const tjArrayRegex = new RegExp(`\\[[^\\]]*\\([^)]*${escapedText}[^)]*\\)[^\\]]*\\]\\s*TJ`, 'gi');
+                scrubbed = scrubbed.replace(tjArrayRegex, '[() ] TJ');
+
+                const hexTarget = Array.from(new TextEncoder().encode(targetText))
+                  .map(b => b.toString(16).padStart(2, '0').toUpperCase())
+                  .join('');
+                if (hexTarget.length > 0) {
+                  const hexRegex = new RegExp(`<[0-9A-Fa-f]*${hexTarget}[0-9A-Fa-f]*>\\s*Tj`, 'gi');
+                  scrubbed = scrubbed.replace(hexRegex, '<> Tj');
+                }
+
+                if (scrubbed !== contentText) {
+                  (contentStream as any).setContent(new TextEncoder().encode(scrubbed));
+                  totalRemoved++;
+                }
               }
             }
           }
@@ -125,10 +134,18 @@ export class BatchWatermarkRemoverProcessor extends BasePDFProcessor {
 
       this.updateProgress(100, 'Complete!');
 
-      return this.createSuccessOutput(blob, `${file.name.replace(/\.pdf$/i, '')}_watermarked_purged.pdf`, {
+      if (!targetText && !removerOptions.removeImages) {
+        return this.createErrorOutput(
+          PDFErrorCode.INVALID_OPTIONS,
+          'No watermark text or image removal specified.'
+        );
+      }
+
+      return this.createSuccessOutput(blob, `${file.name.replace(/\.pdf$/i, '')}_watermark_removed.pdf`, {
         pageCount: totalPages,
         purgedText: !!targetText,
         purgedImages: !!removerOptions.removeImages,
+        operatorsRemoved: totalRemoved,
       });
 
     } catch (error) {

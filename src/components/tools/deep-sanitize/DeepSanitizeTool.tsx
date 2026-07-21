@@ -191,20 +191,7 @@ export function DeepSanitizeTool({ className = '' }: DeepSanitizeToolProps) {
       const pdf = await PDFDocument.load(arrayBuffer, { ignoreEncryption: true } as any);
       setTotalPages(pdf.getPageCount());
 
-      // Auto scan first stage simulation
-      setStatus('processing');
-      setProgress(10);
-      setProgressMessage('Scrutinizing document layers...');
-      
-      setTimeout(() => {
-        // Simulate finding structural logs
-        setFindings([
-          'XMP Metadata Stream (contains creator details, modification logs)',
-          'PieceInfo cache (contains proprietary editor histories)',
-          'Incremental revision history logs (forces full xref reconstruction)'
-        ]);
-        setStatus('idle');
-      }, 1200);
+      setStatus('idle');
 
     } catch (err) {
       console.error(err);

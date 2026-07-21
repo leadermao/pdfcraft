@@ -883,11 +883,6 @@
       "pageNumber": "Trang {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Cơ quan chứng thực thời gian tin cậy MeSign TSA",
-      "tsaDigicertDesc": "Nút mã hóa PKI toàn cầu DigiCert TSA",
-      "tsaSectigoDesc": "Máy chủ đồng hồ nguyên tử Sectigo TSA Comodo",
-      "tsaSslDesc": "Nhà cung cấp TSA Hoa Kỳ đáng tin cậy của SSL.com",
-      "tsaFreetsaDesc": "Dịch vụ TSA cao cấp miễn phí từ FreeTSA.org",
       "uploadLabel": "Tải lên PDF để đóng dấu thời gian TSA",
       "uploadDescription": "Kéo & thả PDF vào đây. Hỗ trợ hoàn toàn PDF được mã hóa với tính năng tự động giải mã cục bộ.",
       "uploadSuccess": "{count} trang • {size} MB",

@@ -189,66 +189,14 @@ export class CertCryptorProcessor extends BasePDFProcessor {
         borderWidth: 1.0,
       });
 
-      this.updateProgress(65, 'Creating PKCS#7 digital signature dictionaries...');
-
-      // Build official Sig (Signature) dictionaries in the PDF
-      const context = pdfDoc.context;
-
-      // Sig contents placeholder block (PKCS#7 signature stream must be preallocated)
-      // Usually 8192 bytes is standard for signatures
-      const placeholderBytes = new Uint8Array(8192);
-      const signatureDict = context.obj({
-        Type: pdfLib.PDFName.of('Sig'),
-        Filter: pdfLib.PDFName.of('Adobe.PPKLite'),
-        SubFilter: pdfLib.PDFName.of('adbe.pkcs7.detached'),
-        Contents: pdfLib.PDFString.of(String.fromCharCode(...placeholderBytes)), // Preallocate
-        Reason: pdfLib.PDFString.of('Signed officially using PDFCraft Wax-Seal cryptor.'),
-        M: pdfLib.PDFString.of(`D:${new Date().toISOString().replace(/[-T:]/g, '').split('.')[0]}Z`),
-      });
-
-      // Register Sig dictionary reference
-      const sigRef = context.register(signatureDict);
-
-      // Create Sig Field in AcroForm
-      const sigFieldDict = context.obj({
-        Type: pdfLib.PDFName.of('Annot'),
-        Subtype: pdfLib.PDFName.of('Widget'),
-        FT: pdfLib.PDFName.of('Sig'),
-        T: pdfLib.PDFString.of(`Signature_WaxSeal_${Date.now()}`),
-        V: sigRef,
-        F: 132, // Print, NoRotate, Lock
-        Rect: context.obj([sealX - radius, sealY - radius, sealX + radius, sealY + radius]),
-        P: page.ref,
-      });
-
-      const sigFieldRef = context.register(sigFieldDict);
-      page.node.set(
-        pdfLib.PDFName.of('Annots'),
-        context.obj([...(page.node.get(pdfLib.PDFName.of('Annots')) as any || []), sigFieldRef])
-      );
-
-      // Link to AcroForm
-      const acroForm = pdfDoc.catalog.get(pdfLib.PDFName.of('AcroForm')) as any;
-      if (acroForm) {
-        const fields = acroForm.get(pdfLib.PDFName.of('Fields')) || context.obj([]);
-        acroForm.set(pdfLib.PDFName.of('Fields'), context.obj([...(fields as any), sigFieldRef]));
-      } else {
-        const newAcroForm = context.obj({
-          Fields: context.obj([sigFieldRef]),
-          SigFlags: 3,
-        });
-        pdfDoc.catalog.set(pdfLib.PDFName.of('AcroForm'), newAcroForm);
-      }
-
       this.updateProgress(80, 'Applying encryption locks to document...');
 
-      // Apply standard 256-bit AES encryption if requested
+      let ownerPassword: string | undefined;
       if (certFile || cryptorOptions.encryptWithCert) {
-        // Enforce user password to simulate certificate lockdown
-        // This provides standard enterprise encryption
-        const ownerPassword = Math.random().toString(36).substring(2, 12);
+        ownerPassword = crypto.getRandomValues(new Uint8Array(8))
+          .reduce((s, b) => s + b.toString(36).padStart(2, '0'), '');
         const userPassword = cryptorOptions.pfxPassword || 'pdfcraft';
-        
+
         (pdfDoc as any).encrypt({
           userPassword,
           ownerPassword,
@@ -262,16 +210,16 @@ export class CertCryptorProcessor extends BasePDFProcessor {
         });
       }
 
-      this.updateProgress(90, 'Generating signed PDF file stream...');
+      this.updateProgress(90, 'Generating PDF...');
       const pdfBytes = await pdfDoc.save();
       const outputBlob = new Blob([pdfBytes as any], { type: 'application/pdf' });
-      const outputFilename = pdfFile.name.replace(/\.pdf$/i, '_signed.pdf');
+      const outputFilename = pdfFile.name.replace(/\.pdf$/i, '_sealed.pdf');
 
-      this.updateProgress(100, 'Digital signature & wax seal applied!');
+      this.updateProgress(100, 'Wax seal applied!');
       return this.createSuccessOutput(outputBlob, outputFilename, {
         signedPage: pageIdx + 1,
-        certified: true,
         encrypted: !!certFile || cryptorOptions.encryptWithCert,
+        ownerPassword: ownerPassword || null,
       });
 
     } catch (error) {

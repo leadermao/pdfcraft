@@ -156,7 +156,7 @@ export function PDFToPDFATool({ className = '' }: PDFToPDFAToolProps) {
                                         <div className="flex items-center gap-2">
                                             <span className="text-xs text-[hsl(var(--color-muted-foreground))]">{formatSize(batchFile.file.size)}</span>
                                             {batchFile.status === 'processing' && <span className="text-xs text-[hsl(var(--color-primary))]">{batchFile.progress}%</span>}
-                                            {batchFile.status === 'completed' && <span className="text-xs text-green-500">✓ PDF/A</span>}
+                                            {batchFile.status === 'completed' && <span className="text-xs text-green-500">✓</span>}
                                             {batchFile.status === 'error' && <span className="text-xs text-red-500">{batchFile.error}</span>}
                                         </div>
                                     </div>

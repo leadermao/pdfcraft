@@ -13,6 +13,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 export interface PassportIdOptions {
   watermarkText?: string;
@@ -110,7 +111,9 @@ export class PassportIdComposerProcessor extends BasePDFProcessor {
       // Draw secure watermark if provided
       if (composerOptions.watermarkText) {
         this.updateProgress(90, 'Adding security watermark...');
-        const standardFont = await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
+        const standardFont = containsCjk(composerOptions.watermarkText || '')
+          ? await getCjkFont(pdfDoc)
+          : await pdfDoc.embedFont(pdfLib.StandardFonts.Helvetica);
         
         // Let's add multiple diagonal watermark lines
         const text = composerOptions.watermarkText;

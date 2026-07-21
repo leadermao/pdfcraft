@@ -34,7 +34,7 @@ describe('TimestampPDFProcessor', () => {
     it('should return error when no files are provided', async () => {
       const result = await processor.process({
         files: [],
-        options: { tsaServer: 'MeSign' },
+        options: {},
       });
 
       expect(result.success).toBe(false);
@@ -48,7 +48,7 @@ describe('TimestampPDFProcessor', () => {
 
       const result = await processor.process({
         files: [file1, file2],
-        options: { tsaServer: 'MeSign' },
+        options: {},
       });
 
       expect(result.success).toBe(false);

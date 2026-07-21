@@ -13,6 +13,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib, loadPdfjs } from '../loader';
+import { rasterizePDF } from './rasterize';
 
 export interface SmartRedactOptions {
   patterns: ('email' | 'phone' | 'idcard' | 'custom')[];
@@ -133,14 +134,12 @@ export class SmartDataRedactorProcessor extends BasePDFProcessor {
           }
         }
 
-        // Draw redaction boxes and perform stream cleaning
         if (matches.length > 0) {
           matchesCount += matches.length;
           const rColor = redactOptions.redactColor || { r: 0, g: 0, b: 0 };
           const fillColor = pdfLib.rgb(rColor.r / 255, rColor.g / 255, rColor.b / 255);
 
           for (const match of matches) {
-            // Overlay blocking mask
             pdfLibPage.drawRectangle({
               x: match.x - 2,
               y: match.y - 2,
@@ -148,40 +147,44 @@ export class SmartDataRedactorProcessor extends BasePDFProcessor {
               height: match.height + 4,
               color: fillColor,
             });
-
-            // Physical scrub: search and replace contents in the page content stream
-            const contents = pdfLibPage.node.get(pdfLib.PDFName.of('Contents'));
-            if (contents) {
-              const contentStreams = Array.isArray(contents) ? contents : [contents];
-              for (const contentStreamRef of contentStreams) {
-                const contentStream = pdfLibDoc.context.lookup(contentStreamRef);
-                if (contentStream instanceof pdfLib.PDFStream) {
-                  const rawData = (contentStream as any).getUncompressedContents();
-                  const contentText = new TextDecoder('utf-8').decode(rawData);
-                  
-                  // Replace the exact matching string with masked chars inside Tj/TJ
-                  const escapedText = match.text.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                  const searchRegex = new RegExp(`\\([^\\)]*${escapedText}[^\\)]*\\)\\s*(Tj|TJ)`, 'gi');
-                  const redactedStreamText = contentText.replace(searchRegex, '([REDACTED]) Tj');
-                  
-                  (contentStream as any).setContent(new TextEncoder().encode(redactedStreamText));
-                }
-              }
-            }
           }
         }
       }
 
-      this.updateProgress(90, 'Saving redacted PDF document...');
-      const pdfBytes = await pdfLibDoc.save({ useObjectStreams: true });
-      const blob = new Blob([new Uint8Array(pdfBytes)], { type: 'application/pdf' });
+      if (matchesCount === 0) {
+        return this.createSuccessOutput(
+          new Blob([new Uint8Array(fileBytes)], { type: 'application/pdf' }),
+          `${file.name.replace(/\.pdf$/i, '')}_redacted.pdf`,
+          { pageCount: totalPages, redactionsApplied: 0 }
+        );
+      }
+
+      this.updateProgress(85, 'Saving redacted overlay...');
+      const overlayBytes = await pdfLibDoc.save({ useObjectStreams: true });
+
+      this.updateProgress(90, 'Rasterizing to remove underlying text...');
+      const overlayFile = new File(
+        [new Uint8Array(overlayBytes)],
+        file.name,
+        { type: 'application/pdf' }
+      );
+      const rasterResult = await rasterizePDF(overlayFile, { format: 'pdf', dpi: 200 });
+
+      if (!rasterResult.success || !rasterResult.result) {
+        return this.createErrorOutput(
+          PDFErrorCode.PROCESSING_FAILED,
+          'Redaction overlay succeeded but rasterization failed.',
+          rasterResult.error?.message
+        );
+      }
 
       this.updateProgress(100, 'Complete!');
 
-      return this.createSuccessOutput(blob, `${file.name.replace(/\.pdf$/i, '')}_redacted.pdf`, {
-        pageCount: totalPages,
-        redactionsApplied: matchesCount,
-      });
+      return this.createSuccessOutput(
+        rasterResult.result as Blob,
+        `${file.name.replace(/\.pdf$/i, '')}_redacted.pdf`,
+        { pageCount: totalPages, redactionsApplied: matchesCount }
+      );
 
     } catch (error) {
       return this.createErrorOutput(

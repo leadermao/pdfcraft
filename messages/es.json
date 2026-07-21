@@ -883,11 +883,6 @@
       "pageNumber": "Página {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "Autoridad de confianza MeSign TSA",
-      "tsaDigicertDesc": "Nodo criptográfico de PKI global DigiCert TSA",
-      "tsaSectigoDesc": "Servidor de reloj atómico Sectigo TSA Comodo",
-      "tsaSslDesc": "SSL.com Proveedor estadounidense de confianza de TSA",
-      "tsaFreetsaDesc": "FreeTSA.org Servicio TSA gratuito de alta calidad",
       "uploadLabel": "Cargar PDF para la marca de tiempo de la TSA",
       "uploadDescription": "Arrastre y suelte el PDF aquí. Totalmente compatible con archivos PDF cifrados con descifrado local automatizado.",
       "uploadSuccess": "{count} página(s) • {size} MB",

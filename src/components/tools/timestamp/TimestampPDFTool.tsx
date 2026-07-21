@@ -21,13 +21,6 @@ interface AuditLog {
   serial: string;
 }
 
-const TSA_SERVERS = [
-  { id: 'MeSign', name: 'MeSign TSA', speedKey: 'fast' },
-  { id: 'DigiCert', name: 'DigiCert TSA', speedKey: 'blazing' },
-  { id: 'Sectigo', name: 'Sectigo TSA', speedKey: 'blazing' },
-  { id: 'SSL.com', name: 'SSL.com TSA', speedKey: 'stable' },
-  { id: 'FreeTSA', name: 'FreeTSA.org', speedKey: 'medium' },
-];
 
 export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
   const t = useTranslations('common');
@@ -37,9 +30,6 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
   const [file, setFile] = useState<File | null>(null);
   const [totalPages, setTotalPages] = useState<number>(0);
   const [isLoadingMetadata, setIsLoadingMetadata] = useState(false);
-
-  // Settings
-  const [selectedTSA, setSelectedTSA] = useState<string>('MeSign');
 
   // Status & Outcomes
   const [status, setStatus] = useState<ProcessingStatus>('idle');
@@ -103,7 +93,7 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
     try {
       const output: ProcessOutput = await timestampPDF(
         [file],
-        { tsaServer: selectedTSA },
+        {},
         (prog, message) => {
           if (!cancelledRef.current) {
             setProgress(prog);
@@ -206,14 +196,14 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
       {file && totalPages > 0 && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
           
-          {/* LEFT: TSA Authority Selection Hub */}
+          {/* LEFT: Local Timestamp Info + Action */}
           <div className="lg:col-span-6 flex flex-col">
             <Card variant="default" className="flex-1 p-6 rounded-[2rem] space-y-6 backdrop-blur-md bg-white/40 dark:bg-black/30 border border-white/20 dark:border-zinc-800/40 flex flex-col justify-between shadow-xl">
               <div className="space-y-4">
                 <div className="border-b border-[hsl(var(--color-border))] pb-3">
                   <h3 className="text-base font-bold text-[hsl(var(--color-foreground))] flex items-center gap-2">
                     <svg className="w-5 h-5 text-[hsl(var(--color-primary))]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {tTools('timestampPdf.selectTsaTitle')}
                   </h3>
@@ -222,60 +212,24 @@ export function TimestampPDFTool({ className = '' }: TimestampPDFToolProps) {
                   </p>
                 </div>
 
-                {/* TSA List selector recreate user screenshot beauty */}
-                <div className="space-y-2.5 max-h-[300px] overflow-y-auto pr-1">
-                  {TSA_SERVERS.map((tsa) => {
-                    const isSelected = selectedTSA === tsa.id;
-                    const isFast = tsa.speedKey === 'fast' || tsa.speedKey === 'blazing';
-                    return (
-                      <div
-                        key={tsa.id}
-                        onClick={() => !isProcessing && setSelectedTSA(tsa.id)}
-                        className={`group p-3.5 rounded-2xl border-2 transition-all cursor-pointer flex items-center justify-between ${
-                          isSelected
-                            ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary)/0.03)] shadow-[0_0_12px_hsl(var(--color-primary)/0.15)]'
-                            : 'border-[hsl(var(--color-border))] bg-[hsl(var(--color-card))] hover:border-[hsl(var(--color-muted-foreground)/0.4)]'
-                        }`}
-                      >
-                        <div className="space-y-1">
-                          <div className="flex items-center gap-2">
-                            <span className="text-sm font-bold text-[hsl(var(--color-foreground))]">
-                              {tsa.name}
-                            </span>
-                            <span className="text-[9px] px-1.5 py-0.5 rounded-full font-bold bg-[hsl(var(--color-muted))] text-[hsl(var(--color-muted-foreground))] uppercase">
-                              {tsa.id}
-                            </span>
-                          </div>
-                          <p className="text-[11px] text-[hsl(var(--color-muted-foreground))] leading-normal max-w-sm">
-                            {tTools(`timestampPdf.tsa.desc.${tsa.id}`)}
-                          </p>
-                        </div>
-                        
-                        <div className="flex items-center gap-2">
-                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-full ${
-                            isFast
-                              ? 'bg-green-100 text-green-700 dark:bg-green-950/20 dark:text-green-400'
-                              : 'bg-amber-100 text-amber-700 dark:bg-amber-950/20 dark:text-amber-400'
-                          }`}>
-                            {tTools(`timestampPdf.tsa.speed.${tsa.speedKey}`)}
-                          </span>
-                          
-                          {/* Inner selected circle indicator */}
-                          <div className={`w-4.5 h-4.5 rounded-full border-2 flex items-center justify-center transition-all ${
-                            isSelected 
-                              ? 'border-[hsl(var(--color-primary))] bg-[hsl(var(--color-primary))]' 
-                              : 'border-zinc-400 dark:border-zinc-600'
-                          }`}>
-                            {isSelected && (
-                              <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={4}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                              </svg>
-                            )}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                <div className="p-4 rounded-2xl border-2 border-[hsl(var(--color-border))] bg-[hsl(var(--color-card))] space-y-3">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-5 h-5 text-[hsl(var(--color-primary))]" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg>
+                    <span className="text-sm font-bold text-[hsl(var(--color-foreground))]">
+                      {t('timestamp.localTimestamp')}
+                    </span>
+                  </div>
+                  <p className="text-xs text-[hsl(var(--color-muted-foreground))] leading-relaxed">
+                    {t('timestamp.localTimestampDesc')}
+                  </p>
+                  <div className="flex items-center gap-1.5 text-[10px] text-[hsl(var(--color-muted-foreground))]">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    {t('timestamp.selfSignedNote')}
+                  </div>
                 </div>
               </div>
 

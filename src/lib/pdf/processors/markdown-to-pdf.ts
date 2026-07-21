@@ -321,8 +321,14 @@ export class MarkdownToPDFProcessor extends BasePDFProcessor {
 
             this.updateProgress(20, 'Converting Markdown to HTML...');
 
-            // Convert markdown to HTML
-            const htmlContent = await simpleMarkdownToHtml(markdownContent, mdOptions.gfm, mdOptions.syntaxHighlight);
+            let htmlContent: string;
+            try {
+                const { marked } = await import('marked');
+                marked.setOptions({ gfm: mdOptions.gfm, breaks: true });
+                htmlContent = await marked.parse(markdownContent);
+            } catch {
+                htmlContent = await simpleMarkdownToHtml(markdownContent, mdOptions.gfm, mdOptions.syntaxHighlight);
+            }
 
             if (this.checkCancelled()) {
                 return this.createErrorOutput(

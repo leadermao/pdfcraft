@@ -13,6 +13,7 @@ import type {
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 
 /**
  * Page size presets in points (72 points = 1 inch)
@@ -117,8 +118,11 @@ export class JSONToPDFProcessor extends BasePDFProcessor {
       // Create a new PDF document
       const pdfDoc = await pdfLib.PDFDocument.create();
 
-      // Get monospace font for JSON
-      const font = await pdfDoc.embedFont(pdfLib.StandardFonts.Courier);
+      // Get font — use CJK font if JSON content contains non-ASCII
+      const jsonTexts = await Promise.all(files.map(f => f.text()));
+      const font = containsCjk(jsonTexts.join(''))
+        ? await getCjkFont(pdfDoc)
+        : await pdfDoc.embedFont(pdfLib.StandardFonts.Courier);
 
       // Process each JSON file
       const progressPerFile = 80 / files.length;

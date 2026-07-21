@@ -883,11 +883,6 @@
       "pageNumber": "Seite {page}"
     },
     "timestamp": {
-      "tsaMesignDesc": "MeSign TSA vertrauenswürdige Zeitstempelbehörde",
-      "tsaDigicertDesc": "DigiCert TSA Globaler PKI-Kryptographieknoten",
-      "tsaSectigoDesc": "Sectigo TSA Comodo Atomuhr-Server",
-      "tsaSslDesc": "SSL.com vertrauenswürdiger amerikanischer TSA-Anbieter",
-      "tsaFreetsaDesc": "FreeTSA.org Kostenloser, hochwertiger TSA-Service",
       "uploadLabel": "Laden Sie das PDF für den TSA-Zeitstempel hoch",
       "uploadDescription": "PDF per Drag & Drop hierher ziehen. Unterstützt vollständig verschlüsselte PDFs mit automatischer lokaler Entschlüsselung.",
       "uploadSuccess": "{count} Seite(n) • {size} MB",

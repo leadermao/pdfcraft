@@ -9,6 +9,7 @@ import type { ProcessInput, ProcessOutput, ProgressCallback } from '@/types/pdf'
 import { PDFErrorCode } from '@/types/pdf';
 import { BasePDFProcessor } from '../processor';
 import { loadPdfLib } from '../loader';
+import { getCjkFont, containsCjk } from '../cjk-font';
 import type { PDFPage, PDFFont, PDFImage } from 'pdf-lib';
 
 
@@ -160,19 +161,13 @@ export class WatermarkProcessor extends BasePDFProcessor {
       const arrayBuffer = await file.arrayBuffer();
       const pdf = await pdfLib.PDFDocument.load(arrayBuffer, { ignoreEncryption: true });
 
-      // Check if we need CJK font support
-      const needsCJKFont = wmOptions.type === 'text' && wmOptions.text && containsNonAscii(wmOptions.text);
+      const needsCJKFont = wmOptions.type === 'text' && wmOptions.text && containsCjk(wmOptions.text);
 
       let font: Awaited<ReturnType<typeof pdf.embedFont>>;
 
       if (needsCJKFont) {
         this.updateProgress(25, 'Loading CJK font...');
-        const fontkit = await import('@pdf-lib/fontkit');
-        pdf.registerFontkit(fontkit.default || fontkit);
-
-        const fontBytes = await loadCJKFont();
-        this.updateProgress(28, 'Embedding font...');
-        font = await pdf.embedFont(fontBytes, { subset: false });
+        font = await getCjkFont(pdf);
       } else {
         font = await pdf.embedFont(pdfLib.StandardFonts.HelveticaBold);
       }

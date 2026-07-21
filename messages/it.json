@@ -883,11 +883,6 @@
       "pageNumber": "Pagina SEGNAPOSTO TOKEN0"
     },
     "timestamp": {
-      "tsaMesignDesc": "Autorità fidata MeSign TSA",
-      "tsaDigicertDesc": "Nodo crittografico PKI globale DigiCert TSA",
-      "tsaSectigoDesc": "Server orologio atomico Sectigo TSA Comodo",
-      "tsaSslDesc": "SSL.com Fornitore TSA americano affidabile",
-      "tsaFreetsaDesc": "FreeTSA.org Servizio TSA gratuito di alta qualità",
       "uploadLabel": "Carica PDF per il timestamp TSA",
       "uploadDescription": "Trascina e rilascia il PDF qui. Supporta completamente i PDF crittografati con decrittografia locale automatizzata.",
       "uploadSuccess": "{count} pagina/e • {size} MB",

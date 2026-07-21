@@ -444,18 +444,18 @@
       "contrastLabel": "字迹笔锋对比度"
     },
     "deadLinkDebugger": {
-      "uploadLabel": "上传需要调试网页超链接的 PDF 文件",
-      "uploadDescription": "系统将遍历扫描文档内所有的 /URI 跳转动作，进行在线可达性探测，并允许在网页中一键热覆盖修复。",
-      "optionsTitle": "超链接探测与重定向选项",
-      "processButton": "开始全局超链接探测",
-      "successMessage": "PDF网页死链探测与坐标重定向覆盖成功！",
-      "previewTitle": "PDF 超链接深度探测脉络图",
+      "uploadLabel": "上传 PDF 以提取超链接",
+      "uploadDescription": "系统将遍历扫描文档内所有的 /URI 跳转动作，提取并列出超链接，并允许在网页中一键热覆盖修复。",
+      "optionsTitle": "超链接提取与重定向选项",
+      "processButton": "开始提取全局超链接",
+      "successMessage": "PDF 超链接提取与坐标重定向覆盖成功！",
+      "previewTitle": "PDF 超链接提取脉络图",
       "clearButton": "清空",
-      "detectingText": "探测链接可达性中...",
+      "detectingText": "提取链接中...",
       "idleText": "点击右侧按钮开始全局深度扫描。",
       "pageNumberLabel": "第 {page} 页",
       "redirectPlaceholder": "重定向到新 URL...",
-      "emptyStateDescription": "一键分析 PDF 文件的外链，自动在左侧列出。您可以针对性地修改并一键写入更新。"
+      "emptyStateDescription": "提取并列出 PDF 文件中的所有超链接，您可以针对性地修改并一键写入更新。"
     },
     "interactiveTocGenerator": {
       "uploadLabel": "上传需要添加前置互动目录的 PDF 文件",
@@ -584,7 +584,7 @@
       "qualityLow": "低质量",
       "qualityMedium": "中等",
       "qualityHigh": "高质量",
-      "qualityMaximum": "极限无损",
+      "qualityMaximum": "极限画质",
       "descLow": "体积大幅压缩 60%-80%，适合普通发票收据与纯文字汇报。",
       "descMedium": "均衡型，在保持清晰可读的字体边缘时获得 40% 体积优化。",
       "descHigh": "保证摄影级图片的高对比度和颜色动态，略微减少体积。",
@@ -883,26 +883,20 @@
       "pageNumber": "第 {page} 页"
     },
     "timestamp": {
-      "tsaMesignDesc": "中国信安可信时间戳权威机构",
-      "tsaDigicertDesc": "全球领先的 PKI 安全时间戳提供商",
-      "tsaSectigoDesc": "Comodo 安全原子钟授时服务",
-      "tsaSslDesc": "北美可信第三方权威授时节点",
-      "tsaFreetsaDesc": "开源高强密码学免费确权机构",
-      "uploadLabel": "上传待签名确权 PDF",
+      "uploadLabel": "上传 PDF 添加时间戳",
       "uploadDescription": "将 PDF 文件拖放到此处。支持所有标准和加密 PDF 的自动解密载入。",
       "uploadSuccess": "{count} 页 • {size} MB",
-      "tsaStepTitle": "1. 选择受信任 TSA 服务器 (RFC 3161)",
-      "tsaPrivacyHelp": "系统只发送无规律的 SHA-256 哈希值与服务器交互，绝对保障文档隐私。",
-      "tsaSpeedFast": "极速",
-      "tsaSpeedStable": "稳定",
-      "processButton": "签署可信时间戳",
-      "processingTitle": "等待时间戳确权签署",
-      "processingDesc": "上传文件并选择 TSA，点击“签署可信时间戳”生成由权威授时中心盖章的加密证书凭证。",
-      "resultTitle": "电子存证可信时间戳凭据",
-      "tsaTime": "TSA 原子钟授时时间 (UTC)",
-      "tsaHash": "安全文件哈希校验和 (SHA-256)",
-      "tsaName": "授时权威商 (TSA)",
-      "tsaSerial": "证书序列号 (Serial)"
+      "localTimestamp": "本地时间戳",
+      "localTimestampDesc": "在 PDF 中嵌入一个自签名 PKCS#7 时间戳，证明文档在此刻存在。签名完全在浏览器中生成，不会上传任何数据。",
+      "selfSignedNote": "这是本地自签名时间戳，不是由受信任的证书颁发机构 (CA) 签发的。",
+      "processButton": "添加本地时间戳",
+      "processingTitle": "正在生成时间戳",
+      "processingDesc": "正在本地计算 SHA-256 哈希并生成自签名 PKCS#7 时间戳。",
+      "resultTitle": "本地时间戳凭据",
+      "tsaTime": "时间戳 (UTC)",
+      "tsaHash": "SHA-256 文件哈希",
+      "tsaName": "签发者",
+      "tsaSerial": "证书序列号"
     },
     "vectorExtractor": {
       "uploadLabel": "上传需要提取矢量的 PDF 文件",
@@ -3161,10 +3155,10 @@
     },
     "deadLinkDebugger": {
       "uploadLabel": "上传待调试PDF",
-      "uploadDescription": "拖放PDF文件到此处进行超链接探测。",
-      "optionsTitle": "超链接探测与重定向选项",
-      "processButton": "开始全局超链接探测",
-      "successMessage": "超链接探测与修复成功！"
+      "uploadDescription": "拖放PDF文件到此处提取超链接列表。",
+      "optionsTitle": "超链接提取与编辑选项",
+      "processButton": "提取超链接",
+      "successMessage": "超链接提取与更新成功！"
     },
     "interactiveTocGenerator": {
       "uploadLabel": "上传需要目录的PDF",
